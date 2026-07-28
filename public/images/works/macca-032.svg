@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <rect width="1200" height="900" fill="#283042"/>
+  <g opacity="0.45" transform="rotate(-15 600 450)">
+    <circle cx="883" cy="-135" r="70" fill="none" stroke="#e8c14e" stroke-width="2" stroke-dasharray="3 10"/>
+    <circle cx="883" cy="-135" r="42" fill="none" stroke="#5b7790" stroke-width="2" stroke-dasharray="3 10"/>
+    <line x1="-50" y1="-15" x2="1250" y2="-175" stroke="#e8c14e" stroke-width="2" opacity="0.6"/>
+  </g>
+  <circle cx="883" cy="-135" r="22" fill="#e8c14e" stroke="#dfe4ee" stroke-width="3"/>
+  <rect x="24" y="24" width="1152" height="852" fill="none" stroke="#dfe4ee" stroke-opacity="0.25" stroke-width="2"/>
+  <text x="600" y="460" text-anchor="middle" font-family="ui-monospace,monospace" font-size="22" letter-spacing="4" fill="#dfe4ee" opacity="0.55">IMMAGINE DIMOSTRATIVA · SOSTITUIRE</text>
+</svg>

@@ -1,0 +1,22 @@
+{
+  "_about": "Content overlay (the 'content pack') merged onto macca.collection.json by work_id. Everything is OPTIONAL and should only be added when verified — it upgrades the editorial fallback states to real content. Images can also be auto-discovered: drop files named <work_id>.jpg (or -2, -3 …) into public/images/works/ and the prebuild step picks them up. See CONTENT_PACK.md.",
+  "_example": {
+    "macca-010": {
+      "description_it": "Testo curatoriale verificato, 60–120 parole, che lega l'opera al luogo.",
+      "description_en": "Verified curatorial text in English (optional).",
+      "materials": "Acciaio verniciato",
+      "dimensions": "300 × 120 × 120 cm",
+      "coordinates": { "lat": 43.5481, "lon": 10.7203, "confidence": "exact" },
+      "images": [
+        {
+          "src": "/images/works/macca-010.jpg",
+          "credit": "© Fondazione Peccioliper · ph. Nome Fotografo",
+          "source": "https://www.fondarte.peccioli.net/opere/progetti.php?idView=6",
+          "license": "Tutti i diritti riservati · uso prototipo",
+          "caption": "Welcome to Peccioli, veduta d'insieme"
+        }
+      ]
+    }
+  },
+  "works": {}
+}
