@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Architects+Daughter&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;font-family:'Architects Daughter',ui-sans-serif,system-ui,sans-serif;color:#34322d;-webkit-font-smoothing:antialiased;}
+</style>
+</helmet>
+
+<!-- ===================== TITLE ===================== -->
+<div style="position:absolute;left:80px;top:36px;width:560px">
+  <div style="font-family:'Caveat';font-weight:700;font-size:72px;line-height:.9;color:#34322d">MACCA</div>
+  <div style="font-family:'Caveat';font-weight:600;font-size:26px;color:#7a7669;margin-top:2px">Museo d'Arte Contemporanea a Cielo Aperto — wireframe del prototipo</div>
+  <div style="margin-top:10px;font-size:14px;color:#8a8576;max-width:520px;line-height:1.5">Bozza a bassa fedeltà · mobile-first · italiano-first · la mappa come interfaccia. Struttura e flusso, non grafica finale.</div>
+</div>
+<div style="position:absolute;left:700px;top:54px;width:240px;background:#fbe9a0;padding:14px 16px;font-size:14px;line-height:1.45;box-shadow:0 1px 4px rgba(0,0,0,.12);transform:rotate(-1.4deg)">
+  <b style="font-family:'Caveat';font-size:18px">Nord stella</b><br>"Il territorio è l'interfaccia." La mappa ritorna in home, collezione, opera, percorsi.
+</div>
+<div style="position:absolute;left:970px;top:48px;width:230px;background:#fff;border:1.5px solid #34322d;padding:13px 15px;font-size:13.5px;line-height:1.45;box-shadow:0 1px 4px rgba(0,0,0,.1);transform:rotate(1deg)">
+  <b style="font-family:'Caveat';font-size:18px">Onestà della posizione</b><br>4 stati: <b>esatta</b> · <b>sito/ingresso</b> · <b>area</b> · <b>in verifica</b>. Mai un pin falso.
+</div>
+
+<!-- ===================== SECTION A HEADER ===================== -->
+<div style="position:absolute;left:80px;top:236px;font-family:'Caveat';font-weight:700;font-size:38px;color:#34322d">01 · Mobile — la guida sul posto <span style="font-size:22px;color:#c0573a">(priorità)</span></div>
+<div style="position:absolute;left:80px;top:286px;font-size:14px;color:#8a8576">Il visitatore apre MACCA col telefono a Peccioli. Schermo intero della mappa + bottom sheet trascinabile.</div>
+
+
+<!-- ===== A1 · HOME MOBILE ===== -->
+<div style="position:absolute;left:80px;top:340px;width:340px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">A1 · Home</div>
+  <div data-screen-label="Mobile Home" style="background:#f6f4ee;border:6px solid #34322d;border-radius:38px;height:712px;overflow:hidden;position:relative;display:flex;flex-direction:column;box-shadow:0 5px 16px rgba(0,0,0,.14)">
+    <div style="height:26px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-size:11px;color:#34322d"><span>9:41</span><span style="font-family:ui-monospace,monospace;letter-spacing:.05em">IT</span></div>
+    <div style="height:46px;border-bottom:1.5px solid #34322d;display:flex;align-items:center;justify-content:space-between;padding:0 16px">
+      <div style="font-family:'Caveat';font-weight:700;font-size:24px;letter-spacing:.04em">MACCA</div>
+      <div style="display:flex;gap:14px;align-items:center;font-size:12px"><span>Cerca</span><div style="display:flex;flex-direction:column;gap:3px"><span style="width:18px;height:1.5px;background:#34322d"></span><span style="width:18px;height:1.5px;background:#34322d"></span><span style="width:18px;height:1.5px;background:#34322d"></span></div></div>
+    </div>
+    <div style="flex:1;overflow:hidden;display:flex;flex-direction:column">
+      <div style="height:218px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px);position:relative;padding:16px;display:flex;flex-direction:column;justify-content:flex-end;border-bottom:1.5px solid #34322d">
+        <div style="position:absolute;inset:0;background:radial-gradient(120% 80% at 70% 10%,rgba(74,93,78,.16),transparent)"></div>
+        <div style="font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#7a7669;position:relative">Museo d'arte contemporanea a cielo aperto</div>
+        <div style="font-family:'Architects Daughter';font-size:23px;line-height:1.08;margin-top:6px;position:relative">Un museo diffuso nel paesaggio di Peccioli.</div>
+        <div style="display:flex;gap:8px;margin-top:12px;position:relative">
+          <div style="flex:1;background:#c0573a;color:#f6f4ee;border:1.5px solid #34322d;border-radius:8px;padding:9px 0;text-align:center;font-size:12.5px">Esplora la mappa</div>
+          <div style="flex:1;background:transparent;border:1.5px solid #34322d;border-radius:8px;padding:9px 0;text-align:center;font-size:12.5px">Scegli un percorso</div>
+        </div>
+        <div style="margin-top:8px;border:1.5px solid #34322d;border-radius:8px;padding:9px 0;text-align:center;font-size:12.5px;position:relative;display:flex;align-items:center;justify-content:center;gap:6px">Esplora le opere <span style="font-size:14px">▦</span></div>
+        <div style="margin-top:10px;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.06em;color:#5a564b;position:relative">72 opere · 30+ anni · 1 territorio</div>
+      </div>
+      <div style="padding:14px 16px;border-bottom:1.5px solid #34322d">
+        <div style="font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#9a957f">La collezione è una mappa</div>
+        <div style="margin-top:8px;height:104px;border:1.5px solid #34322d;border-radius:10px 7px 12px 6px/7px 11px 6px 10px;background:#dbe2e1;position:relative;overflow:hidden">
+          <div style="position:absolute;width:160px;height:90px;border:1.4px dashed rgba(74,93,78,.5);border-radius:50%;left:20px;top:14px"></div>
+          <div style="position:absolute;width:90px;height:54px;border:1.4px dashed rgba(74,93,78,.45);border-radius:50%;left:60px;top:32px"></div>
+          <div style="position:absolute;left:0;top:60%;width:100%;height:2px;background:#cdbfa6;transform:rotate(-7deg)"></div>
+          <div style="position:absolute;left:54px;top:40px;width:14px;height:14px;border-radius:50%;background:#c0573a;border:2px solid #34322d"></div>
+          <div style="position:absolute;left:128px;top:26px;width:13px;height:13px;border-radius:3px;background:#fff;border:2px solid #34322d"></div>
+          <div style="position:absolute;left:188px;top:54px;width:24px;height:24px;border-radius:50%;background:#fff;border:2px dashed #34322d;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">5</div>
+          <div style="position:absolute;left:96px;top:66px;width:30px;height:20px;border:1.6px dashed #8a8576;border-radius:40%;background:rgba(192,87,58,.06)"></div>
+        </div>
+        <div style="margin-top:7px;font-size:12px;color:#6a665a;line-height:1.4">Arte tra strade, colline, frazioni, edifici e infrastrutture.</div>
+      </div>
+      <div style="padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#9a957f">Percorso in evidenza</div>
+        <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden;display:flex">
+          <div style="width:84px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px);border-right:1.5px solid #34322d"></div>
+          <div style="flex:1;padding:10px 12px">
+            <div style="font-family:'Architects Daughter';font-size:16px;line-height:1.1">Centro storico di Peccioli</div>
+            <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;font-family:ui-monospace,monospace;font-size:9px"><span style="border:1.2px solid #34322d;border-radius:20px;padding:2px 7px">~2h</span><span style="border:1.2px solid #34322d;border-radius:20px;padding:2px 7px">A piedi</span><span style="border:1.2px solid #34322d;border-radius:20px;padding:2px 7px">9 tappe</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="height:54px;border-top:1.5px solid #34322d;background:#c0573a;display:flex;align-items:center;justify-content:center;gap:8px;color:#f6f4ee;font-size:14px"><span style="width:14px;height:14px;border-radius:50%;border:2px solid #f6f4ee"></span>Apri mappa</div>
+  </div>
+</div>
+
+<!-- ===== A2 · MAP DEFAULT ===== -->
+<div style="position:absolute;left:480px;top:340px;width:340px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">A2 · Mappa — esplora</div>
+  <div data-screen-label="Mobile Map default" style="background:#dbe2e1;border:6px solid #34322d;border-radius:38px;height:712px;overflow:hidden;position:relative;display:flex;flex-direction:column;box-shadow:0 5px 16px rgba(0,0,0,.14)">
+    <div style="height:26px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-size:11px;background:#f6f4ee;border-bottom:1.5px solid #34322d"><span>9:41</span><span style="font-family:ui-monospace,monospace">IT</span></div>
+    <div style="padding:10px 14px;background:#f6f4ee;border-bottom:1.5px solid #34322d;display:flex;gap:8px;align-items:center">
+      <div style="flex:1;border:1.5px solid #34322d;border-radius:20px;padding:8px 12px;font-size:12px;color:#8a8576">Cerca opere, artisti, luoghi…</div>
+      <div style="width:38px;height:38px;border:1.5px solid #34322d;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:10px;font-family:ui-monospace,monospace">Filtri</div>
+    </div>
+    <div style="flex:1;position:relative;overflow:hidden">
+      <div style="position:absolute;width:260px;height:170px;border:1.4px dashed rgba(74,93,78,.5);border-radius:50%;left:30px;top:30px"></div>
+      <div style="position:absolute;width:170px;height:110px;border:1.4px dashed rgba(74,93,78,.45);border-radius:50%;left:80px;top:60px"></div>
+      <div style="position:absolute;width:90px;height:60px;border:1.4px dashed rgba(74,93,78,.4);border-radius:50%;left:120px;top:84px"></div>
+      <div style="position:absolute;left:-10px;top:48%;width:120%;height:2.5px;background:#cdbfa6;transform:rotate(-9deg)"></div>
+      <div style="position:absolute;left:-10px;top:70%;width:120%;height:2px;background:#cdbfa6;transform:rotate(6deg)"></div>
+      <div style="position:absolute;left:118px;top:108px;width:16px;height:16px;border-radius:50%;background:#c0573a;border:2px solid #34322d"></div>
+      <div style="position:absolute;left:182px;top:80px;width:15px;height:15px;border-radius:3px;background:#fff;border:2px solid #34322d"></div>
+      <div style="position:absolute;left:78px;top:170px;width:16px;height:16px;border-radius:50%;background:#c0573a;border:2px solid #34322d"></div>
+      <div style="position:absolute;left:210px;top:158px;width:30px;height:30px;border-radius:50%;background:#fff;border:2px dashed #34322d;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">7</div>
+      <div style="position:absolute;left:150px;top:210px;width:46px;height:30px;border:1.8px dashed #8a8576;border-radius:40%;background:rgba(192,87,58,.06)"></div>
+      <div style="position:absolute;left:160px;top:236px;font-family:ui-monospace,monospace;font-size:8px;color:#8a8576">in verifica</div>
+      <div style="position:absolute;top:12px;left:50%;transform:translateX(-50%);display:flex;border:1.5px solid #34322d;border-radius:20px;overflow:hidden;font-size:12px;background:#f6f4ee">
+        <span style="padding:6px 16px;background:#34322d;color:#f6f4ee">Mappa</span><span style="padding:6px 16px">Lista</span>
+      </div>
+      <div style="position:absolute;right:12px;bottom:150px;width:42px;height:42px;border-radius:50%;background:#f6f4ee;border:1.5px solid #34322d;display:flex;align-items:center;justify-content:center;font-size:9px;font-family:ui-monospace,monospace;text-align:center">vicino<br>a me</div>
+    </div>
+    <div style="border-top:1.5px solid #34322d;background:#f6f4ee;border-radius:18px 18px 0 0;padding:8px 16px 14px;box-shadow:0 -3px 10px rgba(0,0,0,.08);position:relative">
+      <div style="width:38px;height:4px;background:#bdb8a8;border-radius:3px;margin:0 auto 10px"></div>
+      <div style="font-family:'Architects Daughter';font-size:16px">18 opere nelle vicinanze</div>
+      <div style="margin-top:10px;display:flex;gap:10px;align-items:center;padding-bottom:10px;border-bottom:1px solid #e0dbcf">
+        <div style="width:52px;height:44px;border:1.4px solid #34322d;border-radius:7px;background:repeating-linear-gradient(135deg,#e9e5db 0 5px,#e0dbcf 5px 10px)"></div>
+        <div style="flex:1"><div style="font-size:13px">Endless Sunset</div><div style="font-size:11px;color:#8a8576">Patrick Tuttofuoco · 2020 · Peccioli</div><div style="margin-top:3px;font-family:ui-monospace,monospace;font-size:8px;border:1px solid #34322d;border-radius:12px;padding:1px 6px;display:inline-block">All'aperto · libero</div></div>
+        <div style="font-family:ui-monospace,monospace;font-size:10px;color:#6a665a">240m</div>
+      </div>
+      <div style="margin-top:10px;display:flex;gap:10px;align-items:center">
+        <div style="width:52px;height:44px;border:1.4px solid #34322d;border-radius:7px;background:repeating-linear-gradient(135deg,#e9e5db 0 5px,#e0dbcf 5px 10px)"></div>
+        <div style="flex:1"><div style="font-size:13px">Chiacchiere</div><div style="font-size:11px;color:#8a8576">Vittorio Corsini · 2023 · Peccioli</div></div>
+        <div style="font-family:ui-monospace,monospace;font-size:10px;color:#6a665a">410m</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== A3 · MAP SELECTED WORK ===== -->
+<div style="position:absolute;left:880px;top:340px;width:340px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">A3 · Mappa — opera selezionata</div>
+  <div data-screen-label="Mobile Map selected" style="background:#dbe2e1;border:6px solid #34322d;border-radius:38px;height:712px;overflow:hidden;position:relative;display:flex;flex-direction:column;box-shadow:0 5px 16px rgba(0,0,0,.14)">
+    <div style="height:26px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-size:11px;background:#f6f4ee;border-bottom:1.5px solid #34322d"><span>9:41</span><span style="font-family:ui-monospace,monospace">IT</span></div>
+    <div style="height:160px;position:relative;overflow:hidden;border-bottom:1.5px solid #34322d">
+      <div style="position:absolute;width:220px;height:130px;border:1.4px dashed rgba(74,93,78,.5);border-radius:50%;left:40px;top:14px"></div>
+      <div style="position:absolute;left:-10px;top:60%;width:120%;height:2.5px;background:#cdbfa6;transform:rotate(-9deg)"></div>
+      <div style="position:absolute;left:88px;top:46px;width:13px;height:13px;border-radius:50%;background:#c0573a;border:2px solid #34322d;opacity:.55"></div>
+      <div style="position:absolute;left:198px;top:88px;width:13px;height:13px;border-radius:3px;background:#fff;border:2px solid #34322d"></div>
+      <div style="position:absolute;left:150px;top:44px;width:28px;height:28px;border-radius:50%;background:#c0573a;border:3px solid #34322d;box-shadow:0 0 0 6px rgba(192,87,58,.18);display:flex;align-items:center;justify-content:center"><span style="width:8px;height:8px;border-radius:50%;background:#f6f4ee"></span></div>
+      <div style="position:absolute;top:10px;left:12px;width:34px;height:34px;border-radius:10px;background:#f6f4ee;border:1.5px solid #34322d;display:flex;align-items:center;justify-content:center;font-size:16px">‹</div>
+    </div>
+    <div style="flex:1;background:#f6f4ee;border-radius:18px 18px 0 0;margin-top:-14px;position:relative;border-top:1.5px solid #34322d;padding:8px 16px 14px;overflow:hidden">
+      <div style="width:38px;height:4px;background:#bdb8a8;border-radius:3px;margin:0 auto 12px"></div>
+      <div style="height:120px;border:1.5px solid #34322d;border-radius:10px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px);position:relative"><span style="position:absolute;bottom:8px;left:10px;font-family:ui-monospace,monospace;font-size:9px;color:#7a7669">opera + luogo</span></div>
+      <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:flex-start">
+        <div><div style="font-family:'Architects Daughter';font-size:22px;line-height:1">Endless Sunset</div><div style="font-size:12px;color:#8a8576;margin-top:3px">Patrick Tuttofuoco · 2020 · Peccioli</div></div>
+        <div style="display:flex;gap:8px"><span style="width:30px;height:30px;border:1.5px solid #34322d;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px">♡</span></div>
+      </div>
+      <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;font-family:ui-monospace,monospace;font-size:9px">
+        <span style="border:1.2px solid #34322d;border-radius:14px;padding:3px 8px;display:flex;align-items:center;gap:5px"><span style="width:7px;height:7px;border-radius:50%;background:#4a5d4e"></span>All'aperto · libero accesso</span>
+        <span style="border:1.2px solid #34322d;border-radius:14px;padding:3px 8px;display:flex;align-items:center;gap:5px"><span style="width:7px;height:7px;border-radius:50%;background:#c0573a"></span>Posizione esatta</span>
+      </div>
+      <div style="margin-top:11px;font-size:12.5px;line-height:1.45;color:#56524a">L'orizzonte come spazio pubblico: la scultura riapre la vista sulla valle dal bordo del paese.</div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <div style="flex:2;background:#c0573a;color:#f6f4ee;border:1.5px solid #34322d;border-radius:8px;padding:11px 0;text-align:center;font-size:13px">Apri indicazioni</div>
+        <div style="flex:1;border:1.5px solid #34322d;border-radius:8px;padding:11px 0;text-align:center;font-size:13px">Salva</div>
+      </div>
+      <div style="margin-top:12px;font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#9a957f">Nelle vicinanze</div>
+      <div style="margin-top:7px;display:flex;gap:10px"><div style="width:46px;height:38px;border:1.4px solid #34322d;border-radius:7px;background:repeating-linear-gradient(135deg,#e9e5db 0 5px,#e0dbcf 5px 10px)"></div><div style="flex:1;font-size:12px">Il silenzio delle piante<br><span style="color:#8a8576">Adrian Paci · 180m</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== A4 · ARTWORK PAGE MOBILE ===== -->
+<div style="position:absolute;left:1280px;top:340px;width:340px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">A4 · Opera</div>
+  <div data-screen-label="Mobile Artwork" style="background:#f6f4ee;border:6px solid #34322d;border-radius:38px;height:712px;overflow:hidden;position:relative;display:flex;flex-direction:column;box-shadow:0 5px 16px rgba(0,0,0,.14)">
+    <div style="height:26px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-size:11px"><span>9:41</span><span style="font-family:ui-monospace,monospace">IT</span></div>
+    <div style="flex:1;overflow:hidden;display:flex;flex-direction:column">
+      <div style="height:230px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px);position:relative;border-bottom:1.5px solid #34322d;display:flex;flex-direction:column;justify-content:space-between;padding:14px">
+        <div style="display:flex;justify-content:space-between"><span style="width:34px;height:34px;border-radius:10px;background:#f6f4ee;border:1.5px solid #34322d;display:flex;align-items:center;justify-content:center;font-size:16px">‹</span><div style="display:flex;gap:8px"><span style="width:34px;height:34px;border-radius:50%;background:#f6f4ee;border:1.5px solid #34322d;display:flex;align-items:center;justify-content:center">♡</span><span style="width:34px;height:34px;border-radius:50%;background:#f6f4ee;border:1.5px solid #34322d;display:flex;align-items:center;justify-content:center;font-size:13px">↗</span></div></div>
+        <div><div style="font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#6a665a">Ghizzano · scultura</div><div style="font-family:'Architects Daughter';font-size:28px;line-height:1;margin-top:4px">SolidSky</div><div style="font-size:12px;color:#56524a;margin-top:3px">Alicja Kwade · 2019</div></div>
+      </div>
+      <div style="padding:12px 16px;display:flex;flex-direction:column;gap:13px">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;font-family:ui-monospace,monospace;font-size:9px"><span style="border:1.2px solid #34322d;border-radius:14px;padding:3px 8px;display:flex;gap:5px;align-items:center"><span style="width:7px;height:7px;border-radius:50%;background:#4a5d4e"></span>All'aperto · libero</span><span style="border:1.2px solid #34322d;border-radius:14px;padding:3px 8px;display:flex;gap:5px;align-items:center"><span style="width:7px;height:7px;border-radius:50%;background:#c0573a"></span>Posizione esatta</span></div>
+        <div style="font-size:14px;line-height:1.5;color:#3f3d37">Una scultura che gioca con percezione e gravità: la pietra sembra sospesa sul margine del villaggio, dove lo sguardo cade nella valle.</div>
+        <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden">
+          <div style="padding:9px 12px;border-bottom:1px solid #e0dbcf;font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#9a957f">Scheda</div>
+          <div style="display:flex;justify-content:space-between;padding:7px 12px;font-size:12px;border-bottom:1px solid #efeae0"><span style="color:#8a8576">Artista</span><span>Alicja Kwade</span></div>
+          <div style="display:flex;justify-content:space-between;padding:7px 12px;font-size:12px;border-bottom:1px solid #efeae0"><span style="color:#8a8576">Anno</span><span>2019</span></div>
+          <div style="display:flex;justify-content:space-between;padding:7px 12px;font-size:12px;border-bottom:1px solid #efeae0"><span style="color:#8a8576">Tipo</span><span>Scultura</span></div>
+          <div style="display:flex;justify-content:space-between;padding:7px 12px;font-size:12px"><span style="color:#8a8576">Dimensioni</span><span style="color:#a09a86">in verifica</span></div>
+        </div>
+        <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden">
+          <div style="height:96px;background:#dbe2e1;position:relative"><div style="position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:18px;height:18px;border-radius:50%;background:#c0573a;border:2px solid #34322d"></div></div>
+          <div style="padding:10px 12px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:12px">Ghizzano, bordo del borgo<br><span style="color:#8a8576;font-size:11px">Parcheggio a 300m · breve salita</span></div><span style="background:#c0573a;color:#f6f4ee;border:1.5px solid #34322d;border-radius:7px;padding:8px 10px;font-size:11px">Indicazioni</span></div>
+        </div>
+        <div style="font-size:9px;font-family:ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:#9a957f">Continua a leggere · Galleria · In questo luogo · Artista · Fonti</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== A5 · QR QUICK VIEW ===== -->
+<div style="position:absolute;left:1680px;top:340px;width:340px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">A5 · QR — vista rapida</div>
+  <div data-screen-label="Mobile QR quick view" style="background:#f6f4ee;border:6px solid #34322d;border-radius:38px;height:712px;overflow:hidden;position:relative;display:flex;flex-direction:column;box-shadow:0 5px 16px rgba(0,0,0,.14)">
+    <div style="height:26px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-size:11px"><span>9:41</span><span style="font-family:ui-monospace,monospace">IT</span></div>
+    <div style="padding:10px 20px;display:flex;justify-content:space-between;align-items:center;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.12em;color:#8a8576;border-bottom:1.5px solid #34322d"><span>MACCA · QR</span><span>IT / EN</span></div>
+    <div style="flex:1;padding:22px 20px;display:flex;flex-direction:column">
+      <div style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9a957f">Ghizzano · colore</div>
+      <div style="font-family:'Architects Daughter';font-size:42px;line-height:.98;margin-top:8px">Via di Mezzo</div>
+      <div style="font-size:17px;color:#56524a;margin-top:8px">David Tremlett · 2019</div>
+      <div style="margin-top:16px;border:2px solid #34322d;border-radius:16px;padding:11px 14px;display:flex;align-items:center;gap:9px;font-size:15px;background:#fff"><span style="width:11px;height:11px;border-radius:50%;background:#4a5d4e"></span>Opera visitabile liberamente</div>
+      <div style="margin-top:16px;font-size:16px;line-height:1.5;color:#3f3d37">Il colore diventa architettura: pareti dipinte trasformano la via in un'esperienza continua del villaggio.</div>
+      <div style="flex:1"></div>
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div style="background:#c0573a;color:#f6f4ee;border:2px solid #34322d;border-radius:14px;height:58px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:19px"><span style="width:16px;height:16px;border-radius:50%;border:2.5px solid #f6f4ee"></span>Ascolta</div>
+        <div style="display:flex;gap:11px"><div style="flex:1;border:2px solid #34322d;border-radius:14px;height:58px;display:flex;align-items:center;justify-content:center;font-size:18px">Leggi</div><div style="flex:1;border:2px solid #34322d;border-radius:14px;height:58px;display:flex;align-items:center;justify-content:center;font-size:18px">Mappa</div></div>
+      </div>
+      <div style="margin-top:16px;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9a957f">Nelle vicinanze · 2 opere a &lt;200m</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== A6 · ROUTE ACTIVE ===== -->
+<div style="position:absolute;left:2080px;top:340px;width:340px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">A6 · Percorso attivo</div>
+  <div data-screen-label="Mobile Route active" style="background:#f6f4ee;border:6px solid #34322d;border-radius:38px;height:712px;overflow:hidden;position:relative;display:flex;flex-direction:column;box-shadow:0 5px 16px rgba(0,0,0,.14)">
+    <div style="height:26px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-size:11px"><span>9:41</span><span style="font-family:ui-monospace,monospace">IT</span></div>
+    <div style="padding:12px 16px;border-bottom:1.5px solid #34322d">
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">‹</span><div><div style="font-family:'Architects Daughter';font-size:18px;line-height:1.05">Ghizzano: colore, scultura e villaggio</div><div style="font-family:ui-monospace,monospace;font-size:10px;color:#8a8576;margin-top:3px">A piedi · ~1h 30m · 6 tappe</div></div></div>
+    </div>
+    <div style="height:172px;position:relative;background:#dbe2e1;border-bottom:1.5px solid #34322d;overflow:hidden">
+      <div style="position:absolute;left:-10px;top:50%;width:120%;height:2.5px;background:#cdbfa6;transform:rotate(-6deg)"></div>
+      <svg viewBox="0 0 320 172" style="position:absolute;inset:0;width:100%;height:100%"><polyline points="44,130 96,86 150,104 200,58 250,86 290,40" fill="none" stroke="#c0573a" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"></polyline></svg>
+      <div style="position:absolute;left:36px;top:122px;width:22px;height:22px;border-radius:50%;background:#34322d;color:#f6f4ee;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">1</div>
+      <div style="position:absolute;left:140px;top:94px;width:26px;height:26px;border-radius:50%;background:#c0573a;color:#f6f4ee;border:3px solid #34322d;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">2</div>
+      <div style="position:absolute;left:192px;top:48px;width:22px;height:22px;border-radius:50%;background:#f6f4ee;color:#34322d;border:2px solid #34322d;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">3</div>
+    </div>
+    <div style="flex:1;overflow:hidden;padding:12px 16px;display:flex;flex-direction:column;gap:11px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9a957f">Tappa 2 di 6 · in corso</span><span style="font-family:ui-monospace,monospace;font-size:10px;color:#8a8576">prossima · 220m</span></div>
+      <div style="border:1.5px solid #34322d;border-radius:10px;display:flex;overflow:hidden">
+        <div style="width:70px;background:repeating-linear-gradient(135deg,#e9e5db 0 5px,#e0dbcf 5px 10px);border-right:1.5px solid #34322d"></div>
+        <div style="flex:1;padding:10px 12px"><div style="font-size:14px">Via di Mezzo</div><div style="font-size:11px;color:#8a8576;margin-top:2px">David Tremlett · ~10 min</div><div style="margin-top:5px;font-family:ui-monospace,monospace;font-size:8px;border:1px solid #34322d;border-radius:12px;padding:1px 6px;display:inline-block">All'aperto · libero</div></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2px"><span style="font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#9a957f">Prossime tappe</span><span style="display:flex;align-items:center;gap:5px;font-size:11px;color:#c0573a">＋ Aggiungi</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><span style="width:22px;height:22px;border-radius:50%;border:2px solid #34322d;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex:none">3</span><div style="flex:1;font-size:13px;color:#56524a">Elevatio corpus · Tuttofuoco</div><span style="width:26px;height:26px;border-radius:50%;border:1.5px solid #34322d;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none">−</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><span style="width:22px;height:22px;border-radius:50%;border:2px solid #34322d;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex:none">4</span><div style="flex:1;font-size:13px;color:#56524a">SolidSky · Kwade</div><span style="width:26px;height:26px;border-radius:50%;border:1.5px solid #34322d;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none">−</span></div>
+      <div style="display:flex;align-items:center;gap:10px;border:1.5px dashed #34322d;border-radius:10px;padding:9px 12px;color:#56524a"><span style="width:22px;height:22px;border-radius:50%;border:1.5px dashed #34322d;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none">＋</span><span style="font-size:13px">Aggiungi una tappa al percorso</span></div>
+    </div>
+    <div style="height:54px;border-top:1.5px solid #34322d;background:#c0573a;color:#f6f4ee;display:flex;align-items:center;justify-content:center;font-size:15px">Continua il percorso →</div>
+  </div>
+</div>
+
+<!-- ===== A7 · COLLECTION FILTER DRAWER ===== -->
+<div style="position:absolute;left:2480px;top:340px;width:340px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">A7 · Filtri collezione</div>
+  <div data-screen-label="Mobile Filter drawer" style="background:#f6f4ee;border:6px solid #34322d;border-radius:38px;height:712px;overflow:hidden;position:relative;display:flex;flex-direction:column;box-shadow:0 5px 16px rgba(0,0,0,.14)">
+    <div style="position:absolute;inset:0;padding:60px 16px 0;opacity:.32;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="height:150px;border:1.4px solid #34322d;border-radius:8px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px)"></div>
+      <div style="height:150px;border:1.4px solid #34322d;border-radius:8px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px)"></div>
+      <div style="height:150px;border:1.4px solid #34322d;border-radius:8px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px)"></div>
+      <div style="height:150px;border:1.4px solid #34322d;border-radius:8px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px)"></div>
+    </div>
+    <div style="position:absolute;inset:0;background:rgba(52,50,45,.32)"></div>
+    <div style="margin-top:auto;position:relative;background:#f6f4ee;border-top:1.5px solid #34322d;border-radius:20px 20px 0 0;padding:10px 18px 18px;box-shadow:0 -4px 14px rgba(0,0,0,.18)">
+      <div style="width:38px;height:4px;background:#bdb8a8;border-radius:3px;margin:0 auto 12px"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:'Architects Daughter';font-size:20px">Filtri</div><div style="font-size:12px;color:#c0573a">Azzera</div></div>
+      <div style="margin-top:14px;font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#9a957f">Area</div>
+      <div style="margin-top:7px;display:flex;gap:7px;flex-wrap:wrap;font-size:12px">
+        <span style="border:1.4px solid #34322d;background:#34322d;color:#f6f4ee;border-radius:18px;padding:5px 11px">Peccioli</span>
+        <span style="border:1.4px solid #34322d;border-radius:18px;padding:5px 11px">Ghizzano</span>
+        <span style="border:1.4px solid #34322d;border-radius:18px;padding:5px 11px">Legoli</span>
+        <span style="border:1.4px solid #34322d;border-radius:18px;padding:5px 11px">Le Serre</span>
+      </div>
+      <div style="margin-top:14px;font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#9a957f">Tipo</div>
+      <div style="margin-top:7px;display:flex;gap:7px;flex-wrap:wrap;font-size:12px">
+        <span style="border:1.4px solid #34322d;border-radius:18px;padding:5px 11px">Scultura</span>
+        <span style="border:1.4px solid #34322d;background:#34322d;color:#f6f4ee;border-radius:18px;padding:5px 11px">Colore</span>
+        <span style="border:1.4px solid #34322d;border-radius:18px;padding:5px 11px">Luce</span>
+        <span style="border:1.4px solid #34322d;border-radius:18px;padding:5px 11px">Voce/Suono</span>
+      </div>
+      <div style="margin-top:14px;font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#9a957f">Accesso</div>
+      <div style="margin-top:7px;display:flex;gap:7px;flex-wrap:wrap;font-size:12px">
+        <span style="border:1.4px solid #34322d;border-radius:18px;padding:5px 11px;display:flex;gap:5px;align-items:center"><span style="width:7px;height:7px;border-radius:50%;background:#4a5d4e"></span>Libero</span>
+        <span style="border:1.4px solid #34322d;border-radius:18px;padding:5px 11px;display:flex;gap:5px;align-items:center"><span style="width:7px;height:7px;border-radius:50%;background:#c79a2e"></span>Prenotazione</span>
+      </div>
+      <div style="margin-top:18px;background:#c0573a;color:#f6f4ee;border:1.5px solid #34322d;border-radius:10px;padding:13px 0;text-align:center;font-size:14px">Mostra 41 opere</div>
+    </div>
+  </div>
+</div>
+
+<!-- section A postits -->
+<div style="position:absolute;left:600px;top:1080px;width:230px;background:#fbe9a0;padding:13px 15px;font-size:13.5px;line-height:1.45;box-shadow:0 1px 4px rgba(0,0,0,.12);transform:rotate(-1deg)"><b style="font-family:'Caveat';font-size:17px">Bottom sheet</b><br>Collassato → esteso → schermo intero. La mappa resta sotto, sempre presente.</div>
+<div style="position:absolute;left:1700px;top:1080px;width:230px;background:#fbe9a0;padding:13px 15px;font-size:13.5px;line-height:1.45;box-shadow:0 1px 4px rgba(0,0,0,.12);transform:rotate(1.2deg)"><b style="font-family:'Caveat';font-size:17px">QR all'aperto</b><br>Tipografia grande, leggibile al sole. Tap target 56px+. Niente menu pesanti.</div>
+
+<!-- ===================== SECTION B HEADER ===================== -->
+<div style="position:absolute;left:80px;top:1190px;font-family:'Caveat';font-weight:700;font-size:38px;color:#34322d">02 · Desktop — editoriale &amp; istituzionale</div>
+<div style="position:absolute;left:80px;top:1240px;font-size:14px;color:#8a8576">Visione ampia, griglia modulare, viste mappa/contenuto affiancate. Per stakeholder e lettura lunga.</div>
+
+<!-- ===== B1 · HOME DESKTOP ===== -->
+<div style="position:absolute;left:80px;top:1310px;width:1080px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">B1 · Home desktop</div>
+  <div data-screen-label="Desktop Home" style="background:#f6f4ee;border:2px solid #34322d;border-radius:8px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.1)">
+    <div style="height:54px;border-bottom:1.5px solid #34322d;display:flex;align-items:center;justify-content:space-between;padding:0 24px">
+      <div style="font-family:'Caveat';font-weight:700;font-size:26px;letter-spacing:.04em">MACCA</div>
+      <div style="display:flex;gap:20px;font-size:13px;color:#56524a"><span>Esplora</span><span>Collezione</span><span>Percorsi</span><span>Timeline</span><span>Visita</span><span>MACCA</span></div>
+      <div style="display:flex;gap:14px;align-items:center;font-size:12px"><span>Cerca</span><span style="border:1.2px solid #34322d;border-radius:14px;padding:2px 8px">IT / EN</span><span>Salvati</span><span style="background:#c0573a;color:#f6f4ee;border:1.5px solid #34322d;border-radius:7px;padding:6px 12px">Apri mappa</span></div>
+    </div>
+    <div style="height:380px;background:repeating-linear-gradient(135deg,#e9e5db 0 7px,#e0dbcf 7px 14px);position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:40px 48px;border-bottom:1.5px solid #34322d">
+      <div style="position:absolute;inset:0;background:radial-gradient(80% 90% at 75% 0%,rgba(74,93,78,.16),transparent)"></div>
+      <div style="position:relative;max-width:620px">
+        <div style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7a7669">Museo d'Arte Contemporanea a Cielo Aperto</div>
+        <div style="font-family:'Architects Daughter';font-size:50px;line-height:1.02;margin-top:12px">Un museo diffuso nel paesaggio di Peccioli.</div>
+        <div style="display:flex;gap:12px;margin-top:24px"><span style="background:#c0573a;color:#f6f4ee;border:1.5px solid #34322d;border-radius:8px;padding:12px 22px;font-size:14px">Esplora la mappa</span><span style="border:1.5px solid #34322d;border-radius:8px;padding:12px 22px;font-size:14px">Scegli un percorso</span><span style="border:1.5px solid #34322d;border-radius:8px;padding:12px 22px;font-size:14px;display:flex;align-items:center;gap:8px">Esplora le opere <span>▦</span></span></div>
+        <div style="margin-top:18px;font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.06em;color:#5a564b">72 opere · 30+ anni · 1 territorio</div>
+      </div>
+    </div>
+    <div style="display:flex;border-bottom:1.5px solid #34322d">
+      <div style="width:42%;padding:32px 48px;border-right:1.5px solid #34322d">
+        <div style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9a957f">La collezione è una mappa</div>
+        <div style="font-family:'Architects Daughter';font-size:28px;line-height:1.1;margin-top:12px">L'arte non comincia all'ingresso. È già nel paesaggio.</div>
+        <div style="margin-top:14px;font-size:14px;line-height:1.6;color:#56524a;max-width:340px">Opere tra strade, colline, frazioni, chiese, edifici pubblici e infrastrutture. La mappa è il modo principale per leggere la collezione.</div>
+        <div style="margin-top:18px;display:flex;gap:18px;font-family:ui-monospace,monospace;font-size:10px;color:#6a665a">
+          <span style="display:flex;gap:6px;align-items:center"><span style="width:11px;height:11px;border-radius:50%;background:#c0573a;border:1.5px solid #34322d"></span>esatta</span>
+          <span style="display:flex;gap:6px;align-items:center"><span style="width:11px;height:11px;border-radius:2px;background:#fff;border:1.5px solid #34322d"></span>sito</span>
+          <span style="display:flex;gap:6px;align-items:center"><span style="width:13px;height:13px;border-radius:50%;background:#fff;border:1.5px dashed #34322d"></span>area</span>
+          <span style="display:flex;gap:6px;align-items:center"><span style="width:13px;height:9px;border-radius:40%;border:1.5px dashed #8a8576"></span>in verifica</span>
+        </div>
+      </div>
+      <div style="flex:1;background:#dbe2e1;position:relative;min-height:300px;overflow:hidden">
+        <div style="position:absolute;width:380px;height:230px;border:1.5px dashed rgba(74,93,78,.5);border-radius:50%;left:80px;top:36px"></div>
+        <div style="position:absolute;width:240px;height:150px;border:1.5px dashed rgba(74,93,78,.45);border-radius:50%;left:150px;top:74px"></div>
+        <div style="position:absolute;left:-20px;top:55%;width:130%;height:2.5px;background:#cdbfa6;transform:rotate(-7deg)"></div>
+        <div style="position:absolute;left:200px;top:120px;width:18px;height:18px;border-radius:50%;background:#c0573a;border:2px solid #34322d"></div>
+        <div style="position:absolute;left:300px;top:90px;width:16px;height:16px;border-radius:3px;background:#fff;border:2px solid #34322d"></div>
+        <div style="position:absolute;left:140px;top:175px;width:32px;height:32px;border-radius:50%;background:#fff;border:2px dashed #34322d;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">6</div>
+        <div style="position:absolute;left:360px;top:170px;width:18px;height:18px;border-radius:50%;background:#c0573a;border:2px solid #34322d"></div>
+      </div>
+    </div>
+    <div style="padding:32px 48px;border-bottom:1.5px solid #34322d">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-family:'Architects Daughter';font-size:24px">Percorsi in evidenza</div><span style="font-size:12px;color:#8a8576">Tutti i percorsi →</span></div>
+      <div style="margin-top:18px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+        <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="height:104px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px);border-bottom:1.5px solid #34322d"></div><div style="padding:12px"><div style="font-size:15px">Centro storico di Peccioli</div><div style="margin-top:8px;display:flex;gap:6px;font-family:ui-monospace,monospace;font-size:9px"><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">~2h</span><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">A piedi</span><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">9 tappe</span></div></div></div>
+        <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="height:104px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px);border-bottom:1.5px solid #34322d"></div><div style="padding:12px"><div style="font-size:15px">Ghizzano: colore e villaggio</div><div style="margin-top:8px;display:flex;gap:6px;font-family:ui-monospace,monospace;font-size:9px"><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">~1h30</span><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">A piedi</span><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">6 tappe</span></div></div></div>
+        <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="height:104px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px);border-bottom:1.5px solid #34322d;position:relative"><span style="position:absolute;top:8px;right:8px;font-family:ui-monospace,monospace;font-size:8px;background:#c79a2e;color:#34322d;border:1.2px solid #34322d;border-radius:10px;padding:2px 7px">Su prenotazione</span></div><div style="padding:12px"><div style="font-size:15px">Legoli + Belvedere</div><div style="margin-top:8px;display:flex;gap:6px;font-family:ui-monospace,monospace;font-size:9px"><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">Mezza gita</span><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">Auto</span></div></div></div>
+      </div>
+    </div>
+    <div style="display:flex;border-bottom:1.5px solid #34322d">
+      <div style="width:55%;background:repeating-linear-gradient(135deg,#e9e5db 0 7px,#e0dbcf 7px 14px);min-height:240px;border-right:1.5px solid #34322d"></div>
+      <div style="flex:1;padding:32px;display:flex;flex-direction:column;justify-content:center">
+        <div style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9a957f">Nuova commissione</div>
+        <div style="font-family:'Architects Daughter';font-size:30px;line-height:1.05;margin-top:10px">Breath</div>
+        <div style="font-size:13px;color:#8a8576;margin-top:4px">Emiliano Ponzi + Dario Spinelli · 2026 · Peccioli</div>
+        <div style="margin-top:6px;font-family:ui-monospace,monospace;font-size:9px;border:1px solid #c79a2e;color:#7a5d12;border-radius:12px;padding:2px 8px;display:inline-block;width:fit-content">Scheda provvisoria · in verifica</div>
+        <div style="margin-top:14px;font-size:14px;line-height:1.6;color:#56524a;max-width:300px">Un'opera cinetica che porta il respiro del paese nello spazio pubblico.</div>
+        <div style="margin-top:16px;font-size:12px;color:#c0573a">Scopri l'opera · indizio sulla mappa →</div>
+      </div>
+    </div>
+    <div style="padding:30px 48px;border-bottom:1.5px solid #34322d">
+      <div style="font-family:'Architects Daughter';font-size:22px">Un museo costruito nel tempo</div>
+      <div style="margin-top:18px;display:flex;align-items:flex-end;gap:0;height:60px;border-bottom:1.5px solid #34322d;position:relative">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px"><span style="width:90%;height:14px;background:#ded9cd;border:1.2px solid #34322d"></span></div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px"><span style="width:90%;height:24px;background:#ded9cd;border:1.2px solid #34322d"></span></div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px"><span style="width:90%;height:38px;background:#cdbfa6;border:1.2px solid #34322d"></span></div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px"><span style="width:90%;height:54px;background:#c0573a;border:1.2px solid #34322d"></span></div>
+      </div>
+      <div style="display:flex;font-family:ui-monospace,monospace;font-size:10px;color:#6a665a;margin-top:6px"><span style="flex:1;text-align:center">1991–2000</span><span style="flex:1;text-align:center">2001–2010</span><span style="flex:1;text-align:center">2011–2020</span><span style="flex:1;text-align:center">2021–oggi</span></div>
+    </div>
+    <div style="padding:30px 48px;border-bottom:1.5px solid #34322d">
+      <div style="font-family:'Architects Daughter';font-size:22px">Esplora per luogo</div>
+      <div style="margin-top:16px;display:grid;grid-template-columns:repeat(6,1fr);gap:12px">
+        <div style="height:88px;border:1.5px solid #34322d;border-radius:8px;background:repeating-linear-gradient(135deg,#e9e5db 0 5px,#e0dbcf 5px 10px);display:flex;align-items:flex-end;padding:8px;font-size:12px">Peccioli</div>
+        <div style="height:88px;border:1.5px solid #34322d;border-radius:8px;background:repeating-linear-gradient(135deg,#e9e5db 0 5px,#e0dbcf 5px 10px);display:flex;align-items:flex-end;padding:8px;font-size:12px">Ghizzano</div>
+        <div style="height:88px;border:1.5px solid #34322d;border-radius:8px;background:repeating-linear-gradient(135deg,#e9e5db 0 5px,#e0dbcf 5px 10px);display:flex;align-items:flex-end;padding:8px;font-size:12px">Legoli</div>
+        <div style="height:88px;border:1.5px solid #34322d;border-radius:8px;background:repeating-linear-gradient(135deg,#e9e5db 0 5px,#e0dbcf 5px 10px);display:flex;align-items:flex-end;padding:8px;font-size:12px">Fabbrica</div>
+        <div style="height:88px;border:1.5px solid #34322d;border-radius:8px;background:repeating-linear-gradient(135deg,#e9e5db 0 5px,#e0dbcf 5px 10px);display:flex;align-items:flex-end;padding:8px;font-size:12px">Le Serre</div>
+        <div style="height:88px;border:1.5px solid #34322d;border-radius:8px;background:repeating-linear-gradient(135deg,#e9e5db 0 5px,#e0dbcf 5px 10px);display:flex;align-items:flex-end;padding:8px;font-size:12px">Belvedere</div>
+      </div>
+    </div>
+    <div style="padding:24px 48px;display:flex;gap:14px;border-bottom:1.5px solid #34322d">
+      <div style="flex:1;border:1.5px solid #34322d;border-radius:8px;padding:14px;font-size:13px">Arrivare</div>
+      <div style="flex:1;border:1.5px solid #34322d;border-radius:8px;padding:14px;font-size:13px">Accessibilità</div>
+      <div style="flex:1;border:1.5px solid #34322d;border-radius:8px;padding:14px;font-size:13px">Luoghi su prenotazione</div>
+      <div style="flex:1;border:1.5px solid #34322d;border-radius:8px;padding:14px;font-size:13px">Salva la guida</div>
+    </div>
+    <div style="padding:26px 48px;background:#34322d;color:#cfcabc;display:flex;justify-content:space-between;font-size:12px">
+      <div style="font-family:'Caveat';font-weight:700;font-size:24px;color:#f6f4ee">MACCA</div>
+      <div style="display:flex;gap:40px"><div style="display:flex;flex-direction:column;gap:6px"><span>Collezione</span><span>Percorsi</span><span>Timeline</span></div><div style="display:flex;flex-direction:column;gap:6px"><span>Visita</span><span>Accessibilità</span><span>Contatti</span></div><div style="display:flex;flex-direction:column;gap:6px"><span>Privacy</span><span>Crediti</span><span>IT / EN</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== B2 · EXPLORE MAP DESKTOP SPLIT ===== -->
+<div style="position:absolute;left:1240px;top:1310px;width:1080px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">B2 · Esplora mappa — split desktop</div>
+  <div data-screen-label="Desktop Explore split" style="background:#f6f4ee;border:2px solid #34322d;border-radius:8px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.1);height:660px;display:flex;flex-direction:column">
+    <div style="height:50px;border-bottom:1.5px solid #34322d;display:flex;align-items:center;justify-content:space-between;padding:0 22px;flex:none">
+      <div style="font-family:'Caveat';font-weight:700;font-size:24px">MACCA</div>
+      <div style="display:flex;gap:18px;font-size:12px;color:#56524a"><span style="color:#c0573a">Esplora</span><span>Collezione</span><span>Percorsi</span><span>Timeline</span><span>Visita</span></div>
+      <div style="display:flex;gap:12px;font-size:12px"><span>Cerca</span><span style="border:1.2px solid #34322d;border-radius:14px;padding:2px 8px">IT / EN</span></div>
+    </div>
+    <div style="flex:1;display:flex;min-height:0">
+      <div style="width:42%;border-right:1.5px solid #34322d;display:flex;flex-direction:column;min-height:0">
+        <div style="padding:14px 18px;border-bottom:1.5px solid #34322d;flex:none">
+          <div style="border:1.5px solid #34322d;border-radius:20px;padding:9px 14px;font-size:13px;color:#8a8576">Cerca opere, artisti, luoghi…</div>
+          <div style="margin-top:12px;display:flex;gap:7px;flex-wrap:wrap;font-size:11px">
+            <span style="border:1.3px solid #34322d;background:#34322d;color:#f6f4ee;border-radius:16px;padding:4px 10px">Peccioli</span>
+            <span style="border:1.3px solid #34322d;border-radius:16px;padding:4px 10px">Scultura</span>
+            <span style="border:1.3px solid #34322d;border-radius:16px;padding:4px 10px">Luce</span>
+            <span style="border:1.3px solid #34322d;border-radius:16px;padding:4px 10px">Libero accesso</span>
+            <span style="border:1.3px solid #34322d;border-radius:16px;padding:4px 10px;color:#8a8576">+ filtri</span>
+          </div>
+          <div style="margin-top:12px;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9a957f">41 opere · ordina per vicinanza</div>
+        </div>
+        <div style="flex:1;overflow:hidden;padding:14px 18px;display:flex;flex-direction:column;gap:12px">
+          <div style="border:1.5px solid #c0573a;border-radius:10px;display:flex;overflow:hidden;background:#fbf2ee"><div style="width:96px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px);border-right:1.5px solid #34322d"></div><div style="flex:1;padding:11px 13px"><div style="font-size:15px">Endless Sunset</div><div style="font-size:12px;color:#8a8576">Patrick Tuttofuoco · 2020 · Peccioli</div><div style="margin-top:6px;font-family:ui-monospace,monospace;font-size:9px;border:1px solid #34322d;border-radius:12px;padding:2px 7px;display:inline-block">All'aperto · libero</div></div></div>
+          <div style="border:1.5px solid #34322d;border-radius:10px;display:flex;overflow:hidden"><div style="width:96px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px);border-right:1.5px solid #34322d"></div><div style="flex:1;padding:11px 13px"><div style="font-size:15px">Rotating Mirror IX</div><div style="font-size:12px;color:#8a8576">Jeppe Hein · 2021 · Peccioli</div><div style="margin-top:6px;font-family:ui-monospace,monospace;font-size:9px;border:1px solid #34322d;border-radius:12px;padding:2px 7px;display:inline-block">All'aperto · libero</div></div></div>
+          <div style="border:1.5px solid #34322d;border-radius:10px;display:flex;overflow:hidden"><div style="width:96px;background:#dbe2e1;border-right:1.5px solid #34322d;display:flex;align-items:center;justify-content:center;font-family:ui-monospace,monospace;font-size:9px;color:#8a8576;text-align:center">solo<br>area</div><div style="flex:1;padding:11px 13px"><div style="font-size:15px">VOCI</div><div style="font-size:12px;color:#8a8576">V. Corsini + scrittori · 2018 · più siti</div><div style="margin-top:6px;font-family:ui-monospace,monospace;font-size:9px;border:1px solid #34322d;border-radius:12px;padding:2px 7px;display:inline-block">Percorso / più luoghi</div></div></div>
+        </div>
+      </div>
+      <div style="flex:1;background:#dbe2e1;position:relative;min-height:0;overflow:hidden">
+        <div style="position:absolute;width:420px;height:280px;border:1.5px dashed rgba(74,93,78,.5);border-radius:50%;left:90px;top:50px"></div>
+        <div style="position:absolute;width:280px;height:180px;border:1.5px dashed rgba(74,93,78,.45);border-radius:50%;left:160px;top:100px"></div>
+        <div style="position:absolute;left:-20px;top:52%;width:130%;height:3px;background:#cdbfa6;transform:rotate(-8deg)"></div>
+        <div style="position:absolute;left:-20px;top:74%;width:130%;height:2px;background:#cdbfa6;transform:rotate(5deg)"></div>
+        <div style="position:absolute;left:230px;top:150px;width:26px;height:26px;border-radius:50%;background:#c0573a;border:3px solid #34322d;box-shadow:0 0 0 6px rgba(192,87,58,.18)"></div>
+        <div style="position:absolute;left:330px;top:120px;width:18px;height:18px;border-radius:50%;background:#c0573a;border:2px solid #34322d"></div>
+        <div style="position:absolute;left:160px;top:230px;width:18px;height:18px;border-radius:3px;background:#fff;border:2px solid #34322d"></div>
+        <div style="position:absolute;left:380px;top:220px;width:34px;height:34px;border-radius:50%;background:#fff;border:2px dashed #34322d;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">8</div>
+        <div style="position:absolute;left:280px;top:280px;width:60px;height:38px;border:2px dashed #8a8576;border-radius:40%;background:rgba(192,87,58,.06)"></div>
+        <div style="position:absolute;top:14px;right:14px;display:flex;flex-direction:column;gap:8px">
+          <span style="width:36px;height:36px;border:1.5px solid #34322d;border-radius:9px;background:#f6f4ee;display:flex;align-items:center;justify-content:center;font-size:14px">+</span>
+          <span style="width:36px;height:36px;border:1.5px solid #34322d;border-radius:9px;background:#f6f4ee;display:flex;align-items:center;justify-content:center;font-size:14px">–</span>
+          <span style="width:36px;height:36px;border:1.5px solid #34322d;border-radius:9px;background:#f6f4ee;display:flex;align-items:center;justify-content:center;font-family:ui-monospace,monospace;font-size:8px">livelli</span>
+        </div>
+        <div style="position:absolute;left:14px;bottom:14px;background:#f6f4ee;border:1.5px solid #34322d;border-radius:9px;padding:10px 12px;font-family:ui-monospace,monospace;font-size:9px;line-height:1.7">
+          <div style="display:flex;gap:6px;align-items:center"><span style="width:10px;height:10px;border-radius:50%;background:#c0573a;border:1.2px solid #34322d"></span>opera · posizione esatta</div>
+          <div style="display:flex;gap:6px;align-items:center"><span style="width:10px;height:10px;border-radius:2px;background:#fff;border:1.2px solid #34322d"></span>sito / ingresso</div>
+          <div style="display:flex;gap:6px;align-items:center"><span style="width:12px;height:12px;border-radius:50%;background:#fff;border:1.2px dashed #34322d"></span>gruppo di opere</div>
+          <div style="display:flex;gap:6px;align-items:center"><span style="width:14px;height:9px;border-radius:40%;border:1.2px dashed #8a8576"></span>posizione in verifica</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== B3 · COLLECTION INDEX ===== -->
+<div style="position:absolute;left:2400px;top:1310px;width:1080px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">B3 · Collezione</div>
+  <div data-screen-label="Desktop Collection" style="background:#f6f4ee;border:2px solid #34322d;border-radius:8px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.1)">
+    <div style="height:50px;border-bottom:1.5px solid #34322d;display:flex;align-items:center;justify-content:space-between;padding:0 24px">
+      <div style="font-family:'Caveat';font-weight:700;font-size:24px">MACCA</div>
+      <div style="display:flex;gap:18px;font-size:12px;color:#56524a"><span>Esplora</span><span style="color:#c0573a">Collezione</span><span>Percorsi</span><span>Timeline</span><span>Visita</span></div>
+      <div style="display:flex;gap:12px;font-size:12px"><span>Cerca</span><span style="border:1.2px solid #34322d;border-radius:14px;padding:2px 8px">IT / EN</span><span style="background:#c0573a;color:#f6f4ee;border:1.5px solid #34322d;border-radius:7px;padding:5px 11px">Apri mappa</span></div>
+    </div>
+    <div style="padding:28px 32px;border-bottom:1.5px solid #34322d">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end">
+        <div><div style="font-family:'Architects Daughter';font-size:40px;line-height:1">Collezione</div><div style="margin-top:8px;font-size:14px;color:#56524a;max-width:440px">72 opere distribuite nel territorio di Peccioli. Sculture, colore, luce, voci e gesti alla scala dell'edificio.</div></div>
+        <div style="display:flex;border:1.5px solid #34322d;border-radius:8px;overflow:hidden;font-size:12px"><span style="padding:7px 14px;background:#34322d;color:#f6f4ee">Griglia</span><span style="padding:7px 14px">Lista</span><span style="padding:7px 14px;border-left:1.5px solid #34322d">Mappa</span></div>
+      </div>
+      <div style="margin-top:18px;display:flex;gap:7px;flex-wrap:wrap;font-size:11px">
+        <span style="border:1.3px solid #34322d;border-radius:16px;padding:4px 11px;color:#8a8576">Per luogo ▾</span>
+        <span style="border:1.3px solid #34322d;border-radius:16px;padding:4px 11px;color:#8a8576">Per tipo ▾</span>
+        <span style="border:1.3px solid #34322d;border-radius:16px;padding:4px 11px;color:#8a8576">Per decennio ▾</span>
+        <span style="border:1.3px solid #34322d;border-radius:16px;padding:4px 11px;color:#8a8576">Per accesso ▾</span>
+        <span style="margin-left:8px;border:1.3px solid #34322d;background:#ded9cd;border-radius:16px;padding:4px 11px">Opere nel paesaggio ✕</span>
+        <span style="border:1.3px solid #34322d;background:#ded9cd;border-radius:16px;padding:4px 11px">Dopo il tramonto ✕</span>
+      </div>
+    </div>
+    <div style="padding:28px 32px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px">
+      <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="height:150px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px);border-bottom:1.5px solid #34322d;position:relative"><span style="position:absolute;top:8px;left:8px;width:24px;height:24px;border-radius:50%;border:1.5px solid #34322d;background:#f6f4ee;display:flex;align-items:center;justify-content:center;font-size:12px">♡</span></div><div style="padding:11px"><div style="font-size:14px">SolidSky</div><div style="font-size:11px;color:#8a8576">Alicja Kwade · 2019</div><div style="margin-top:7px;display:flex;justify-content:space-between;align-items:center"><span style="font-family:ui-monospace,monospace;font-size:9px;color:#6a665a">Ghizzano</span><span style="width:9px;height:9px;border-radius:50%;background:#c0573a;border:1.2px solid #34322d"></span></div></div></div>
+      <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="height:150px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px);border-bottom:1.5px solid #34322d"></div><div style="padding:11px"><div style="font-size:14px">Via di Mezzo</div><div style="font-size:11px;color:#8a8576">David Tremlett · 2019</div><div style="margin-top:7px;display:flex;justify-content:space-between;align-items:center"><span style="font-family:ui-monospace,monospace;font-size:9px;color:#6a665a">Ghizzano</span><span style="width:9px;height:9px;border-radius:50%;background:#c0573a;border:1.2px solid #34322d"></span></div></div></div>
+      <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="height:150px;background:#dbe2e1;border-bottom:1.5px solid #34322d;display:flex;align-items:center;justify-content:center;font-family:ui-monospace,monospace;font-size:10px;color:#8a8576">testo · niente foto</div><div style="padding:11px"><div style="font-size:14px">VOCI</div><div style="font-size:11px;color:#8a8576">V. Corsini + scrittori · 2018</div><div style="margin-top:7px;display:flex;justify-content:space-between;align-items:center"><span style="font-family:ui-monospace,monospace;font-size:9px;color:#6a665a">più siti</span><span style="width:12px;height:8px;border-radius:40%;border:1.2px dashed #8a8576"></span></div></div></div>
+      <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="height:150px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px);border-bottom:1.5px solid #34322d;position:relative"><span style="position:absolute;top:8px;right:8px;font-family:ui-monospace,monospace;font-size:8px;background:#283042;color:#dfe4ee;border-radius:10px;padding:2px 7px">notturna</span></div><div style="padding:11px"><div style="font-size:14px">Dance First Think Later</div><div style="font-size:11px;color:#8a8576">M. Senatore · 2024</div><div style="margin-top:7px;display:flex;justify-content:space-between;align-items:center"><span style="font-family:ui-monospace,monospace;font-size:9px;color:#6a665a">Le Serre</span><span style="width:9px;height:9px;border-radius:50%;background:#c0573a;border:1.2px solid #34322d"></span></div></div></div>
+      <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="height:150px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px);border-bottom:1.5px solid #34322d"></div><div style="padding:11px"><div style="font-size:14px">Colonna che scende</div><div style="font-size:11px;color:#8a8576">H. Nagasawa · 1992</div><div style="margin-top:7px;display:flex;justify-content:space-between;align-items:center"><span style="font-family:ui-monospace,monospace;font-size:9px;color:#6a665a">Peccioli</span><span style="width:9px;height:9px;border-radius:2px;background:#fff;border:1.2px solid #34322d"></span></div></div></div>
+      <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="height:150px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px);border-bottom:1.5px solid #34322d"></div><div style="padding:11px"><div style="font-size:14px">Endless Sunset</div><div style="font-size:11px;color:#8a8576">P. Tuttofuoco · 2020</div><div style="margin-top:7px;display:flex;justify-content:space-between;align-items:center"><span style="font-family:ui-monospace,monospace;font-size:9px;color:#6a665a">Peccioli</span><span style="width:9px;height:9px;border-radius:50%;background:#c0573a;border:1.2px solid #34322d"></span></div></div></div>
+      <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="height:150px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px);border-bottom:1.5px solid #34322d;position:relative"><span style="position:absolute;top:8px;right:8px;font-family:ui-monospace,monospace;font-size:8px;background:#c79a2e;color:#34322d;border:1.2px solid #34322d;border-radius:10px;padding:2px 6px">prenotazione</span></div><div style="padding:11px"><div style="font-size:14px">Germoglio</div><div style="font-size:11px;color:#8a8576">R. Salvadori · 2024</div><div style="margin-top:7px;display:flex;justify-content:space-between;align-items:center"><span style="font-family:ui-monospace,monospace;font-size:9px;color:#6a665a">Belvedere</span><span style="width:9px;height:9px;border-radius:2px;background:#fff;border:1.2px solid #34322d"></span></div></div></div>
+      <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="height:150px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px);border-bottom:1.5px solid #34322d"></div><div style="padding:11px"><div style="font-size:14px">We Rise by Lifting Others</div><div style="font-size:11px;color:#8a8576">M. Senatore · 2023</div><div style="margin-top:7px;display:flex;justify-content:space-between;align-items:center"><span style="font-family:ui-monospace,monospace;font-size:9px;color:#6a665a">Le Serre</span><span style="width:9px;height:9px;border-radius:50%;background:#c0573a;border:1.2px solid #34322d"></span></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== B4 · ARTWORK DETAIL DESKTOP ===== -->
+<div style="position:absolute;left:3560px;top:1310px;width:1080px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">B4 · Opera — pagina dettaglio</div>
+  <div data-screen-label="Desktop Artwork detail" style="background:#f6f4ee;border:2px solid #34322d;border-radius:8px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.1)">
+    <div style="height:50px;border-bottom:1.5px solid #34322d;display:flex;align-items:center;justify-content:space-between;padding:0 24px">
+      <div style="font-family:'Caveat';font-weight:700;font-size:24px">MACCA</div>
+      <div style="font-family:ui-monospace,monospace;font-size:11px;color:#8a8576">Collezione › Ghizzano › SolidSky</div>
+      <div style="display:flex;gap:12px;font-size:12px"><span style="border:1.2px solid #34322d;border-radius:14px;padding:2px 8px">IT / EN</span></div>
+    </div>
+    <div style="display:flex;border-bottom:1.5px solid #34322d">
+      <div style="width:60%;height:420px;background:repeating-linear-gradient(135deg,#e9e5db 0 7px,#e0dbcf 7px 14px);border-right:1.5px solid #34322d"></div>
+      <div style="flex:1;padding:32px;display:flex;flex-direction:column">
+        <div style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9a957f">Ghizzano · scultura</div>
+        <div style="font-family:'Architects Daughter';font-size:42px;line-height:1;margin-top:10px">SolidSky</div>
+        <div style="font-size:15px;color:#56524a;margin-top:6px">Alicja Kwade · 2019</div>
+        <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px;font-family:ui-monospace,monospace;font-size:10px">
+          <span style="border:1.2px solid #34322d;border-radius:14px;padding:5px 10px;display:flex;gap:6px;align-items:center;width:fit-content"><span style="width:8px;height:8px;border-radius:50%;background:#4a5d4e"></span>All'aperto · libero accesso</span>
+          <span style="border:1.2px solid #34322d;border-radius:14px;padding:5px 10px;display:flex;gap:6px;align-items:center;width:fit-content"><span style="width:8px;height:8px;border-radius:50%;background:#c0573a"></span>Posizione esatta · approccio sicuro</span>
+        </div>
+        <div style="flex:1"></div>
+        <div style="display:flex;gap:10px;margin-top:18px"><span style="flex:1;border:1.5px solid #34322d;border-radius:8px;padding:10px 0;text-align:center;font-size:13px">♡ Salva</span><span style="flex:1;border:1.5px solid #34322d;border-radius:8px;padding:10px 0;text-align:center;font-size:13px">↗ Condividi</span></div>
+      </div>
+    </div>
+    <div style="padding:34px 48px;border-bottom:1.5px solid #34322d;max-width:720px">
+      <div style="font-family:'Architects Daughter';font-size:24px;line-height:1.4;color:#3f3d37">Una scultura che mette in dubbio ciò che vediamo: la pietra pare sospesa sul margine del villaggio, dove lo sguardo cade nella valle. <span style="color:#8a8576">Dove l'opera incontra il luogo.</span></div>
+    </div>
+    <div style="display:flex;border-bottom:1.5px solid #34322d">
+      <div style="width:42%;padding:30px 48px;border-right:1.5px solid #34322d">
+        <div style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9a957f">Scheda</div>
+        <div style="margin-top:14px;display:flex;flex-direction:column">
+          <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #e7e1d4;font-size:13px"><span style="color:#8a8576">Artista</span><span>Alicja Kwade</span></div>
+          <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #e7e1d4;font-size:13px"><span style="color:#8a8576">Anno</span><span>2019</span></div>
+          <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #e7e1d4;font-size:13px"><span style="color:#8a8576">Tipo</span><span>Scultura</span></div>
+          <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #e7e1d4;font-size:13px"><span style="color:#8a8576">Commissione</span><span>Progetto Ghizzano</span></div>
+          <div style="display:flex;justify-content:space-between;padding:9px 0;font-size:13px"><span style="color:#8a8576">Dimensioni</span><span style="color:#a09a86">in verifica</span></div>
+        </div>
+      </div>
+      <div style="flex:1;padding:0;position:relative;background:#dbe2e1;min-height:240px;overflow:hidden">
+        <div style="position:absolute;width:260px;height:160px;border:1.5px dashed rgba(74,93,78,.5);border-radius:50%;left:60px;top:30px"></div>
+        <div style="position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:22px;height:22px;border-radius:50%;background:#c0573a;border:3px solid #34322d;box-shadow:0 0 0 6px rgba(192,87,58,.18)"></div>
+        <div style="position:absolute;left:24px;bottom:24px;right:24px;background:#f6f4ee;border:1.5px solid #34322d;border-radius:9px;padding:13px 15px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:13px">Ghizzano, bordo del borgo<br><span style="color:#8a8576;font-size:12px">Parcheggio a 300m · breve salita a piedi</span></div><span style="background:#c0573a;color:#f6f4ee;border:1.5px solid #34322d;border-radius:7px;padding:9px 13px;font-size:12px">Apri indicazioni</span></div>
+      </div>
+    </div>
+    <div style="padding:34px 48px;border-bottom:1.5px solid #34322d;display:flex;gap:48px">
+      <div style="max-width:560px;font-size:15px;line-height:1.7;color:#3f3d37">Kwade lavora sulla soglia tra realtà e illusione. A Ghizzano l'opera dialoga con la topografia: il punto in cui il borgo finisce e comincia la valle diventa lo strumento dell'opera.<br><br>Il visitatore è invitato a spostarsi, a guardare due volte, a dubitare di ciò che la pietra suggerisce.</div>
+      <div style="flex:1;border-left:2px solid #c0573a;padding-left:18px;font-family:'Architects Daughter';font-size:19px;line-height:1.4;color:#56524a">"L'arte non comincia all'ingresso. È già nel paesaggio."</div>
+    </div>
+    <div style="padding:30px 48px;border-bottom:1.5px solid #34322d">
+      <div style="font-family:'Architects Daughter';font-size:20px">Galleria</div>
+      <div style="margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px"><div style="height:160px;border:1.5px solid #34322d;border-radius:8px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px);position:relative"><span style="position:absolute;bottom:7px;left:9px;font-family:ui-monospace,monospace;font-size:8px;color:#7a7669">credito immagine</span></div><div style="height:160px;border:1.5px solid #34322d;border-radius:8px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px)"></div><div style="height:160px;border:1.5px solid #34322d;border-radius:8px;background:#dbe2e1;display:flex;align-items:center;justify-content:center;font-family:ui-monospace,monospace;font-size:10px;color:#8a8576">audio · 2'10"</div></div>
+    </div>
+    <div style="display:flex;border-bottom:1.5px solid #34322d">
+      <div style="flex:1;padding:30px 48px;border-right:1.5px solid #34322d">
+        <div style="font-family:'Architects Daughter';font-size:20px">In questo luogo</div>
+        <div style="margin-top:14px;display:flex;gap:14px">
+          <div style="flex:1;border:1.5px solid #34322d;border-radius:9px;overflow:hidden"><div style="height:80px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px)"></div><div style="padding:9px;font-size:12px">Via di Mezzo<br><span style="color:#8a8576;font-size:11px">Tremlett · 180m</span></div></div>
+          <div style="flex:1;border:1.5px solid #34322d;border-radius:9px;overflow:hidden"><div style="height:80px;background:repeating-linear-gradient(135deg,#e9e5db 0 6px,#e0dbcf 6px 12px)"></div><div style="padding:9px;font-size:12px">Elevatio corpus<br><span style="color:#8a8576;font-size:11px">Tuttofuoco · 260m</span></div></div>
+        </div>
+        <div style="margin-top:14px;font-size:12px;color:#c0573a">Continua il percorso: Ghizzano colore e villaggio →</div>
+      </div>
+      <div style="width:34%;padding:30px 32px">
+        <div style="font-family:'Architects Daughter';font-size:20px">Artista</div>
+        <div style="margin-top:14px;display:flex;gap:12px;align-items:center"><div style="width:54px;height:54px;border-radius:50%;border:1.5px solid #34322d;background:#dbe2e1;display:flex;align-items:center;justify-content:center;font-size:18px">AK</div><div><div style="font-size:14px">Alicja Kwade</div><div style="font-size:11px;color:#8a8576">Percezione, materia, tempo</div></div></div>
+        <div style="margin-top:12px;font-size:12px;color:#c0573a">Profilo artista →</div>
+      </div>
+    </div>
+    <div style="padding:18px 48px;background:#efeae0;font-family:ui-monospace,monospace;font-size:10px;color:#8a8576;display:flex;justify-content:space-between"><span>Fonti · crediti · riferimento d'archivio</span><span>Diritti immagine da verificare prima della pubblicazione</span></div>
+  </div>
+</div>
+
+<!-- ===== SECTION B ROW 2 ===== -->
+<!-- B5 · ROUTES INDEX -->
+<div style="position:absolute;left:80px;top:3360px;width:1080px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">B5 · Percorsi</div>
+  <div data-screen-label="Desktop Routes index" style="background:#f6f4ee;border:2px solid #34322d;border-radius:8px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.1)">
+    <div style="height:50px;border-bottom:1.5px solid #34322d;display:flex;align-items:center;justify-content:space-between;padding:0 24px"><div style="font-family:'Caveat';font-weight:700;font-size:24px">MACCA</div><div style="display:flex;gap:18px;font-size:12px;color:#56524a"><span>Esplora</span><span>Collezione</span><span style="color:#c0573a">Percorsi</span><span>Timeline</span><span>Visita</span></div><div style="font-size:12px;border:1.2px solid #34322d;border-radius:14px;padding:2px 8px">IT / EN</div></div>
+    <div style="padding:28px 32px;border-bottom:1.5px solid #34322d"><div style="font-family:'Architects Daughter';font-size:38px;line-height:1">Percorsi</div><div style="margin-top:8px;font-size:14px;color:#56524a;max-width:520px">Modi diversi di attraversare MACCA — per tempo, luogo, tema e accesso. Non serve conoscere il mondo dell'arte.</div></div>
+    <div style="padding:28px 32px;display:grid;grid-template-columns:1fr 1fr;gap:22px">
+      <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden;display:flex"><div style="width:160px;background:#dbe2e1;border-right:1.5px solid #34322d;position:relative"><svg viewBox="0 0 160 200" style="position:absolute;inset:0;width:100%;height:100%"><polyline points="30,170 70,120 50,80 110,90 130,40" fill="none" stroke="#c0573a" stroke-width="3" stroke-dasharray="2 6"></polyline></svg></div><div style="flex:1;padding:16px"><div style="font-family:'Architects Daughter';font-size:19px;line-height:1.05">Centro storico di Peccioli</div><div style="margin-top:6px;font-size:12px;color:#8a8576">L'arte attraverso il centro storico</div><div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;font-family:ui-monospace,monospace;font-size:9px"><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">~2h</span><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">A piedi</span><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">9 tappe</span><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">Centro storico</span></div></div></div>
+      <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden;display:flex"><div style="width:160px;background:#dbe2e1;border-right:1.5px solid #34322d;position:relative"><svg viewBox="0 0 160 200" style="position:absolute;inset:0;width:100%;height:100%"><polyline points="40,160 90,130 60,90 120,70" fill="none" stroke="#c0573a" stroke-width="3" stroke-dasharray="2 6"></polyline></svg></div><div style="flex:1;padding:16px"><div style="font-family:'Architects Daughter';font-size:19px;line-height:1.05">Ghizzano: colore e villaggio</div><div style="margin-top:6px;font-size:12px;color:#8a8576">Tremlett, Kwade, Tuttofuoco</div><div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;font-family:ui-monospace,monospace;font-size:9px"><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">~1h30</span><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">A piedi</span><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">Colore</span></div></div></div>
+      <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden;display:flex"><div style="width:160px;background:#dbe2e1;border-right:1.5px solid #34322d;position:relative"><span style="position:absolute;top:10px;left:10px;font-family:ui-monospace,monospace;font-size:8px;background:#c79a2e;color:#34322d;border:1.2px solid #34322d;border-radius:10px;padding:2px 7px">Su prenotazione</span><svg viewBox="0 0 160 200" style="position:absolute;inset:0;width:100%;height:100%"><polyline points="30,150 80,150 110,90 140,100" fill="none" stroke="#c0573a" stroke-width="3" stroke-dasharray="2 6"></polyline></svg></div><div style="flex:1;padding:16px"><div style="font-family:'Architects Daughter';font-size:19px;line-height:1.05">Legoli + Belvedere</div><div style="margin-top:6px;font-size:12px;color:#8a8576">Arte, paesaggio e infrastruttura</div><div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;font-family:ui-monospace,monospace;font-size:9px"><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">Mezza gita</span><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">Auto</span><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">Accesso regolato</span></div></div></div>
+      <div style="border:1.5px solid #34322d;border-radius:10px;overflow:hidden;display:flex"><div style="width:160px;background:#283042;border-right:1.5px solid #34322d;position:relative"><span style="position:absolute;top:10px;left:10px;font-family:ui-monospace,monospace;font-size:8px;background:#dfe4ee;color:#283042;border-radius:10px;padding:2px 7px">Dopo il tramonto</span><svg viewBox="0 0 160 200" style="position:absolute;inset:0;width:100%;height:100%"><polyline points="30,160 80,120 120,140 130,80" fill="none" stroke="#e8c14e" stroke-width="3" stroke-dasharray="2 6"></polyline></svg></div><div style="flex:1;padding:16px"><div style="font-family:'Architects Daughter';font-size:19px;line-height:1.05">VOCI: sette siti, sette racconti</div><div style="margin-top:6px;font-size:12px;color:#8a8576">Storie e voci nel territorio</div><div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;font-family:ui-monospace,monospace;font-size:9px"><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">Multi-sito</span><span style="border:1px solid #34322d;border-radius:12px;padding:2px 7px">Storie e voci</span></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- B6 · ROUTE DETAIL DESKTOP -->
+<div style="position:absolute;left:1240px;top:3360px;width:1080px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">B6 · Percorso — dettaglio</div>
+  <div data-screen-label="Desktop Route detail" style="background:#f6f4ee;border:2px solid #34322d;border-radius:8px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.1)">
+    <div style="height:50px;border-bottom:1.5px solid #34322d;display:flex;align-items:center;justify-content:space-between;padding:0 24px"><div style="font-family:'Caveat';font-weight:700;font-size:24px">MACCA</div><div style="font-family:ui-monospace,monospace;font-size:11px;color:#8a8576">Percorsi › Ghizzano</div><div style="font-size:12px;border:1.2px solid #34322d;border-radius:14px;padding:2px 8px">IT / EN</div></div>
+    <div style="height:220px;background:#dbe2e1;border-bottom:1.5px solid #34322d;position:relative;overflow:hidden">
+      <div style="position:absolute;width:420px;height:240px;border:1.5px dashed rgba(74,93,78,.5);border-radius:50%;left:120px;top:30px"></div>
+      <div style="position:absolute;left:-20px;top:55%;width:130%;height:2.5px;background:#cdbfa6;transform:rotate(-6deg)"></div>
+      <svg viewBox="0 0 1076 220" style="position:absolute;inset:0;width:100%;height:100%"><polyline points="120,170 280,120 440,150 600,80 760,120 900,60" fill="none" stroke="#c0573a" stroke-width="3.5" stroke-dasharray="2 8" stroke-linecap="round"></polyline></svg>
+      <div style="position:absolute;left:108px;top:158px;width:26px;height:26px;border-radius:50%;background:#34322d;color:#f6f4ee;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">1</div>
+      <div style="position:absolute;left:888px;top:48px;width:26px;height:26px;border-radius:50%;background:#34322d;color:#f6f4ee;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">6</div>
+    </div>
+    <div style="padding:24px 32px;border-bottom:1.5px solid #34322d;display:flex;justify-content:space-between;align-items:flex-start">
+      <div><div style="font-family:'Architects Daughter';font-size:32px;line-height:1.02">Ghizzano: colore, scultura e villaggio</div><div style="margin-top:10px;font-size:14px;line-height:1.6;color:#56524a;max-width:520px">Un percorso compatto attorno a tre interventi che usano il colore e la forma per ridisegnare lo sguardo sul borgo.</div></div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-family:ui-monospace,monospace;font-size:10px;text-align:right"><span style="border:1.2px solid #34322d;border-radius:12px;padding:4px 9px">A piedi · ~1h30</span><span style="border:1.2px solid #34322d;border-radius:12px;padding:4px 9px">6 tappe · 1,8 km*</span><span style="border:1.2px solid #34322d;border-radius:12px;padding:4px 9px;display:flex;gap:5px;align-items:center;justify-content:flex-end"><span style="width:7px;height:7px;border-radius:50%;background:#4a5d4e"></span>Tutto all'aperto</span></div>
+    </div>
+    <div style="display:flex">
+      <div style="width:50%;border-right:1.5px solid #34322d;padding:24px 32px">
+        <div style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9a957f">Tappe in ordine</div>
+        <div style="margin-top:16px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;gap:14px;align-items:flex-start"><span style="width:28px;height:28px;border-radius:50%;background:#34322d;color:#f6f4ee;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none">1</span><div><div style="font-size:15px">Via di Mezzo · David Tremlett</div><div style="font-size:12px;color:#8a8576">Colore come architettura · ~10 min</div></div></div>
+          <div style="display:flex;gap:14px;align-items:flex-start"><span style="width:28px;height:28px;border-radius:50%;background:#34322d;color:#f6f4ee;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none">2</span><div><div style="font-size:15px">SolidSky · Alicja Kwade</div><div style="font-size:12px;color:#8a8576">Percezione sul bordo del borgo · ~10 min</div></div></div>
+          <div style="display:flex;gap:14px;align-items:flex-start"><span style="width:28px;height:28px;border-radius:50%;background:#34322d;color:#f6f4ee;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none">3</span><div><div style="font-size:15px">Elevatio corpus · Patrick Tuttofuoco</div><div style="font-size:12px;color:#8a8576">Corpo e verticalità · ~8 min</div></div></div>
+          <div style="display:flex;gap:14px;align-items:flex-start;opacity:.6"><span style="width:28px;height:28px;border-radius:50%;border:2px solid #34322d;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none">4</span><div><div style="font-size:15px">Tappe 4–6 →</div></div></div>
+        </div>
+        <div style="margin-top:20px;background:#c0573a;color:#f6f4ee;border:1.5px solid #34322d;border-radius:8px;padding:13px 0;text-align:center;font-size:14px">Avvia il percorso</div>
+      </div>
+      <div style="flex:1;padding:24px 32px">
+        <div style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9a957f">Note pratiche</div>
+        <div style="margin-top:16px;display:flex;flex-direction:column;gap:11px;font-size:13px;color:#56524a">
+          <div style="display:flex;gap:10px"><span style="width:18px">▲</span>Salita breve verso il bordo del borgo</div>
+          <div style="display:flex;gap:10px"><span style="width:18px">P</span>Parcheggio all'ingresso del paese · 300m</div>
+          <div style="display:flex;gap:10px"><span style="width:18px">☼</span>Migliore al tardo pomeriggio per la luce</div>
+          <div style="display:flex;gap:10px"><span style="width:18px">♿</span>Suitabilità sedia: da verificare (gradini)</div>
+        </div>
+        <div style="margin-top:18px;border-top:1px solid #e7e1d4;padding-top:14px;display:flex;gap:14px;font-size:12px;color:#c0573a"><span>♡ Salva percorso</span><span>↗ Condividi</span><span>Versione ridotta</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- B7 · TIMELINE -->
+<div style="position:absolute;left:2400px;top:3360px;width:1080px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">B7 · Timeline</div>
+  <div data-screen-label="Desktop Timeline" style="background:#f6f4ee;border:2px solid #34322d;border-radius:8px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.1)">
+    <div style="height:50px;border-bottom:1.5px solid #34322d;display:flex;align-items:center;justify-content:space-between;padding:0 24px"><div style="font-family:'Caveat';font-weight:700;font-size:24px">MACCA</div><div style="display:flex;gap:18px;font-size:12px;color:#56524a"><span>Esplora</span><span>Collezione</span><span>Percorsi</span><span style="color:#c0573a">Timeline</span><span>Visita</span></div><div style="font-size:12px;border:1.2px solid #34322d;border-radius:14px;padding:2px 8px">IT / EN</div></div>
+    <div style="padding:26px 32px;border-bottom:1.5px solid #34322d;display:flex;justify-content:space-between;align-items:flex-end"><div><div style="font-family:'Architects Daughter';font-size:36px;line-height:1">Trent'anni di commissioni</div><div style="margin-top:6px;font-size:14px;color:#56524a;max-width:480px">Un paesaggio culturale che si espande. La densità cresce con il tempo.</div></div><div style="display:flex;gap:6px;font-family:ui-monospace,monospace;font-size:9px"><span style="border:1px solid #34322d;border-radius:12px;padding:3px 8px">Luogo ▾</span><span style="border:1px solid #34322d;border-radius:12px;padding:3px 8px">Tipo ▾</span><span style="border:1px solid #34322d;border-radius:12px;padding:3px 8px">Artista ▾</span></div></div>
+    <div style="padding:30px 32px;position:relative">
+      <div style="position:absolute;left:32px;right:32px;top:64px;height:2.5px;background:#34322d"></div>
+      <div style="display:flex;gap:0">
+        <div style="flex:1;padding-right:14px">
+          <div style="font-family:'Architects Daughter';font-size:18px">1991–2000</div>
+          <div style="height:24px"></div>
+          <div style="display:flex;flex-direction:column;gap:14px;margin-top:6px">
+            <div style="border:1.5px solid #34322d;border-radius:8px;padding:9px 11px;background:#fff"><div style="font-size:13px">Colonna che scende</div><div style="font-size:10px;color:#8a8576">Nagasawa · 1992</div></div>
+            <div style="border:1.5px solid #34322d;border-radius:8px;padding:9px 11px;background:#fff"><div style="font-size:13px">Welcome to Peccioli</div><div style="font-size:10px;color:#8a8576">Giugiaro · 1999</div></div>
+          </div>
+        </div>
+        <div style="flex:1;padding:0 14px;border-left:1px dashed #cdc6b6">
+          <div style="font-family:'Architects Daughter';font-size:18px">2001–2010</div>
+          <div style="height:24px"></div>
+          <div style="display:flex;flex-direction:column;gap:14px;margin-top:6px">
+            <div style="border:1.5px solid #34322d;border-radius:8px;padding:9px 11px;background:#fff"><div style="font-size:13px">Fessura e Contravvento II</div><div style="font-size:10px;color:#8a8576">De Leonardis · 2000</div></div>
+          </div>
+        </div>
+        <div style="flex:1.3;padding:0 14px;border-left:1px dashed #cdc6b6">
+          <div style="font-family:'Architects Daughter';font-size:18px">2011–2020</div>
+          <div style="height:24px"></div>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-top:6px">
+            <div style="border:1.5px solid #34322d;border-radius:8px;padding:8px 11px;background:#fff"><div style="font-size:13px">Presenze · 2011</div></div>
+            <div style="border:1.5px solid #34322d;border-radius:8px;padding:8px 11px;background:#fff"><div style="font-size:13px">SolidSky · Via di Mezzo · 2019</div></div>
+            <div style="border:1.5px solid #34322d;border-radius:8px;padding:8px 11px;background:#fff"><div style="font-size:13px">Endless Sunset · 2020</div></div>
+          </div>
+        </div>
+        <div style="flex:1.6;padding-left:14px;border-left:1px dashed #cdc6b6">
+          <div style="font-family:'Architects Daughter';font-size:18px;color:#c0573a">2021–oggi</div>
+          <div style="height:24px"></div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px">
+            <div style="border:1.5px solid #c0573a;border-radius:8px;padding:8px 11px;background:#fbf2ee"><div style="font-size:13px">Daniel Buren · Jeppe Hein · 2021</div></div>
+            <div style="border:1.5px solid #34322d;border-radius:8px;padding:8px 11px;background:#fff"><div style="font-size:13px">Chiacchiere · We Rise… · 2023</div></div>
+            <div style="border:1.5px solid #34322d;border-radius:8px;padding:8px 11px;background:#fff"><div style="font-size:13px">Dance First Think Later · 2024</div></div>
+            <div style="border:1.5px dashed #c79a2e;border-radius:8px;padding:8px 11px;background:#fbf6e8"><div style="font-size:13px">Breath · 2026 <span style="font-size:9px;color:#7a5d12">provvisorio</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- B8 · VISIT -->
+<div style="position:absolute;left:3560px;top:3360px;width:1080px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">B8 · Visita</div>
+  <div data-screen-label="Desktop Visit" style="background:#f6f4ee;border:2px solid #34322d;border-radius:8px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.1)">
+    <div style="height:50px;border-bottom:1.5px solid #34322d;display:flex;align-items:center;justify-content:space-between;padding:0 24px"><div style="font-family:'Caveat';font-weight:700;font-size:24px">MACCA</div><div style="display:flex;gap:18px;font-size:12px;color:#56524a"><span>Esplora</span><span>Collezione</span><span>Percorsi</span><span>Timeline</span><span style="color:#c0573a">Visita</span></div><div style="font-size:12px;border:1.2px solid #34322d;border-radius:14px;padding:2px 8px">IT / EN</div></div>
+    <div style="padding:28px 32px;border-bottom:1.5px solid #34322d"><div style="font-family:'Architects Daughter';font-size:38px;line-height:1">Prima di partire.</div><div style="margin-top:8px;font-size:14px;color:#56524a;max-width:520px">MACCA si visita nello spazio pubblico. Alcuni luoghi richiedono prenotazione o accesso regolato: qui è tutto chiaro.</div></div>
+    <div style="display:flex;border-bottom:1.5px solid #34322d">
+      <div style="width:50%;border-right:1.5px solid #34322d;padding:24px 32px">
+        <div style="display:flex;gap:8px;align-items:center;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#4a5d4e"><span style="width:9px;height:9px;border-radius:50%;background:#4a5d4e"></span>Liberamente visitabili</div>
+        <div style="margin-top:14px;font-size:14px;line-height:1.6;color:#56524a">La maggior parte delle opere è all'aperto, nello spazio pubblico di Peccioli e delle frazioni. Nessuna prenotazione, nessun biglietto.</div>
+        <div style="margin-top:14px;display:flex;flex-direction:column;gap:8px;font-size:13px"><span>· Centro storico di Peccioli</span><span>· Ghizzano — colore e sculture</span><span>· Le Serre — opere civiche</span></div>
+      </div>
+      <div style="flex:1;padding:24px 32px;background:#fbf6e8">
+        <div style="display:flex;gap:8px;align-items:center;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#7a5d12"><span style="width:9px;height:9px;border-radius:50%;background:#c79a2e"></span>Su prenotazione / accesso regolato</div>
+        <div style="margin-top:14px;font-size:14px;line-height:1.6;color:#56524a">Alcuni siti — interni, edifici controllati, Belvedere — richiedono appuntamento o orari verificati. Pianifica in anticipo.</div>
+        <div style="margin-top:14px;display:flex;flex-direction:column;gap:8px;font-size:13px"><span>· Belvedere — accesso regolato</span><span>· Palazzo Senza Tempo — orari da verificare</span></div>
+        <div style="margin-top:16px;background:#c0573a;color:#f6f4ee;border:1.5px solid #34322d;border-radius:8px;padding:11px 16px;text-align:center;font-size:13px;width:fit-content">Prenota una visita</div>
+      </div>
+    </div>
+    <div style="padding:26px 32px;border-bottom:1.5px solid #34322d;display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+      <div style="border:1.5px solid #34322d;border-radius:9px;padding:14px"><div style="font-family:'Architects Daughter';font-size:17px">Arrivare</div><div style="margin-top:7px;font-size:12px;color:#8a8576;line-height:1.5">In auto da Pisa / Firenze · placeholder trasporti</div></div>
+      <div style="border:1.5px solid #34322d;border-radius:9px;padding:14px"><div style="font-family:'Architects Daughter';font-size:17px">Parcheggio</div><div style="margin-top:7px;font-size:12px;color:#8a8576;line-height:1.5">Aree all'ingresso dei borghi · breve cammino</div></div>
+      <div style="border:1.5px solid #34322d;border-radius:9px;padding:14px"><div style="font-family:'Architects Daughter';font-size:17px">Accessibilità</div><div style="margin-top:7px;font-size:12px;color:#8a8576;line-height:1.5">Pendenze e gradini segnalati per opera</div></div>
+      <div style="border:1.5px solid #34322d;border-radius:9px;padding:14px"><div style="font-family:'Architects Daughter';font-size:17px">Orari</div><div style="margin-top:7px;font-size:12px;color:#a09a86;line-height:1.5">Stagionali · placeholder da aggiornare</div></div>
+    </div>
+    <div style="padding:24px 32px;display:flex;gap:32px">
+      <div style="flex:1"><div style="font-family:'Architects Daughter';font-size:18px">Da sapere prima</div><div style="margin-top:12px;display:flex;flex-direction:column;gap:9px;font-size:13px;color:#56524a"><span>☐ Scarpe comode — saliscendi e fondi diversi</span><span>☐ Salva il percorso per usarlo offline</span><span>☐ Rispetta luoghi, abitanti e opere</span><span>☐ Controlla i siti su prenotazione</span></div></div>
+      <div style="width:34%;border:1.5px solid #34322d;border-radius:9px;padding:16px;background:#ded9cd"><div style="font-family:'Architects Daughter';font-size:17px">Visite di gruppo e scuole</div><div style="margin-top:8px;font-size:12px;color:#56524a;line-height:1.5">Contesto didattico, siti prenotabili e accessibilità su richiesta.</div><div style="margin-top:10px;font-size:12px;color:#c0573a">Contatti →</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECTION C HEADER ===================== -->
+<div style="position:absolute;left:80px;top:4280px;font-family:'Caveat';font-weight:700;font-size:38px;color:#34322d">03 · Sistema — marcatori, badge, token</div>
+<div style="position:absolute;left:80px;top:4330px;font-size:14px;color:#8a8576">Componenti da disegnare una volta e riusare ovunque. Onestà della posizione e accesso sempre leggibili.</div>
+
+<!-- C1 · MARKER LEGEND -->
+<div style="position:absolute;left:80px;top:4400px;width:500px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">C1 · Famiglia di marcatori</div>
+  <div style="background:#f6f4ee;border:2px solid #34322d;border-radius:8px;padding:24px;box-shadow:0 3px 12px rgba(0,0,0,.1)">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;gap:16px;align-items:center"><div style="width:44px;display:flex;justify-content:center"><span style="width:18px;height:18px;border-radius:50%;background:#c0573a;border:2px solid #34322d"></span></div><div><div style="font-size:15px">Opera · posizione esatta</div><div style="font-size:12px;color:#8a8576">Punto preciso e avvicinamento sicuro verificati</div></div></div>
+      <div style="display:flex;gap:16px;align-items:center"><div style="width:44px;display:flex;justify-content:center"><span style="width:26px;height:26px;border-radius:50%;background:#c0573a;border:3px solid #34322d;box-shadow:0 0 0 5px rgba(192,87,58,.2)"></span></div><div><div style="font-size:15px">Opera selezionata</div><div style="font-size:12px;color:#8a8576">Stato attivo, alone evidente</div></div></div>
+      <div style="display:flex;gap:16px;align-items:center"><div style="width:44px;display:flex;justify-content:center"><span style="width:18px;height:18px;border-radius:3px;background:#fff;border:2px solid #34322d"></span></div><div><div style="font-size:15px">Sito / ingresso</div><div style="font-size:12px;color:#8a8576">Opera in edificio o area controllata: punta all'ingresso</div></div></div>
+      <div style="display:flex;gap:16px;align-items:center"><div style="width:44px;display:flex;justify-content:center"><span style="width:30px;height:30px;border-radius:50%;background:#fff;border:2px dashed #34322d;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px">5</span></div><div><div style="font-size:15px">Gruppo di opere</div><div style="font-size:12px;color:#8a8576">Cluster o area con più opere</div></div></div>
+      <div style="display:flex;gap:16px;align-items:center"><div style="width:44px;display:flex;justify-content:center"><span style="width:26px;height:26px;border-radius:50%;background:#34322d;color:#f6f4ee;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px">2</span></div><div><div style="font-size:15px">Tappa di percorso</div><div style="font-size:12px;color:#8a8576">Numerata, in sequenza</div></div></div>
+      <div style="display:flex;gap:16px;align-items:center"><div style="width:44px;display:flex;justify-content:center"><span style="width:30px;height:18px;border:2px dashed #8a8576;border-radius:40%;background:rgba(192,87,58,.06)"></span></div><div><div style="font-size:15px">Posizione in verifica</div><div style="font-size:12px;color:#8a8576">Etichetta d'area, mai un pin falso</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- C2 · ACCESS BADGES -->
+<div style="position:absolute;left:640px;top:4400px;width:500px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">C2 · Badge di accesso</div>
+  <div style="background:#f6f4ee;border:2px solid #34322d;border-radius:8px;padding:24px;box-shadow:0 3px 12px rgba(0,0,0,.1)">
+    <div style="display:flex;flex-direction:column;gap:13px">
+      <div style="border:1.4px solid #34322d;border-radius:16px;padding:8px 14px;display:flex;gap:9px;align-items:center;font-size:13px;width:fit-content"><span style="width:10px;height:10px;border-radius:50%;background:#4a5d4e"></span>All'aperto · libero accesso</div>
+      <div style="border:1.4px solid #34322d;border-radius:16px;padding:8px 14px;display:flex;gap:9px;align-items:center;font-size:13px;width:fit-content"><span style="width:10px;height:10px;border-radius:50%;background:#5b7790"></span>Interno · orari da verificare</div>
+      <div style="border:1.4px solid #34322d;border-radius:16px;padding:8px 14px;display:flex;gap:9px;align-items:center;font-size:13px;width:fit-content"><span style="width:10px;height:10px;border-radius:50%;background:#c79a2e"></span>Su prenotazione</div>
+      <div style="border:1.4px solid #34322d;border-radius:16px;padding:8px 14px;display:flex;gap:9px;align-items:center;font-size:13px;width:fit-content"><span style="width:10px;height:10px;border-radius:2px;background:#c0573a"></span>Accesso regolato</div>
+      <div style="border:1.4px solid #34322d;border-radius:16px;padding:8px 14px;display:flex;gap:9px;align-items:center;font-size:13px;width:fit-content"><span style="width:10px;height:7px;border-radius:40%;border:1.4px solid #34322d"></span>Percorso / più luoghi</div>
+      <div style="border:1.4px dashed #8a8576;border-radius:16px;padding:8px 14px;display:flex;gap:9px;align-items:center;font-size:13px;width:fit-content;color:#6a665a"><span style="width:10px;height:10px;border-radius:50%;border:1.6px dashed #8a8576"></span>Posizione in verifica</div>
+    </div>
+    <div style="margin-top:18px;border-top:1px solid #e7e1d4;padding-top:12px;font-size:12px;color:#8a8576;line-height:1.5">Mai allarmanti se non per sicurezza. Lo stato non è comunicato dal colore soltanto: c'è sempre il testo.</div>
+  </div>
+</div>
+
+<!-- C3 · TOKENS -->
+<div style="position:absolute;left:1200px;top:4400px;width:640px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">C3 · Colore &amp; tipografia</div>
+  <div style="background:#f6f4ee;border:2px solid #34322d;border-radius:8px;padding:24px;box-shadow:0 3px 12px rgba(0,0,0,.1)">
+    <div style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9a957f">Palette · base quieta, accenti strutturali</div>
+    <div style="margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+      <div><div style="height:54px;border:1.5px solid #34322d;border-radius:7px;background:#f0ece2"></div><div style="margin-top:6px;font-size:12px">Stone</div><div style="font-family:ui-monospace,monospace;font-size:9px;color:#8a8576">sfondo</div></div>
+      <div><div style="height:54px;border:1.5px solid #34322d;border-radius:7px;background:#34322d"></div><div style="margin-top:6px;font-size:12px">Ink</div><div style="font-family:ui-monospace,monospace;font-size:9px;color:#8a8576">testo · linee</div></div>
+      <div><div style="height:54px;border:1.5px solid #34322d;border-radius:7px;background:#4a5d4e"></div><div style="margin-top:6px;font-size:12px">Cypress</div><div style="font-family:ui-monospace,monospace;font-size:9px;color:#8a8576">mappa · libero</div></div>
+      <div><div style="height:54px;border:1.5px solid #34322d;border-radius:7px;background:#c0573a"></div><div style="margin-top:6px;font-size:12px">Terracotta</div><div style="font-family:ui-monospace,monospace;font-size:9px;color:#8a8576">CTA · segnale</div></div>
+      <div><div style="height:54px;border:1.5px solid #34322d;border-radius:7px;background:#c2d0d3"></div><div style="margin-top:6px;font-size:12px">Sky haze</div><div style="font-family:ui-monospace,monospace;font-size:9px;color:#8a8576">superfici · acqua</div></div>
+      <div><div style="height:54px;border:1.5px solid #34322d;border-radius:7px;background:#c79a2e"></div><div style="margin-top:6px;font-size:12px">Sun</div><div style="font-family:ui-monospace,monospace;font-size:9px;color:#8a8576">avviso · scoperta</div></div>
+      <div><div style="height:54px;border:1.5px solid #34322d;border-radius:7px;background:#283042"></div><div style="margin-top:6px;font-size:12px">Night</div><div style="font-family:ui-monospace,monospace;font-size:9px;color:#8a8576">notturna · inverso</div></div>
+      <div><div style="height:54px;border:1.5px solid #34322d;border-radius:7px;background:repeating-linear-gradient(135deg,#e9e5db 0 5px,#e0dbcf 5px 10px)"></div><div style="margin-top:6px;font-size:12px">Placeholder</div><div style="font-family:ui-monospace,monospace;font-size:9px;color:#8a8576">immagine assente</div></div>
+    </div>
+    <div style="margin-top:22px;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9a957f">Tipografia</div>
+    <div style="margin-top:12px;display:flex;gap:24px">
+      <div style="flex:1;border:1.5px solid #34322d;border-radius:8px;padding:16px"><div style="font-family:'Architects Daughter';font-size:30px;line-height:1">Serif editoriale</div><div style="margin-top:8px;font-size:12px;color:#8a8576">Titoli opere, citazioni, momenti lunghi.<br><span style="font-family:ui-monospace,monospace;font-size:10px">in prototipo: hand-drawn → finale: serif caldo</span></div></div>
+      <div style="flex:1;border:1.5px solid #34322d;border-radius:8px;padding:16px"><div style="font-size:22px;font-family:ui-monospace,monospace">Grotesk UI</div><div style="margin-top:10px;font-size:12px;color:#8a8576">Navigazione, dati, filtri, etichette mappa.<br><span style="font-family:ui-monospace,monospace;font-size:10px">overline IN MAIUSCOLETTO · mai corpo in maiuscolo</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- closing postits -->
+<div style="position:absolute;left:1900px;top:4420px;width:240px;background:#fbe9a0;padding:14px 16px;font-size:13.5px;line-height:1.45;box-shadow:0 1px 4px rgba(0,0,0,.12);transform:rotate(-1.2deg)"><b style="font-family:'Caveat';font-size:17px">Accessibilità</b><br>Tap target 44px+, focus evidenti, alternativa a lista per la mappa, contrasto adeguato, switch IT/EN sempre visibile.</div>
+<div style="position:absolute;left:1900px;top:4600px;width:240px;background:#fff;border:1.5px solid #34322d;padding:13px 15px;font-size:13px;line-height:1.45;box-shadow:0 1px 4px rgba(0,0,0,.1);transform:rotate(1deg)"><b style="font-family:'Caveat';font-size:17px">Prossimo passo</b><br>Scegliere la direzione e portarne 2–3 schermi chiave in alta fedeltà (Home, Mappa, Opera).</div>
+
+<!-- ===================== SECTION 04 — ROUTE BUILDER ===================== -->
+<div style="position:absolute;left:80px;top:5060px;font-family:'Caveat';font-weight:700;font-size:38px;color:#34322d">04 · Crea il tuo percorso <span style="font-size:22px;color:#c0573a">(interattivo)</span></div>
+<div style="position:absolute;left:80px;top:5110px;font-size:14px;color:#8a8576">Seleziona le opere, poi genera un percorso a piedi su misura attorno a Peccioli. Ordine ottimizzato dal parcheggio.</div>
+
+<div style="position:absolute;left:80px;top:5180px;width:1120px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">D1 · Costruttore di percorso</div>
+  <div data-screen-label="Route builder" style="background:#f6f4ee;border:2px solid #34322d;border-radius:8px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.1)">
+    <div style="height:62px;border-bottom:1.5px solid #34322d;display:flex;align-items:center;justify-content:space-between;padding:0 24px">
+      <div><div style="font-family:'Architects Daughter';font-size:24px;line-height:1">Crea il tuo percorso</div><div style="font-family:ui-monospace,monospace;font-size:11px;color:#8a8576;margin-top:2px">{{ selLabel }}</div></div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div onClick="{{ clearSel }}" style="border:1.5px solid #34322d;border-radius:8px;padding:10px 16px;font-size:13px;cursor:pointer">Azzera</div>
+        <div onClick="{{ generate }}" style="{{ genBtnStyle }}">Genera percorso →</div>
+      </div>
+    </div>
+    <div style="display:flex">
+      <div style="width:46%;border-right:1.5px solid #34322d;display:flex;flex-direction:column">
+        <div style="padding:12px 18px;border-bottom:1.5px solid #34322d;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#9a957f">Opere a Peccioli · tocca per selezionare</div>
+        <div style="padding:14px 18px;display:flex;flex-direction:column;gap:9px;height:392px;overflow:auto">
+          <sc-for list="{{ opere }}" as="item" hint-placeholder-count="8">
+            <div onClick="{{ item.onClick }}" style="{{ item.rowStyle }}">
+              <div style="{{ item.checkStyle }}">{{ item.check }}</div>
+              <div style="flex:1"><div style="font-size:14px">{{ item.t }}</div><div style="font-size:11px;color:#8a8576">{{ item.a }}</div></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column">
+        <div style="position:relative;width:100%;height:392px;background:#dbe2e1;overflow:hidden">
+          <div style="position:absolute;width:380px;height:240px;border:1.5px dashed rgba(74,93,78,.5);border-radius:50%;left:90px;top:50px"></div>
+          <div style="position:absolute;width:240px;height:150px;border:1.5px dashed rgba(74,93,78,.45);border-radius:50%;left:150px;top:100px"></div>
+          <div style="position:absolute;left:-20px;top:60%;width:130%;height:2.5px;background:#cdbfa6;transform:rotate(-7deg)"></div>
+          <div style="position:absolute;left:-20px;top:82%;width:130%;height:2px;background:#cdbfa6;transform:rotate(4deg)"></div>
+          <svg viewBox="0 0 540 392" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">
+            <sc-if value="{{ generated }}" hint-placeholder-val="{{ true }}">
+              <polyline points="{{ routePoints }}" fill="none" stroke="#c0573a" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round" stroke-linejoin="round"></polyline>
+            </sc-if>
+          </svg>
+          <div style="position:absolute;left:90px;top:345px;transform:translate(-50%,-50%);width:24px;height:24px;border-radius:7px;background:#f6f4ee;border:1.5px solid #34322d;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">P</div>
+          <div style="position:absolute;left:90px;top:368px;transform:translateX(-50%);font-family:ui-monospace,monospace;font-size:8px;color:#6a665a;white-space:nowrap">parcheggio · partenza</div>
+          <sc-for list="{{ opere }}" as="m" hint-placeholder-count="8">
+            <div style="{{ m.posStyle }}"></div>
+          </sc-for>
+          <sc-if value="{{ generated }}" hint-placeholder-val="{{ true }}">
+            <sc-for list="{{ orderedMarkers }}" as="rm" hint-placeholder-count="4">
+              <div style="{{ rm.posStyle }}">{{ rm.n }}</div>
+            </sc-for>
+          </sc-if>
+          <sc-if value="{{ notGenerated }}" hint-placeholder-val="{{ true }}">
+            <div style="position:absolute;left:50%;bottom:18px;transform:translateX(-50%);background:#f6f4ee;border:1.5px solid #34322d;border-radius:20px;padding:7px 16px;font-size:12px;white-space:nowrap">Seleziona le opere e genera il percorso →</div>
+          </sc-if>
+        </div>
+        <sc-if value="{{ generated }}" hint-placeholder-val="{{ true }}">
+          <div style="border-top:1.5px solid #34322d;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;background:#fbf2ee">
+            <div style="display:flex;gap:22px;font-family:ui-monospace,monospace">
+              <div><div style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#9a957f">Tappe</div><div style="font-size:17px;margin-top:2px">{{ statStops }}</div></div>
+              <div><div style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#9a957f">A piedi</div><div style="font-size:17px;margin-top:2px">{{ statTime }}</div></div>
+              <div><div style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#9a957f">Distanza</div><div style="font-size:17px;margin-top:2px">{{ statDist }}</div></div>
+            </div>
+            <div style="display:flex;gap:9px"><span style="border:1.5px solid #34322d;border-radius:8px;padding:9px 14px;font-size:13px">♡ Salva</span><span style="background:#c0573a;color:#f6f4ee;border:1.5px solid #34322d;border-radius:8px;padding:9px 14px;font-size:13px">Avvia →</span></div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+    <sc-if value="{{ generated }}" hint-placeholder-val="{{ true }}">
+      <div style="border-top:1.5px solid #34322d;padding:18px 24px">
+        <div style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#9a957f">Il tuo percorso · in ordine</div>
+        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+          <sc-for list="{{ orderedList }}" as="s" hint-placeholder-count="4">
+            <div style="display:flex;gap:9px;align-items:center;border:1.5px solid #34322d;border-radius:9px;padding:8px 12px;background:#fff">
+              <span style="width:24px;height:24px;border-radius:50%;background:#34322d;color:#f6f4ee;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex:none">{{ s.n }}</span>
+              <div><div style="font-size:13px">{{ s.t }}</div><div style="font-size:10px;color:#8a8576">{{ s.a }}</div></div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="margin-top:12px;font-family:ui-monospace,monospace;font-size:9px;color:#a09a86">* distanza stimata · ordine ottimizzato a piedi dal parcheggio · da verificare sul campo</div>
+      </div>
+    </sc-if>
+  </div>
+</div>
+
+<div style="position:absolute;left:1260px;top:5210px;width:240px;background:#fbe9a0;padding:14px 16px;font-size:13.5px;line-height:1.45;box-shadow:0 1px 4px rgba(0,0,0,.12);transform:rotate(-1.2deg)"><b style="font-family:'Caveat';font-size:17px">Su mobile</b><br>La selezione vive in un bottom sheet a lista; "Genera" porta alla mappa a schermo intero con il percorso numerato e i tempi.</div>
+<div style="position:absolute;left:1260px;top:5400px;width:240px;background:#fff;border:1.5px solid #34322d;padding:13px 15px;font-size:13px;line-height:1.45;box-shadow:0 1px 4px rgba(0,0,0,.1);transform:rotate(1deg)"><b style="font-family:'Caveat';font-size:17px">Onestà</b><br>Le opere senza posizione esatta restano selezionabili ma segnalate; il percorso evita falsa precisione e mostra "da verificare".</div>
+
+<!-- ===== A8 · FEED OPERE (mobile, social) ===== -->
+<div style="position:absolute;left:2880px;top:340px;width:340px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">A8 · Feed opere <span style="font-size:15px;color:#c0573a">← Esplora le opere</span></div>
+  <div data-screen-label="Mobile Feed opere" style="background:#f6f4ee;border:6px solid #34322d;border-radius:38px;height:712px;overflow:hidden;position:relative;display:flex;flex-direction:column;box-shadow:0 5px 16px rgba(0,0,0,.14)">
+    <div style="height:26px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-size:11px"><span>9:41</span><span style="font-family:ui-monospace,monospace">IT</span></div>
+    <div style="height:46px;border-bottom:1.5px solid #34322d;display:flex;align-items:center;justify-content:space-between;padding:0 16px">
+      <div style="font-family:'Architects Daughter';font-size:20px">Opere</div>
+      <div style="display:flex;gap:10px;align-items:center;font-size:11px"><span style="border:1.2px solid #34322d;border-radius:20px;padding:4px 10px">Feed</span><span style="color:#8a8576">Griglia</span><span style="color:#8a8576">Mappa</span></div>
+    </div>
+    <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;gap:0">
+      <div style="position:relative;height:300px;background:repeating-linear-gradient(135deg,#e9e5db 0 7px,#e0dbcf 7px 14px);border-bottom:1.5px solid #34322d">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(52,50,45,.55),transparent 45%)"></div>
+        <div style="position:absolute;top:12px;left:14px;font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(52,50,45,.5);padding:3px 8px;border-radius:12px">Peccioli · scultura</div>
+        <div style="position:absolute;top:12px;right:14px;width:36px;height:36px;border-radius:50%;background:rgba(246,244,238,.92);border:1.5px solid #34322d;display:flex;align-items:center;justify-content:center;font-size:16px">♡</div>
+        <div style="position:absolute;left:14px;bottom:14px;right:14px;color:#f6f4ee"><div style="font-family:'Architects Daughter';font-size:26px;line-height:1">Endless Sunset</div><div style="font-size:12px;opacity:.9;margin-top:2px">Patrick Tuttofuoco · 2020</div></div>
+      </div>
+      <div style="padding:9px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #34322d">
+        <span style="font-family:ui-monospace,monospace;font-size:9px;border:1px solid #34322d;border-radius:12px;padding:2px 8px;display:flex;gap:5px;align-items:center"><span style="width:7px;height:7px;border-radius:50%;background:#4a5d4e"></span>All'aperto · libero</span>
+        <div style="display:flex;gap:14px;font-size:15px;color:#56524a"><span>♡</span><span>↗</span><span style="font-size:13px">◎ mappa</span></div>
+      </div>
+      <div style="position:relative;height:200px;background:repeating-linear-gradient(135deg,#e9e5db 0 7px,#e0dbcf 7px 14px)">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(52,50,45,.55),transparent 50%)"></div>
+        <div style="position:absolute;top:12px;left:14px;font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(52,50,45,.5);padding:3px 8px;border-radius:12px">Ghizzano · colore</div>
+        <div style="position:absolute;left:14px;bottom:14px;color:#f6f4ee"><div style="font-family:'Architects Daughter';font-size:24px;line-height:1">Via di Mezzo</div><div style="font-size:12px;opacity:.9;margin-top:2px">David Tremlett · 2019</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- mobile home → feed connector note -->
+<div style="position:absolute;left:2480px;top:1080px;width:230px;background:#fbe9a0;padding:13px 15px;font-size:13.5px;line-height:1.45;box-shadow:0 1px 4px rgba(0,0,0,.12);transform:rotate(-1deg)"><b style="font-family:'Caveat';font-size:17px">CTA "Esplora le opere"</b><br>In home (mobile + desktop) apre il <b>Feed opere</b> (A8 / D2): catalogo visivo a tutta immagine.</div>
+
+<!-- ===================== SECTION 05 — CATALOG FEED ===================== -->
+<div style="position:absolute;left:80px;top:5800px;font-family:'Caveat';font-weight:700;font-size:38px;color:#34322d">05 · Catalogo — feed opere</div>
+<div style="position:absolute;left:80px;top:5850px;font-size:14px;color:#8a8576">Le immagini guidano. Un catalogo a grandi foto, scorrevole come un feed. Da "Esplora le opere" in home.</div>
+
+<div style="position:absolute;left:80px;top:5920px;width:1180px">
+  <div data-drags-parent="1" style="position:absolute;top:-28px;left:4px;font-family:'Caveat';font-weight:700;font-size:21px;color:rgba(52,50,45,.85)">D2 · Feed opere (desktop)</div>
+  <div data-screen-label="Desktop Feed opere" style="background:#f6f4ee;border:2px solid #34322d;border-radius:8px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.1)">
+    <div style="height:50px;border-bottom:1.5px solid #34322d;display:flex;align-items:center;justify-content:space-between;padding:0 24px">
+      <div style="font-family:'Caveat';font-weight:700;font-size:24px">MACCA</div>
+      <div style="display:flex;gap:18px;font-size:12px;color:#56524a"><span>Esplora</span><span style="color:#c0573a">Opere</span><span>Percorsi</span><span>Timeline</span><span>Visita</span></div>
+      <div style="display:flex;gap:12px;align-items:center;font-size:12px"><span style="border:1.2px solid #34322d;border-radius:8px;padding:5px 12px;display:flex;gap:7px;align-items:center"><span style="font-size:13px">▦</span>Feed</span><span style="color:#8a8576">Griglia · Mappa</span><span style="border:1.2px solid #34322d;border-radius:14px;padding:2px 8px">IT / EN</span></div>
+    </div>
+    <div style="padding:26px 32px;border-bottom:1.5px solid #34322d;display:flex;justify-content:space-between;align-items:flex-end">
+      <div><div style="font-family:'Architects Daughter';font-size:36px;line-height:1">Esplora le opere</div><div style="margin-top:6px;font-size:14px;color:#56524a;max-width:460px">72 opere nel territorio. Lasciati guidare dalle immagini, poi apri la scheda o trovala sulla mappa.</div></div>
+      <div style="display:flex;gap:7px;font-family:ui-monospace,monospace;font-size:9px"><span style="border:1px solid #34322d;background:#ded9cd;border-radius:12px;padding:3px 9px">Tutte</span><span style="border:1px solid #34322d;border-radius:12px;padding:3px 9px">Scultura</span><span style="border:1px solid #34322d;border-radius:12px;padding:3px 9px">Colore</span><span style="border:1px solid #34322d;border-radius:12px;padding:3px 9px">Luce</span><span style="border:1px solid #34322d;border-radius:12px;padding:3px 9px">Dopo il tramonto</span></div>
+    </div>
+    <div style="padding:28px 32px;column-count:3;column-gap:22px">
+      <div style="break-inside:avoid;margin-bottom:22px;border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="position:relative;height:300px;background:repeating-linear-gradient(135deg,#e9e5db 0 7px,#e0dbcf 7px 14px)"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(52,50,45,.5),transparent 50%)"></div><span style="position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(246,244,238,.92);border:1.5px solid #34322d;display:flex;align-items:center;justify-content:center">♡</span><div style="position:absolute;left:14px;bottom:14px;color:#f6f4ee"><div style="font-family:'Architects Daughter';font-size:22px;line-height:1">SolidSky</div><div style="font-size:11px;opacity:.9">Alicja Kwade · 2019 · Ghizzano</div></div></div></div>
+      <div style="break-inside:avoid;margin-bottom:22px;border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="position:relative;height:200px;background:repeating-linear-gradient(135deg,#e9e5db 0 7px,#e0dbcf 7px 14px)"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(52,50,45,.5),transparent 55%)"></div><div style="position:absolute;left:14px;bottom:14px;color:#f6f4ee"><div style="font-family:'Architects Daughter';font-size:20px;line-height:1">Chiacchiere</div><div style="font-size:11px;opacity:.9">Vittorio Corsini · 2023</div></div></div></div>
+      <div style="break-inside:avoid;margin-bottom:22px;border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="position:relative;height:260px;background:#283042"><div style="position:absolute;top:12px;left:12px;font-family:ui-monospace,monospace;font-size:8px;background:#dfe4ee;color:#283042;border-radius:10px;padding:2px 7px">notturna</div><div style="position:absolute;left:14px;bottom:14px;color:#f6f4ee"><div style="font-family:'Architects Daughter';font-size:20px;line-height:1">Dance First Think Later</div><div style="font-size:11px;opacity:.8">Marinella Senatore · 2024 · Le Serre</div></div></div></div>
+      <div style="break-inside:avoid;margin-bottom:22px;border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="position:relative;height:230px;background:repeating-linear-gradient(135deg,#e9e5db 0 7px,#e0dbcf 7px 14px)"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(52,50,45,.5),transparent 55%)"></div><div style="position:absolute;left:14px;bottom:14px;color:#f6f4ee"><div style="font-family:'Architects Daughter';font-size:20px;line-height:1">Endless Sunset</div><div style="font-size:11px;opacity:.9">Patrick Tuttofuoco · 2020 · Peccioli</div></div></div></div>
+      <div style="break-inside:avoid;margin-bottom:22px;border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="position:relative;height:300px;background:repeating-linear-gradient(135deg,#e9e5db 0 7px,#e0dbcf 7px 14px)"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(52,50,45,.5),transparent 50%)"></div><div style="position:absolute;left:14px;bottom:14px;color:#f6f4ee"><div style="font-family:'Architects Daughter';font-size:22px;line-height:1">Via di Mezzo</div><div style="font-size:11px;opacity:.9">David Tremlett · 2019 · Ghizzano</div></div></div></div>
+      <div style="break-inside:avoid;margin-bottom:22px;border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="position:relative;height:210px;background:#dbe2e1;display:flex;align-items:center;justify-content:center;font-family:ui-monospace,monospace;font-size:10px;color:#8a8576">testo · niente foto</div><div style="padding:11px"><div style="font-size:15px">VOCI</div><div style="font-size:11px;color:#8a8576">V. Corsini + scrittori · 2018 · più siti</div></div></div>
+      <div style="break-inside:avoid;margin-bottom:22px;border:1.5px solid #34322d;border-radius:10px;overflow:hidden"><div style="position:relative;height:250px;background:repeating-linear-gradient(135deg,#e9e5db 0 7px,#e0dbcf 7px 14px)"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(52,50,45,.5),transparent 55%)"></div><div style="position:absolute;left:14px;bottom:14px;color:#f6f4ee"><div style="font-family:'Architects Daughter';font-size:20px;line-height:1">Photo-souvenirs</div><div style="font-size:11px;opacity:.9">Daniel Buren · 2021 · Peccioli</div></div></div></div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { selected: { colonna:true, fessura:true, chiacchiere:true, sunset:true }, generated:false };
+  renderVals() {
+    const base = [
+      {id:'colonna', t:'Colonna che scende', a:'Nagasawa · 1992', x:150,y:90},
+      {id:'welcome', t:'Welcome to Peccioli', a:'Giugiaro · 1999', x:90,y:300},
+      {id:'fessura', t:'Fessura e Contravvento II', a:'De Leonardis · 2000', x:210,y:180},
+      {id:'presenze', t:'Presenze', a:'Naturaliter · 2011', x:330,y:110},
+      {id:'azzurro', t:'Azzurro', a:'Corsini · 2017', x:260,y:250},
+      {id:'silenzio', t:'Il silenzio delle piante', a:'Paci · 2019', x:420,y:95},
+      {id:'sunset', t:'Endless Sunset', a:'Tuttofuoco · 2020', x:470,y:200},
+      {id:'buren', t:'Photo-souvenirs', a:'Buren · 2021', x:180,y:260},
+      {id:'mirror', t:'Rotating Mirror IX', a:'Hein · 2021', x:360,y:300},
+      {id:'chiacchiere', t:'Chiacchiere', a:'Corsini · 2023', x:300,y:175},
+      {id:'benvenuti', t:'Benvenuti in città', a:'Corsini · 2023', x:130,y:205},
+      {id:'breath', t:'Breath (provvisorio)', a:'Ponzi + Spinelli · 2026', x:430,y:300},
+    ];
+    const sel = this.state.selected || {};
+    const genFlag = this.state.generated;
+    const toggle = (id) => this.setState(s => { const n = {...(s.selected||{})}; if (n[id]) delete n[id]; else n[id]=true; return { selected:n, generated:false }; });
+    const opere = base.map(o => {
+      const on = !!sel[o.id];
+      return { ...o, selected:on, check: on ? '✓' : '',
+        onClick: () => toggle(o.id),
+        rowStyle: 'display:flex;gap:12px;align-items:center;padding:9px 12px;border:1.5px solid #34322d;border-radius:9px;cursor:pointer;transition:background .12s;background:'+(on?'#fbf2ee':'#fff')+';border-left:'+(on?'5px':'1.5px')+' solid '+(on?'#c0573a':'#34322d'),
+        checkStyle: 'width:22px;height:22px;border-radius:6px;border:1.6px solid #34322d;display:flex;align-items:center;justify-content:center;flex:none;font-size:13px;background:'+(on?'#c0573a':'#fff')+';color:#f6f4ee',
+        posStyle: 'position:absolute;left:'+o.x+'px;top:'+o.y+'px;transform:translate(-50%,-50%);border-radius:50%;width:'+(on?'18px':'13px')+'px;height:'+(on?'18px':'13px')+'px;background:'+(on?'#c0573a':'#fff')+';border:2px solid '+(on?'#34322d':'#a8a293')+';opacity:'+(on?'1':'.5'),
+      };
+    });
+    const selList = base.filter(o => sel[o.id]);
+    const stops = selList.length;
+    const start = { x:90, y:345 };
+    let rem = selList.slice(), cur = start, order = [];
+    while (rem.length) { let bi=0,bd=1e9; rem.forEach((p,i)=>{const d=(p.x-cur.x)**2+(p.y-cur.y)**2; if(d<bd){bd=d;bi=i;}}); order.push(rem[bi]); cur=rem[bi]; rem.splice(bi,1); }
+    const pts = [start, ...order];
+    let distPx = 0; for (let i=1;i<pts.length;i++) distPx += Math.hypot(pts[i].x-pts[i-1].x, pts[i].y-pts[i-1].y);
+    const meters = Math.round(distPx*2.4/10)*10;
+    const mins = stops ? Math.round(meters/70) + 6*stops : 0;
+    const generated = genFlag && stops>0;
+    const orderedMarkers = order.map((p,i)=>({ n:i+1,
+      posStyle:'position:absolute;left:'+p.x+'px;top:'+p.y+'px;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:#34322d;color:#f6f4ee;border:2px solid #f6f4ee;box-shadow:0 0 0 2px #34322d;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700' }));
+    const orderedList = order.map((p,i)=>({ n:i+1, t:p.t, a:p.a }));
+    return {
+      opere, generated, notGenerated: !generated, hasSelection: stops>0,
+      selLabel: stops + (stops===1?' opera selezionata':' opere selezionate'),
+      generate: () => { if (stops) this.setState({ generated:true }); },
+      clearSel: () => this.setState({ selected:{}, generated:false }),
+      genBtnStyle: 'border:1.5px solid #34322d;border-radius:8px;padding:10px 20px;font-size:14px;cursor:'+(stops?'pointer':'default')+';background:'+(stops?'#c0573a':'#ded9cd')+';color:'+(stops?'#f6f4ee':'#8a8576'),
+      routePoints: pts.map(p=>p.x+','+p.y).join(' '),
+      orderedMarkers, orderedList,
+      statTime: mins + ' min', statStops: stops + (stops===1?' tappa':' tappe'),
+      statDist: meters>=1000 ? (meters/1000).toFixed(1)+' km*' : meters+' m*',
+    };
+  }
+}
+</script>
+</body>
+</html>

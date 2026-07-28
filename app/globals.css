@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --hatch: repeating-linear-gradient(
+      135deg,
+      #e9e5db 0 7px,
+      #e0dbcf 7px 14px
+    );
+    --map-surface: #dbe2e1;
+    /* Height reserved for the mobile bottom tab bar (set to 0 on desktop and
+       on field-mode routes via data-bnav="off", toggled by <BottomNav>). */
+    --bnav: 0px;
+  }
+
+  @media (max-width: 1023.98px) {
+    :root[data-bnav="on"] {
+      --bnav: calc(60px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-stone text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+    /* Keep content (incl. footer) clear of the mobile tab bar. */
+    padding-bottom: var(--bnav);
+  }
+
+  /* Paper grain — a whisper of material texture over the whole surface,
+     echoing the brief's stone/limestone base. Purely decorative. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  }
+
+  ::selection {
+    background: rgba(192, 87, 58, 0.18);
+  }
+
+  /* Visible, unambiguous focus states (accessibility requirement). */
+  :focus-visible {
+    outline: 2px solid #c0573a;
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Overline — small all-caps used for labels, map labels, categorisation. */
+  .overline {
+    @apply font-mono text-[10px] uppercase tracking-overline text-ink-40;
+  }
+
+  /* Abstract image placeholder evoking stone / sun-bleached surfaces.
+     Used wherever cleared photography is not yet available. */
+  .hatch {
+    background: var(--hatch);
+  }
+
+  .map-surface {
+    background: var(--map-surface);
+  }
+
+  /* Editorial reading column. */
+  .prose-editorial {
+    @apply text-[17px] leading-[1.7] text-ink-80;
+  }
+  .prose-editorial p + p {
+    @apply mt-5;
+  }
+
+  .focus-ring {
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Animated hover underline for editorial links / card titles. */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1.5px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.35s ease;
+  }
+  .group:hover .link-underline,
+  .link-underline:hover {
+    background-size: 100% 1.5px;
+  }
+
+  /* Media zoom inside cards. */
+  .zoom-media {
+    transition: transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1);
+  }
+  .group:hover .zoom-media {
+    transform: scale(1.04);
+  }
+}
+
+/* Gentle pulse for the selected map marker. */
+@keyframes marker-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 6px rgba(192, 87, 58, 0.18);
+  }
+  50% {
+    box-shadow: 0 0 0 11px rgba(192, 87, 58, 0.08);
+  }
+}
+.marker-pulse {
+  animation: marker-pulse 2.4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marker-pulse {
+    animation: none;
+  }
+}
