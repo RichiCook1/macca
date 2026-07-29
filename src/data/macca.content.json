@@ -18,5 +18,21 @@
       ]
     }
   },
-  "works": {}
+  "works": {
+    "macca-072": {
+      "description_it": "Breath è una scultura cinetica di Emiliano Ponzi e Dario Spinelli, inaugurata nel 2026 sul territorio del museo diffuso MACCA a Peccioli. Alta circa dieci metri su una base di otto, è costruita con lame di acciaio inossidabile satinato che, mosse dal vento, ruotano attorno a un asse centrale: da lontano l'opera sembra respirare col paesaggio. La finitura satinata trattiene la luce e il colore del cielo, così che la scultura cambi aspetto lungo l'arco della giornata.",
+      "description_en": "Breath is a kinetic sculpture by Emiliano Ponzi and Dario Spinelli, inaugurated in 2026 within the MACCA dispersed museum at Peccioli. Roughly ten metres tall on an eight-metre base, it is built from satin-finished stainless-steel blades that rotate around a central axis as the wind moves them, so that from a distance the work appears to breathe with the landscape. The satin finish holds the light and the colour of the sky, shifting the sculpture's appearance across the day.",
+      "materials": "Acciaio inossidabile satinato",
+      "dimensions": "≈ 10 m (altezza) · base ≈ 8 m",
+      "images": [
+        {
+          "src": "/images/works/macca-072.jpg",
+          "credit": "Foto: Andrea Testi",
+          "source": "https://www.emilianoponzi.com/",
+          "license": "Tutti i diritti riservati · uso prototipo · diritti di riproduzione da confermare",
+          "caption": "Breath, dettaglio delle lame in acciaio satinato"
+        }
+      ]
+    }
+  }
 }

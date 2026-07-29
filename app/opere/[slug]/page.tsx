@@ -283,9 +283,20 @@ export default async function ArtworkPage({ params }: { params: Promise<{ slug: 
                         href={`/opere/${w.slug}`}
                         className="group block overflow-hidden rounded-xl border border-ink/15 bg-paper shadow-card transition-shadow hover:shadow-raised focus-ring"
                       >
-                        <div className="flex h-20 items-end p-2 hatch">
-                          <FallbackNote>archivio</FallbackNote>
-                        </div>
+                        {w.heroImage ? (
+                          <div className="h-20">
+                            <WorkPhoto
+                              image={w.heroImage}
+                              alt={w.title}
+                              className="zoom-media h-full w-full"
+                              showCredit={false}
+                            />
+                          </div>
+                        ) : (
+                          <div className="flex h-20 items-end p-2 hatch">
+                            <FallbackNote>archivio</FallbackNote>
+                          </div>
+                        )}
                         <div className="p-3">
                           <div className="font-serif text-[15px] leading-tight">{w.title}</div>
                           <div className="mt-0.5 text-[12px] text-ink-60">
