@@ -37,6 +37,70 @@
       "description_it": "«Rotating Mirror IX» di Jeppe Hein (2021) è collocata a Palazzo Senza Tempo, nell'ambito de «Le opere a Palazzo Senza Tempo», insieme agli interventi di Daniel Buren e Vittorio Corsini che accompagnano la rinascita e il recupero dell'edificio. Fedele alla ricerca dell'artista, l'opera a specchio coinvolge chi guarda: riflette e mette in movimento il visitatore e lo spazio circostante, trasformando la percezione del palazzo e del suo panorama.",
       "description_en": "Jeppe Hein's «Rotating Mirror IX» (2021) is installed at Palazzo Senza Tempo, within «Le opere a Palazzo Senza Tempo», alongside works by Daniel Buren and Vittorio Corsini that accompany the building's rebirth and restoration. True to the artist's practice, the mirror work engages the viewer — reflecting and setting both visitor and surroundings in motion, and reshaping the perception of the palace and its panorama."
     },
+    "macca-011": {
+      "description_it": "Realizzata nel 2000 da Federico De Leonardis, «Fessura e Contravvento II» appartiene a «Le periferie di Peccioli» (1999–2002), il programma con cui il Comune ha ripensato le zone d'accesso e i servizi del paese. L'opera si integra con una struttura di parcheggio, portando la scultura dentro l'infrastruttura quotidiana anziché isolarla come monumento.",
+      "description_en": "Made in 2000 by Federico De Leonardis, «Fessura e Contravvento II» belongs to «Le periferie di Peccioli» (1999–2002), the programme through which the municipality rethought the town's access zones and services. The work is integrated into a parking structure, bringing sculpture inside everyday infrastructure rather than isolating it as a monument."
+    },
+    "macca-028": {
+      "description_it": "«Presenze» del collettivo Naturaliter (2011) si trova all'impianto di smaltimento e trattamento rifiuti di Legoli, nell'ambito del programma di opere (2011–2017) che ha trasformato il sito in un luogo simbolico di resilienza, rinascita e riflessione sulla cura del territorio. Un gruppo di figure scultoree abita l'infrastruttura, ribaltandone la percezione.",
+      "description_en": "«Presenze» by the collective Naturaliter (2011) stands at the Legoli waste-management and treatment facility, within the programme of works (2011–2017) that turned the site into a symbolic place of resilience, rebirth and reflection on care for the territory. A group of sculptural figures inhabits the infrastructure, overturning how it is perceived."
+    },
+    "macca-037": {
+      "description_it": "«Azzurro» di Vittorio Corsini (2017) fa parte dei progetti pubblici permanenti nati dal lungo rapporto dell'artista con Peccioli e dal dialogo con i suoi abitanti, insieme a «Lo sguardo di Peccioli» e «Light mood». Installazione luminosa, porta il colore e la luce nello spazio urbano come segno condiviso della comunità.",
+      "description_en": "«Azzurro» by Vittorio Corsini (2017) is part of the permanent public projects born from the artist's long relationship with Peccioli and dialogue with its residents, alongside «Lo sguardo di Peccioli» and «Light mood». A light installation, it brings colour and light into urban space as a shared sign of the community.",
+      "materials": "Installazione luminosa"
+    },
+    "macca-046": {
+      "description_it": "«Via di Mezzo» di David Tremlett (2019) è un intervento a parete realizzato per Ghizzano, nell'ambito de «Gli interventi a Ghizzano» (2018–2019) curati da Antonella Soldaini. Fedele al linguaggio dell'artista, campiture di colore stese a mano ridisegnano le superfici del borgo, trasformando i muri quotidiani in paesaggio pittorico.",
+      "description_en": "«Via di Mezzo» by David Tremlett (2019) is a wall intervention made for Ghizzano, within «Gli interventi a Ghizzano» (2018–2019) curated by Antonella Soldaini. True to the artist's language, hand-applied fields of colour redraw the village's surfaces, turning everyday walls into a painterly landscape.",
+      "materials": "Pittura murale"
+    },
+    "macca-047": {
+      "description_it": "«Elevatio corpus» di Patrick Tuttofuoco (2019) nasce per Ghizzano all'interno de «Gli interventi a Ghizzano» (2018–2019), curati da Antonella Soldaini. La scultura entra nel tessuto del borgo dopo un lavoro di ascolto del luogo e degli abitanti, in dialogo con gli interventi di Tremlett e Kwade.",
+      "description_en": "«Elevatio corpus» by Patrick Tuttofuoco (2019) was created for Ghizzano within «Gli interventi a Ghizzano» (2018–2019), curated by Antonella Soldaini. The sculpture enters the fabric of the village after a process of listening to the place and its residents, in dialogue with the works by Tremlett and Kwade."
+    },
+    "macca-051": {
+      "description_it": "«Il silenzio delle piante» di Adrian Paci è un'installazione inserita nel programma di interventi con cui MACCA ha reinterpretato e valorizzato il territorio di Peccioli. Coerente con la ricerca dell'artista su memoria, natura e presenza umana, l'opera introduce una nota di silenzio e attesa nel paesaggio.",
+      "description_en": "«Il silenzio delle piante» by Adrian Paci is an installation set within the programme of interventions through which MACCA reinterpreted and enhanced the Peccioli territory. Consistent with the artist's enquiry into memory, nature and human presence, the work introduces a note of silence and expectation into the landscape."
+    },
+    "macca-053": {
+      "description_it": "«Endless Sunset» di Patrick Tuttofuoco (2020) è un'installazione pensata per un passaggio pedonale, parte de «Gli interventi dal 2020 al 2021». Colore e luce trasformano un attraversamento ordinario in un'esperienza sospesa, un tramonto senza fine incontrato lungo il cammino nel paese.",
+      "description_en": "«Endless Sunset» by Patrick Tuttofuoco (2020) is an installation conceived for a pedestrian passage, part of «Gli interventi dal 2020 al 2021». Colour and light turn an ordinary crossing into a suspended experience — an endless sunset met along the walk through the town."
+    },
+    "macca-056": {
+      "description_it": "«Photo-souvenirs A 45°, 5 colori + nero e bianco» di Daniel Buren (2021) è un intervento sulla facciata di Palazzo Senza Tempo, nell'ambito del progetto che ha accompagnato il recupero dell'edificio insieme a opere di Jeppe Hein e Vittorio Corsini. Con il suo linguaggio «in situ», Buren usa colore e geometria per rivelare l'architettura e il suo contesto.",
+      "description_en": "«Photo-souvenirs A 45°, 5 colours + black and white» by Daniel Buren (2021) is an intervention on the façade of Palazzo Senza Tempo, within the project that accompanied the building's restoration alongside works by Jeppe Hein and Vittorio Corsini. With his «in situ» language, Buren uses colour and geometry to reveal the architecture and its context."
+    },
+    "macca-060": {
+      "description_it": "«Chiacchiere» di Vittorio Corsini (2023) è un'installazione in bronzo realizzata tra le opere del 2023, l'anno in cui, il 25 marzo, nasce ufficialmente il MACCA. Coerente con la pratica dell'artista, l'opera dà forma alla parola e alla conversazione come materia condivisa dello spazio pubblico.",
+      "description_en": "«Chiacchiere» by Vittorio Corsini (2023) is a bronze installation made among the 2023 works — the year MACCA was officially established on 25 March. Consistent with the artist's practice, the work gives form to speech and conversation as a shared material of public space.",
+      "materials": "Bronzo"
+    },
+    "macca-063": {
+      "description_it": "«We Rise by Lifting Others» di Marinella Senatore (2023) appartiene agli interventi del 2023, l'anno di fondazione del MACCA. Realizzata con acciaio Cor-Ten, luminarie e superfici a specchio, l'opera traduce nel linguaggio festivo delle luci del Sud Italia un messaggio di solidarietà ed emancipazione collettiva.",
+      "description_en": "«We Rise by Lifting Others» by Marinella Senatore (2023) belongs to the 2023 interventions, the year MACCA was founded. Made with Cor-Ten steel, luminarie and mirrored surfaces, the work translates a message of solidarity and collective empowerment into the festive language of southern-Italian lights.",
+      "materials": "Acciaio Cor-Ten, luminaria, superfici a specchio"
+    },
+    "macca-065": {
+      "description_it": "«Benvenuti in città» di Vittorio Corsini (2023) è un'opera video su parete LED, parte degli interventi del 2023. L'artista porta immagine e testo in movimento nello spazio urbano, come un saluto e una soglia che accoglie chi arriva nel paese.",
+      "description_en": "«Benvenuti in città» by Vittorio Corsini (2023) is a video work on an LED wall, part of the 2023 interventions. The artist brings moving image and text into urban space, as a greeting and a threshold that welcomes those arriving in the town.",
+      "materials": "Video su parete LED"
+    },
+    "macca-067": {
+      "description_it": "«Dance First Think Later» di Marinella Senatore (2024) è un'installazione a luminaria realizzata tra gli interventi site-specific del 2024. Le strutture luminose della tradizione festiva diventano scultura pubblica, un invito collettivo al movimento e alla gioia condivisa.",
+      "description_en": "«Dance First Think Later» by Marinella Senatore (2024) is a luminaria installation made among the site-specific 2024 interventions. The illuminated structures of festive tradition become public sculpture — a collective invitation to movement and shared joy.",
+      "materials": "Luminaria"
+    },
+    "macca-068": {
+      "description_it": "Opera a quattro mani di David Tremlett e Remo Salvadori (2024), «Untitled / Germoglio» unisce il wall drawing a pastello di Tremlett a un intervento in ferro e foglia d'oro di Salvadori, tra gli interventi site-specific del 2024. Colore steso a mano e gesto essenziale dialogano sulla stessa superficie.",
+      "description_en": "A four-hand work by David Tremlett and Remo Salvadori (2024), «Untitled / Germoglio» joins Tremlett's pastel wall drawing to an iron-and-gold-leaf intervention by Salvadori, among the site-specific 2024 interventions. Hand-applied colour and essential gesture converse on the same surface.",
+      "materials": "Wall drawing a pastello; ferro e foglia d'oro"
+    },
+    "macca-071": {
+      "description_it": "«Flower Up» di Emiliano Ponzi (2025) è un'installazione in ferro e acciaio realizzata tra gli interventi del 2025. L'illustratore porta il suo immaginario alla scala pubblica: una fioritura metallica che segna il territorio e anticipa la scultura cinetica «Breath», firmata con Dario Spinelli.",
+      "description_en": "«Flower Up» by Emiliano Ponzi (2025) is an iron-and-steel installation made among the 2025 interventions. The illustrator brings his imagery to public scale: a metal blossoming that marks the territory and anticipates the kinetic sculpture «Breath», co-created with Dario Spinelli.",
+      "materials": "Ferro e acciaio"
+    },
     "macca-072": {
       "description_it": "Breath è una scultura cinetica di Emiliano Ponzi e Dario Spinelli, inaugurata nel 2026 sul territorio del museo diffuso MACCA a Peccioli. Alta circa dieci metri su una base di otto, è costruita con lame di acciaio inossidabile satinato che, mosse dal vento, ruotano attorno a un asse centrale: da lontano l'opera sembra respirare col paesaggio. La finitura satinata trattiene la luce e il colore del cielo, così che la scultura cambi aspetto lungo l'arco della giornata.",
       "description_en": "Breath is a kinetic sculpture by Emiliano Ponzi and Dario Spinelli, inaugurated in 2026 within the MACCA dispersed museum at Peccioli. Roughly ten metres tall on an eight-metre base, it is built from satin-finished stainless-steel blades that rotate around a central axis as the wind moves them, so that from a distance the work appears to breathe with the landscape. The satin finish holds the light and the colour of the sky, shifting the sculpture's appearance across the day.",
