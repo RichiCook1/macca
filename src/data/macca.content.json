@@ -52,5 +52,63 @@
         }
       ]
     }
+  },
+  "artists": {
+    "vittorio-corsini": {
+      "bio_it": "Artista italiano nato a Cecina, Vittorio Corsini lavora tra scultura, luce e parola, spesso nello spazio pubblico e in dialogo con la comunità. È l'autore più presente in MACCA, con opere e collaborazioni letterarie distribuite nel territorio di Peccioli.",
+      "bio_en": "An Italian artist born in Cecina, Vittorio Corsini works across sculpture, light and language, often in public space and in dialogue with the community. He is the most represented artist in MACCA, with works and literary collaborations spread across the Peccioli territory."
+    },
+    "david-tremlett": {
+      "bio_it": "Artista britannico, David Tremlett è noto per i grandi wall drawing realizzati a mano con pastelli e pigmenti, che ridisegnano architetture e superfici con campiture di colore. Finalista del Turner Prize nel 1992, a Peccioli è intervenuto anche in dialogo con altri autori.",
+      "bio_en": "A British artist, David Tremlett is known for his large hand-made wall drawings in pastel and pigment, redrawing architecture and surfaces with fields of colour. A Turner Prize finalist in 1992, at Peccioli he has also worked in dialogue with other artists."
+    },
+    "marinella-senatore": {
+      "bio_it": "Artista italiana, Marinella Senatore fonda la sua pratica sulla partecipazione e sull'emancipazione collettiva. Ha ideato «The School of Narrative Dance» e utilizza le luminarie della tradizione festiva del Sud Italia come sculture di luce che portano messaggi condivisi.",
+      "bio_en": "An Italian artist, Marinella Senatore builds her practice on participation and collective empowerment. She founded «The School of Narrative Dance» and uses the luminarie of southern-Italian festival tradition as sculptures of light carrying shared messages."
+    },
+    "patrick-tuttofuoco": {
+      "bio_it": "Artista italiano, Patrick Tuttofuoco lavora con luce, colore e scultura, spesso in chiave urbana e collaborativa. A Peccioli firma opere che giocano con il paesaggio e con la percezione dello spettatore.",
+      "bio_en": "An Italian artist, Patrick Tuttofuoco works with light, colour and sculpture, often in an urban and collaborative register. At Peccioli he creates works that play with the landscape and the viewer's perception."
+    },
+    "alicja-kwade": {
+      "bio_it": "Nata in Polonia e attiva a Berlino, Alicja Kwade indaga la percezione, il tempo, la scienza e il valore dei materiali attraverso scultura e installazione. A Ghizzano ha realizzato «SolidSky» dopo un lavoro di ascolto del luogo e degli abitanti.",
+      "bio_en": "Born in Poland and based in Berlin, Alicja Kwade probes perception, time, science and the value of materials through sculpture and installation. At Ghizzano she made «SolidSky» after a process of listening to the place and its residents."
+    },
+    "jeppe-hein": {
+      "bio_it": "Artista danese, Jeppe Hein è noto per opere interattive — specchi, padiglioni, giochi d'acqua — che coinvolgono direttamente il pubblico e lo spazio. A Palazzo Senza Tempo la sua opera a specchio mette in movimento visitatore e panorama.",
+      "bio_en": "A Danish artist, Jeppe Hein is known for interactive works — mirrors, pavilions, water features — that directly engage the public and the space. At Palazzo Senza Tempo his mirror work sets both visitor and panorama in motion."
+    },
+    "daniel-buren": {
+      "bio_it": "Artista francese tra i protagonisti dell'arte concettuale, Daniel Buren lavora «in situ» usando le sue caratteristiche bande verticali di 8,7 cm per rivelare e trasformare l'architettura e il contesto. A Peccioli è presente a Palazzo Senza Tempo.",
+      "bio_en": "A French artist and a leading figure of conceptual art, Daniel Buren works «in situ», using his signature 8.7 cm vertical stripes to reveal and transform architecture and context. At Peccioli he is present at Palazzo Senza Tempo."
+    },
+    "adrian-paci": {
+      "bio_it": "Nato a Scutari, in Albania, e attivo in Italia, Adrian Paci lavora con video, film e pittura affrontando temi di migrazione, memoria e sradicamento. La sua opera a Peccioli porta questa sensibilità nel paesaggio del museo diffuso.",
+      "bio_en": "Born in Shkodër, Albania, and based in Italy, Adrian Paci works with video, film and painting, addressing migration, memory and displacement. His work at Peccioli brings this sensibility into the landscape of the dispersed museum."
+    },
+    "hidetoshi-nagasawa": {
+      "bio_it": "Scultore di origine giapponese che ha vissuto e lavorato in Italia, Hidetoshi Nagasawa (1940–2018) appartiene alla generazione vicina all'Arte Povera. Lavora bronzo, pietra e marmo con un linguaggio essenziale: sua è «Colonna che scende», opera fondativa del museo.",
+      "bio_en": "A Japanese-born sculptor who lived and worked in Italy, Hidetoshi Nagasawa (1940–2018) belongs to the generation close to Arte Povera. Working bronze, stone and marble in an essential language, he is the author of «Colonna che scende», a foundational work of the museum."
+    },
+    "giorgetto-giugiaro": {
+      "bio_it": "Giorgetto Giugiaro è tra i più celebri designer italiani, fondatore di Italdesign e autore di icone dell'automobile e del prodotto industriale; nel 1999 è stato nominato «Car Designer of the Century». A Peccioli firma «Welcome to Peccioli», porta d'accesso al paese.",
+      "bio_en": "Giorgetto Giugiaro is one of Italy's most celebrated designers, founder of Italdesign and author of icons of automotive and industrial design; in 1999 he was named «Car Designer of the Century». At Peccioli he created «Welcome to Peccioli», the town's gateway."
+    },
+    "remo-salvadori": {
+      "bio_it": "Artista italiano, Remo Salvadori sviluppa una ricerca contemplativa attraverso scultura, disegno e materiali diversi, attenta al gesto, al tempo e alla geometria. A Peccioli è presente anche in un intervento condiviso con David Tremlett.",
+      "bio_en": "An Italian artist, Remo Salvadori pursues a contemplative practice through sculpture, drawing and varied materials, attentive to gesture, time and geometry. At Peccioli he is also present in a work shared with David Tremlett."
+    },
+    "massimo-bartolini": {
+      "bio_it": "Artista italiano nato a Cecina, Massimo Bartolini lavora con installazione, luce, suono e con la percezione dello spazio, spostando l'attenzione dello spettatore su dettagli e soglie. È presente nel territorio di Peccioli con più interventi.",
+      "bio_en": "An Italian artist born in Cecina, Massimo Bartolini works with installation, light, sound and the perception of space, shifting the viewer's attention onto details and thresholds. He is present in the Peccioli territory with several works."
+    },
+    "alberto-garutti": {
+      "bio_it": "Artista italiano (1948–2023), Alberto Garutti è noto per opere pubbliche e relazionali che legano l'arte alla comunità e alla vita quotidiana, spesso coinvolgendo direttamente gli abitanti. La sua presenza a Peccioli riflette questa vocazione civica.",
+      "bio_en": "An Italian artist (1948–2023), Alberto Garutti is known for public and relational works that tie art to community and everyday life, often directly involving residents. His presence at Peccioli reflects this civic vocation."
+    },
+    "emiliano-ponzi": {
+      "bio_it": "Emiliano Ponzi è un illustratore italiano di fama internazionale, noto per il lavoro editoriale per testate e case editrici di tutto il mondo. A Peccioli estende la sua ricerca alla scala pubblica con «Flower Up» e, insieme a Dario Spinelli, con la scultura cinetica «Breath».",
+      "bio_en": "Emiliano Ponzi is an internationally renowned Italian illustrator, known for editorial work for publications and publishers worldwide. At Peccioli he extends his practice to public scale with «Flower Up» and, together with Dario Spinelli, with the kinetic sculpture «Breath»."
+    }
   }
 }

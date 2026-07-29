@@ -460,13 +460,35 @@ export interface Artist {
   slug: string;
   name: string;
   workCount: number;
+  /** Verified biography (overlay, keyed by artist slug). Absent → editorial fallback. */
+  bio?: string;
+  bioEn?: string;
 }
+
+// Artist biography overlay (content pack). Keyed by artist slug; every entry is
+// OPTIONAL and only added when verified — it upgrades the "no bio" fallback.
+interface ArtistOverlay {
+  bio_it?: string;
+  bio_en?: string;
+}
+const overlayArtists: Record<string, ArtistOverlay> =
+  (contentOverlay as { artists?: Record<string, ArtistOverlay> }).artists ?? {};
+
 export const artists: Artist[] = (() => {
   const map = new Map<string, Artist>();
   for (const w of works) {
     const ex = map.get(w.artistSlug);
     if (ex) ex.workCount++;
-    else map.set(w.artistSlug, { slug: w.artistSlug, name: w.artist, workCount: 1 });
+    else {
+      const ov = overlayArtists[w.artistSlug];
+      map.set(w.artistSlug, {
+        slug: w.artistSlug,
+        name: w.artist,
+        workCount: 1,
+        bio: ov?.bio_it,
+        bioEn: ov?.bio_en,
+      });
+    }
   }
   return [...map.values()].sort((a, b) => a.name.localeCompare(b.name, "it"));
 })();

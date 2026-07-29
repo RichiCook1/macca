@@ -44,9 +44,16 @@ export default async function ArtistPage({
               {artist.workCount}{" "}
               {artist.workCount === 1 ? "opera in MACCA" : "opere in MACCA"}
             </div>
-            {/* No biography in the seed — editorial fallback, never invented. */}
+            {/* Verified biography from the content overlay when present; the
+                editorial fallback (never invented) otherwise. */}
             <div className="mt-5">
-              <FallbackNote>{FALLBACK.more}</FallbackNote>
+              {artist.bio ? (
+                <p className="max-w-2xl text-[15px] leading-relaxed text-ink-80">
+                  {artist.bio}
+                </p>
+              ) : (
+                <FallbackNote>{FALLBACK.more}</FallbackNote>
+              )}
             </div>
           </div>
         </section>
