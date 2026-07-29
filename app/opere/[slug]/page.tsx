@@ -15,7 +15,7 @@ import {
 import { Overline, Button } from "@/components/ui";
 import { ShareButton } from "@/components/share-button";
 import { WorkPhoto } from "@/components/work-image";
-import { works, workBySlug, worksByArea, FALLBACK } from "@/lib/collection";
+import { works, workBySlug, worksByArea, artistBySlug, FALLBACK } from "@/lib/collection";
 import { mapsDirectionsUrl, workQuery } from "@/lib/maps";
 import { routeBySlug } from "@/lib/routes-data";
 import { confidenceMeta } from "@/lib/constants";
@@ -47,6 +47,7 @@ export default async function ArtworkPage({ params }: { params: Promise<{ slug: 
     .filter((w) => w.slug !== work.slug)
     .slice(0, 4);
   const firstRoute = work.routes[0] ? routeBySlug(work.routes[0]) : undefined;
+  const artistBio = artistBySlug(work.artistSlug)?.bio;
 
   // In-app prev/next between works (seed order) — browse the whole collection
   // without leaving the artwork flow.
@@ -339,9 +340,14 @@ export default async function ArtworkPage({ params }: { params: Promise<{ slug: 
                 </span>
                 <div>
                   <div className="font-serif text-[17px]">{work.artist}</div>
-                  <FallbackNote>{FALLBACK.more}</FallbackNote>
+                  {!artistBio && <FallbackNote>{FALLBACK.more}</FallbackNote>}
                 </div>
               </div>
+              {artistBio && (
+                <p className="mt-4 max-w-md text-[14px] leading-relaxed text-ink-80">
+                  {artistBio}
+                </p>
+              )}
               <Link
                 href={`/artisti/${work.artistSlug}`}
                 className="mt-5 inline-block text-[13px] text-terracotta hover:underline focus-ring"

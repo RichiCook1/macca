@@ -173,6 +173,94 @@
     "emiliano-ponzi": {
       "bio_it": "Emiliano Ponzi è un illustratore italiano di fama internazionale, noto per il lavoro editoriale per testate e case editrici di tutto il mondo. A Peccioli estende la sua ricerca alla scala pubblica con «Flower Up» e, insieme a Dario Spinelli, con la scultura cinetica «Breath».",
       "bio_en": "Emiliano Ponzi is an internationally renowned Italian illustrator, known for editorial work for publications and publishers worldwide. At Peccioli he extends his practice to public scale with «Flower Up» and, together with Dario Spinelli, with the kinetic sculpture «Breath»."
+    },
+    "vittorio-messina": {
+      "bio_it": "Artista italiano, Vittorio Messina lavora al confine tra scultura e architettura, indagando lo spazio, la luce e l'idea di soglia e di costruzione incompiuta. È tra gli autori più presenti nel centro storico di Peccioli.",
+      "bio_en": "An Italian artist, Vittorio Messina works on the border between sculpture and architecture, exploring space, light and the idea of threshold and unfinished construction. He is among the most present artists in Peccioli's historic centre."
+    },
+    "federico-de-leonardis": {
+      "bio_it": "Scultore italiano, Federico De Leonardis lavora con materiali essenziali come pietra e ferro, con un linguaggio scarno e attento al rapporto tra opera, gesto e luogo. A Peccioli è presente fin dai primi interventi sul territorio.",
+      "bio_en": "An Italian sculptor, Federico De Leonardis works with essential materials such as stone and iron, in a spare language attentive to the relationship between work, gesture and place. He has been present at Peccioli since its earliest interventions on the territory."
+    },
+    "umberto-cavenago": {
+      "bio_it": "Artista italiano, Umberto Cavenago sviluppa una scultura attenta alle strutture, ai materiali industriali e al rapporto con l'architettura e lo spazio pubblico.",
+      "bio_en": "An Italian artist, Umberto Cavenago develops a sculpture attentive to structures, industrial materials and the relationship with architecture and public space."
+    },
+    "irene-fortuyn-robert-o-brien": {
+      "bio_it": "Fortuyn/O'Brien è il nome del duo olandese formato da Irene Fortuyn e Robert O'Brien: una pratica scultorea attenta alla memoria, all'oggetto e al rapporto tra pubblico e privato, portata avanti da Fortuyn anche dopo la scomparsa di O'Brien.",
+      "bio_en": "Fortuyn/O'Brien is the name of the Dutch duo formed by Irene Fortuyn and Robert O'Brien: a sculptural practice attentive to memory, the object and the relationship between public and private, continued by Fortuyn after O'Brien's death."
+    },
+    "vedovamazzei": {
+      "bio_it": "Vedovamazzei è il duo italiano formato da Simeone Crispino e Stella Scala, attivo dai primi anni Novanta. La loro ricerca attraversa media e linguaggi diversi con ironia e libertà, tra scultura, pittura e installazione.",
+      "bio_en": "Vedovamazzei is the Italian duo of Simeone Crispino and Stella Scala, active since the early 1990s. Their practice moves across different media and languages with irony and freedom, spanning sculpture, painting and installation."
+    },
+    "vladimir-dubossarsky-alexander-vinogradov": {
+      "bio_it": "Vladimir Dubossarsky e Alexander Vinogradov sono un duo di pittori russi noti per grandi tele dal linguaggio ironico e pop, che rileggono l'immaginario sovietico e la cultura di massa.",
+      "bio_en": "Vladimir Dubossarsky and Alexander Vinogradov are a duo of Russian painters known for large canvases in an ironic, pop language that reworks Soviet imagery and mass culture."
+    },
+    "nicola-carrino": {
+      "bio_it": "Scultore italiano (1932–2018), Nicola Carrino è figura di riferimento dell'astrazione costruttivista: i suoi «costruttivi» in acciaio e pietra dialogano con l'architettura e con lo spazio pubblico come strutture aperte e componibili.",
+      "bio_en": "An Italian sculptor (1932–2018), Nicola Carrino is a key figure of constructivist abstraction: his «costruttivi» in steel and stone engage architecture and public space as open, modular structures."
+    },
+    "mariella-bettineschi": {
+      "bio_it": "Artista italiana, Mariella Bettineschi lavora con pittura, fotografia e immagine, indagando la memoria, il tempo e la percezione dello sguardo. A Peccioli firma un intervento pittorico a parete.",
+      "bio_en": "An Italian artist, Mariella Bettineschi works with painting, photography and image, exploring memory, time and the perception of the gaze. At Peccioli she created a painted wall intervention."
+    },
+    "angelo-casciello": {
+      "bio_it": "Scultore italiano, Angelo Casciello lavora bronzo, ferro e legno con forme organiche e simboliche, in dialogo con il paesaggio e con la dimensione del sacro e del mito.",
+      "bio_en": "An Italian sculptor, Angelo Casciello works bronze, iron and wood in organic, symbolic forms, in dialogue with landscape and with the dimension of the sacred and of myth."
+    },
+    "sergio-michele-staino": {
+      "bio_it": "Sergio Staino (1940–2023) è stato uno dei più noti disegnatori satirici italiani, creatore del personaggio Bobo. L'opera a Peccioli nasce dalla collaborazione con il figlio Michele Staino.",
+      "bio_en": "Sergio Staino (1940–2023) was one of Italy's best-known satirical cartoonists, creator of the character Bobo. The work at Peccioli comes from his collaboration with his son Michele Staino."
+    },
+    "riccardo-burchielli": {
+      "bio_it": "Riccardo Burchielli è un fumettista italiano di fama internazionale, noto soprattutto per la serie «DMZ». A Peccioli porta il linguaggio del disegno e della narrazione per immagini alla scala del murale.",
+      "bio_en": "Riccardo Burchielli is an internationally known Italian comic-book artist, best known for the series «DMZ». At Peccioli he brings the language of drawing and visual storytelling to the scale of the mural."
+    },
+    "nicola-boccini-riccardo-burchielli": {
+      "bio_it": "L'opera unisce Nicola Boccini, artista e ricercatore nel campo della ceramica, e il fumettista Riccardo Burchielli: un intervento in ceramica e neon che intreccia materia e segno narrativo.",
+      "bio_en": "The work brings together Nicola Boccini, an artist and researcher in the field of ceramics, and the comic-book artist Riccardo Burchielli: a ceramics-and-neon intervention that weaves material and narrative line."
+    },
+    "marco-tirelli": {
+      "bio_it": "Artista italiano nato a Roma, Marco Tirelli è noto per una pittura di luce, ombra e geometria essenziale, sospesa tra apparizione e astrazione, vicina alla generazione della cosiddetta Nuova Scuola Romana.",
+      "bio_en": "An Italian artist born in Rome, Marco Tirelli is known for a painting of light, shadow and essential geometry, suspended between apparition and abstraction, close to the generation of the so-called New Roman School."
+    },
+    "david-tremlett-remo-salvadori": {
+      "bio_it": "«Untitled / Germoglio» nasce dalla collaborazione tra David Tremlett, autore di grandi wall drawing a pastello, e Remo Salvadori, artista di ricerca contemplativa: due linguaggi essenziali che si incontrano sulla stessa superficie.",
+      "bio_en": "«Untitled / Germoglio» comes from the collaboration between David Tremlett, author of large pastel wall drawings, and Remo Salvadori, an artist of contemplative research: two essential languages meeting on the same surface."
+    },
+    "emiliano-ponzi-dario-spinelli": {
+      "bio_it": "Breath nasce dalla collaborazione tra l'illustratore Emiliano Ponzi e Dario Spinelli: un progetto che porta l'immaginario dell'illustrazione nella scala pubblica della scultura cinetica.",
+      "bio_en": "Breath comes from the collaboration between the illustrator Emiliano Ponzi and Dario Spinelli: a project that brings the imagery of illustration into the public scale of kinetic sculpture."
+    },
+    "vittorio-corsini-laura-bosio": {
+      "bio_it": "Installazione sonora e scultorea nata dalla collaborazione tra Vittorio Corsini e la scrittrice Laura Bosio, che intreccia l'intervento dell'artista a un testo dell'autrice, dando voce alla parola nello spazio pubblico.",
+      "bio_en": "A sound-and-sculpture installation from the collaboration between Vittorio Corsini and the writer Laura Bosio, weaving the artist's intervention with a text by the author and giving voice to language in public space."
+    },
+    "vittorio-corsini-mauro-covacich": {
+      "bio_it": "Installazione sonora e scultorea nata dalla collaborazione tra Vittorio Corsini e lo scrittore Mauro Covacich: la voce e il testo dell'autore entrano nell'opera come materia condivisa dello spazio.",
+      "bio_en": "A sound-and-sculpture installation from the collaboration between Vittorio Corsini and the writer Mauro Covacich: the author's voice and text enter the work as a shared material of space."
+    },
+    "vittorio-corsini-maurizio-de-giovanni": {
+      "bio_it": "Installazione sonora e scultorea nata dalla collaborazione tra Vittorio Corsini e lo scrittore napoletano Maurizio de Giovanni, che porta la narrazione dell'autore nello spazio dell'opera.",
+      "bio_en": "A sound-and-sculpture installation from the collaboration between Vittorio Corsini and the Neapolitan writer Maurizio de Giovanni, bringing the author's storytelling into the space of the work."
+    },
+    "vittorio-corsini-romano-de-marco": {
+      "bio_it": "Installazione sonora e scultorea nata dalla collaborazione tra Vittorio Corsini e lo scrittore Romano De Marco: il testo dell'autore si fa voce e presenza nello spazio pubblico.",
+      "bio_en": "A sound-and-sculpture installation from the collaboration between Vittorio Corsini and the writer Romano De Marco: the author's text becomes voice and presence in public space."
+    },
+    "vittorio-corsini-ferruccio-parazzoli": {
+      "bio_it": "Installazione sonora e scultorea nata dalla collaborazione tra Vittorio Corsini e lo scrittore Ferruccio Parazzoli, che intreccia l'opera dell'artista a un testo dell'autore.",
+      "bio_en": "A sound-and-sculpture installation from the collaboration between Vittorio Corsini and the writer Ferruccio Parazzoli, weaving the artist's work with a text by the author."
+    },
+    "vittorio-corsini-laura-pugno": {
+      "bio_it": "Installazione sonora e scultorea nata dalla collaborazione tra Vittorio Corsini e Laura Pugno, poeta e narratrice: la parola poetica dell'autrice risuona nello spazio dell'opera.",
+      "bio_en": "A sound-and-sculpture installation from the collaboration between Vittorio Corsini and Laura Pugno, poet and novelist: the author's poetic word resonates in the space of the work."
+    },
+    "vittorio-corsini-fabio-genovesi": {
+      "bio_it": "Installazione sonora e cinematografica nata dalla collaborazione tra Vittorio Corsini e lo scrittore Fabio Genovesi: testo, voce e immagine si intrecciano nell'intervento dell'artista.",
+      "bio_en": "A sound-and-cinema installation from the collaboration between Vittorio Corsini and the writer Fabio Genovesi: text, voice and image interweave in the artist's intervention."
     }
   }
 }
