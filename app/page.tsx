@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { HomeHero } from "@/components/home-hero";
 import { StylizedMap, MapLegend } from "@/components/stylized-map";
 import { RouteCard } from "@/components/route-card";
+import { WorkPhoto } from "@/components/work-image";
 import { Overline, SectionHeading } from "@/components/ui";
 import { ProvisionalTag, FallbackNote } from "@/components/badges";
 import { works, flagshipWorks } from "@/lib/works";
@@ -25,6 +26,16 @@ export default function HomePage() {
   // Representative location per area for the "esplora per luogo" tiles.
   const repLocation = (areaName: string) =>
     locations.find((l) => l.area.toLowerCase().includes(areaName.toLowerCase()));
+
+  // Representative photo per area — prefer a flagship work with a real photo,
+  // else any work in the area with one. Never a demo tile (.svg).
+  const areaImage = (areaSlug: string) => {
+    const inArea = works.filter(
+      (w) => w.area === areaSlug && w.heroImage?.src.endsWith(".jpg")
+    );
+    const pick = inArea.find((w) => w.isFlagship) ?? inArea[0];
+    return pick?.heroImage?.src;
+  };
 
   return (
     <>
@@ -80,8 +91,18 @@ export default function HomePage() {
         {/* Featured work / new commission */}
         <section className="border-t border-ink/15">
           <div className="mx-auto grid max-w-[1400px] md:grid-cols-2">
-            <div className="relative hatch min-h-[280px] border-b border-ink/15 md:border-b-0 md:border-r">
-              <FallbackNote className="absolute bottom-3 left-4">{FALLBACK.image}</FallbackNote>
+            <div className="relative min-h-[280px] border-b border-ink/15 md:border-b-0 md:border-r">
+              {featured.heroImage ? (
+                <WorkPhoto
+                  image={featured.heroImage}
+                  alt={featured.title}
+                  className="absolute inset-0 h-full w-full"
+                />
+              ) : (
+                <div className="absolute inset-0 hatch">
+                  <FallbackNote className="absolute bottom-3 left-4">{FALLBACK.image}</FallbackNote>
+                </div>
+              )}
             </div>
             <div className="flex flex-col justify-center p-8 md:p-14">
               <Overline>Nuova commissione</Overline>
@@ -97,10 +118,16 @@ export default function HomePage() {
                   {featured.feature.story_lens}.
                 </p>
               ) : null}
-              <p className="mt-3 max-w-md text-[14px] text-ink-60">
-                <FallbackNote>{FALLBACK.story}</FallbackNote> — scheda in attesa di firma curatoriale,
-                posizione e diritti.
-              </p>
+              {featured.description ? (
+                <p className="mt-3 max-w-md text-[14px] leading-relaxed text-ink-80">
+                  {featured.description}
+                </p>
+              ) : (
+                <p className="mt-3 max-w-md text-[14px] text-ink-60">
+                  <FallbackNote>{FALLBACK.story}</FallbackNote> — scheda in attesa di firma curatoriale,
+                  posizione e diritti.
+                </p>
+              )}
               <Link
                 href={`/opere/${featured.slug}`}
                 className="mt-6 w-fit text-sm text-terracotta hover:underline focus-ring"
@@ -153,14 +180,35 @@ export default function HomePage() {
               {mapAreas.map((a) => {
                 const loc = repLocation(a.name);
                 const count = works.filter((w) => w.area === a.slug).length;
+                const img = areaImage(a.slug);
                 return (
                   <Link
                     key={a.slug}
                     href={loc ? `/luoghi/${loc.slug}` : "/esplora"}
-                    className="group relative flex h-28 flex-col justify-end overflow-hidden rounded-lg border border-ink hatch p-3 focus-ring"
+                    className={`group relative flex h-28 flex-col justify-end overflow-hidden rounded-lg border border-ink p-3 focus-ring ${
+                      img ? "" : "hatch"
+                    }`}
                   >
-                    <span className="relative font-serif text-[15px]">{a.name}</span>
-                    <span className="relative font-mono text-[10px] text-ink-60">{count} opere</span>
+                    {img && (
+                      <>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={img}
+                          alt=""
+                          loading="lazy"
+                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <span className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/25 to-transparent" />
+                      </>
+                    )}
+                    <span className={`relative font-serif text-[15px] ${img ? "text-paper" : ""}`}>
+                      {a.name}
+                    </span>
+                    <span
+                      className={`relative font-mono text-[10px] ${img ? "text-paper/80" : "text-ink-60"}`}
+                    >
+                      {count} opere
+                    </span>
                   </Link>
                 );
               })}
