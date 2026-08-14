@@ -15,11 +15,64 @@ import { workMapCenter } from "@/lib/maps";
 
 type Pt = { x: number; y: number };
 
+// ── Deterministic terrain (stable across SSR/hydration — no Math.random) ──
+function hashSeed(str: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+function mulberry32(seed: number): () => number {
+  let a = seed;
+  return () => {
+    a |= 0;
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/** An organic closed loop (a contour ring) around a centre, undulating via a
+ *  small sum of sines so it reads like a survey contour, not an ellipse. */
+function contourRing(cx: number, cy: number, r: number, ph: number[], amp: number): string {
+  const N = 26;
+  const pts: Pt[] = [];
+  for (let i = 0; i < N; i++) {
+    const a = (i / N) * Math.PI * 2;
+    const wob =
+      1 +
+      amp * (Math.sin(a * 3 + ph[0]) * 0.6 + Math.sin(a * 5 + ph[1]) * 0.3 + Math.sin(a * 2 + ph[2]) * 0.4);
+    // Slightly elliptical (landscape) so the terrain feels wide.
+    pts.push({ x: cx + Math.cos(a) * r * 1.28 * wob, y: cy + Math.sin(a) * r * 0.9 * wob });
+  }
+  // Closed Catmull-Rom → bezier.
+  let d = `M${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+  for (let i = 0; i < N; i++) {
+    const p0 = pts[(i - 1 + N) % N];
+    const p1 = pts[i];
+    const p2 = pts[(i + 1) % N];
+    const p3 = pts[(i + 2) % N];
+    const c1x = p1.x + (p2.x - p0.x) / 6;
+    const c1y = p1.y + (p2.y - p0.y) / 6;
+    const c2x = p2.x - (p3.x - p1.x) / 6;
+    const c2y = p2.y - (p3.y - p1.y) / 6;
+    d += ` C${c1x.toFixed(1)} ${c1y.toFixed(1)}, ${c2x.toFixed(1)} ${c2y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+  }
+  return d + "Z";
+}
+
 const PALETTE = {
   paper: "#efe9db",
   paperDeep: "#e6dfcd",
   ink: "#34322d",
-  contour: "#d8cfb8",
+  contour: "#c3b795",
+  contourIndex: "#a9997097".slice(0, 7), // #a99970
+  // Hypsometric tints, valley → summit (muted, warm).
+  tint: ["#e2ddc9", "#e7e1cd", "#ece5d2", "#f0ead7", "#f4eedd"],
+  tintNight: ["#2f3648", "#353d51", "#3b4459", "#414b62", "#48536b"],
   water: "#bcccce",
   waterLine: "#9fb3b6",
   road: "#ded4bd",
@@ -125,17 +178,28 @@ export function RouteMapArt({
   const accent = night ? PALETTE.routeNight : PALETTE.route;
   const paper = night ? PALETTE.nightPaper : PALETTE.paper;
   const paper2 = night ? PALETTE.night : PALETTE.paperDeep;
-  const contour = night ? PALETTE.nightContour : PALETTE.contour;
   const ink = night ? PALETTE.nightInk : PALETTE.ink;
 
   const medallion = hero ? 15 : 11;
   const fontStop = hero ? 15 : 11;
 
-  // Deterministic contour "hills" — nested loops around two centres.
-  const hills = [
-    { cx: W * 0.32, cy: H * 0.4, r: 1 },
-    { cx: W * 0.68, cy: H * 0.62, r: 0.8 },
-  ];
+  // Deterministic relief terrain (seeded per route → stable SSR/hydration).
+  const rng = mulberry32(hashSeed(uid));
+  const peakCount = 3 + Math.floor(rng() * 2);
+  const hills = Array.from({ length: peakCount }, () => {
+    const base = 26 + rng() * 22;
+    const levels = 4 + Math.floor(rng() * 3);
+    return {
+      cx: W * (0.14 + rng() * 0.72),
+      cy: H * (0.2 + rng() * 0.58),
+      levels,
+      maxR: base * 2.3,
+      step: (base * 1.5) / levels,
+      ph: [rng() * 6.283, rng() * 6.283, rng() * 6.283],
+      amp: 0.05 + rng() * 0.06,
+    };
+  });
+  const tintRamp = night ? PALETTE.tintNight : PALETTE.tint;
 
   return (
     <svg
@@ -154,24 +218,68 @@ export function RouteMapArt({
           <stop offset="60%" stopColor="#000" stopOpacity="0" />
           <stop offset="100%" stopColor="#000" stopOpacity={night ? 0.32 : 0.1} />
         </radialGradient>
+        {/* Hillshade — light from the north-west, shadow to the south-east. */}
+        <radialGradient id={`lit-${uid}`} cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#fff" stopOpacity={night ? 0.1 : 0.5} />
+          <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+        </radialGradient>
+        <radialGradient id={`shd-${uid}`} cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor={ink} stopOpacity={night ? 0.3 : 0.14} />
+          <stop offset="100%" stopColor={ink} stopOpacity="0" />
+        </radialGradient>
       </defs>
 
-      {/* Paper */}
-      <rect width={W} height={H} fill={paper} />
+      {/* Valley base tone */}
+      <rect width={W} height={H} fill={tintRamp[0]} />
 
-      {/* Contour hills */}
-      <g fill="none" stroke={contour} strokeWidth={1.4} opacity={0.85}>
+      {/* Relief — hypsometric bands (valley → summit gets lighter/warmer) */}
+      <g>
         {hills.map((hl, hi) =>
-          [0, 1, 2, 3].map((ring) => {
-            const rr = (28 + ring * 24) * hl.r;
+          Array.from({ length: hl.levels }, (_, e) => (
+            <path
+              key={`b-${hi}-${e}`}
+              d={contourRing(hl.cx, hl.cy, hl.maxR - e * hl.step, hl.ph, hl.amp)}
+              fill={tintRamp[Math.min(e, tintRamp.length - 1)]}
+              opacity={0.92}
+            />
+          ))
+        )}
+      </g>
+
+      {/* Relief — hillshade (soft 3-D from a NW light) */}
+      <g>
+        {hills.map((hl, hi) => (
+          <g key={`s-${hi}`}>
+            <ellipse
+              cx={hl.cx + hl.maxR * 0.26}
+              cy={hl.cy + hl.maxR * 0.3}
+              rx={hl.maxR * 1.35}
+              ry={hl.maxR * 0.98}
+              fill={`url(#shd-${uid})`}
+            />
+            <ellipse
+              cx={hl.cx - hl.maxR * 0.2}
+              cy={hl.cy - hl.maxR * 0.22}
+              rx={hl.maxR * 1.15}
+              ry={hl.maxR * 0.82}
+              fill={`url(#lit-${uid})`}
+            />
+          </g>
+        ))}
+      </g>
+
+      {/* Relief — contour lines (index contours heavier) */}
+      <g fill="none">
+        {hills.map((hl, hi) =>
+          Array.from({ length: hl.levels }, (_, e) => {
+            const idx = e % 2 === 0;
             return (
-              <ellipse
-                key={`${hi}-${ring}`}
-                cx={hl.cx}
-                cy={hl.cy}
-                rx={rr * 1.35}
-                ry={rr}
-                transform={`rotate(${hi ? -12 : 16} ${hl.cx} ${hl.cy})`}
+              <path
+                key={`c-${hi}-${e}`}
+                d={contourRing(hl.cx, hl.cy, hl.maxR - e * hl.step, hl.ph, hl.amp)}
+                stroke={idx ? PALETTE.contourIndex : PALETTE.contour}
+                strokeWidth={idx ? 1.1 : 0.7}
+                opacity={night ? 0.5 : 0.85}
               />
             );
           })
