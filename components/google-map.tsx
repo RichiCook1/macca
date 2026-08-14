@@ -99,7 +99,7 @@ export function GoogleTerritoryMap({
 
         // Focused place — an "approximate area" disc + a prominent marker.
         if (focus) {
-          new google.maps.Circle({
+          const circle = new google.maps.Circle({
             map,
             center: { lat: focus.lat, lng: focus.lng },
             radius: focus.radiusM ?? 130,
@@ -109,6 +109,10 @@ export function GoogleTerritoryMap({
             fillColor: "#c0573a",
             fillOpacity: 0.12,
           });
+          // Frame the area with breathing room (extra room at the bottom for
+          // the overlaid location card) so the disc never fills the viewport.
+          const b = circle.getBounds();
+          if (b) map.fitBounds(b, { top: 34, right: 34, bottom: 96, left: 34 });
           const fm = new google.maps.Marker({
             map,
             position: { lat: focus.lat, lng: focus.lng },

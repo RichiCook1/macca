@@ -221,34 +221,29 @@ export default async function ArtworkPage({ params }: { params: Promise<{ slug: 
                 footnote={false}
                 className="absolute inset-0"
               />
-              <div className="pointer-events-none absolute inset-x-5 bottom-5 md:inset-x-8">
-                <div className="pointer-events-auto rounded-xl border border-ink bg-paper p-4 shadow-card">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <div className="text-[14px]">{work.place}</div>
-                      <div className="mt-0.5 text-[12px] text-ink-60">
-                        {confidenceMeta[work.mapConfidence].label} · {work.mapStatus}
-                      </div>
-                    </div>
-                    <div className="flex shrink-0 flex-col gap-2">
-                      <Link
-                        href={`/esplora?opera=${work.slug}`}
-                        className="inline-flex items-center justify-center gap-2 rounded-lg border border-ink bg-terracotta px-4 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-terracotta-dark focus-ring"
-                      >
-                        Vedi sulla mappa
-                      </Link>
-                      <a
-                        href={mapsDirectionsUrl(workQuery(work))}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 rounded-lg border border-ink bg-paper px-4 py-2.5 text-sm font-medium transition-colors hover:bg-ink/[0.04] focus-ring"
-                      >
-                        Indicazioni ↗
-                      </a>
+              <div className="pointer-events-none absolute inset-x-3 bottom-3 md:inset-x-8 md:bottom-5">
+                <div className="pointer-events-auto rounded-lg border border-ink bg-paper/95 p-2.5 shadow-card backdrop-blur md:rounded-xl md:p-4">
+                  <div className="min-w-0">
+                    <div className="truncate text-[13px] font-medium md:text-[14px]">{work.place}</div>
+                    <div className="mt-0.5 truncate text-[11px] text-ink-60 md:text-[12px]">
+                      {confidenceMeta[work.mapConfidence].label} · posizione in verifica
                     </div>
                   </div>
-                  <div className="mt-3 border-t border-hairline pt-2">
-                    <FallbackNote>{FALLBACK.location}</FallbackNote>
+                  <div className="mt-2.5 flex gap-2">
+                    <Link
+                      href={`/esplora?opera=${work.slug}`}
+                      className="inline-flex flex-1 items-center justify-center rounded-md border border-ink bg-terracotta px-3 py-1.5 text-[12px] font-medium text-paper transition-colors hover:bg-terracotta-dark focus-ring md:text-[13px]"
+                    >
+                      Vedi sulla mappa
+                    </Link>
+                    <a
+                      href={mapsDirectionsUrl(workQuery(work))}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex shrink-0 items-center justify-center rounded-md border border-ink bg-paper px-3 py-1.5 text-[12px] font-medium transition-colors hover:bg-ink/[0.04] focus-ring md:text-[13px]"
+                    >
+                      Indicazioni ↗
+                    </a>
                   </div>
                 </div>
               </div>
