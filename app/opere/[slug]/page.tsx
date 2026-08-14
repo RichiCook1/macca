@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { StylizedMap } from "@/components/stylized-map";
+import { GoogleTerritoryMap } from "@/components/google-map";
 import { SaveButton } from "@/components/save-button";
 import {
   AccessBadge,
@@ -16,7 +16,7 @@ import { Overline, Button } from "@/components/ui";
 import { ShareButton } from "@/components/share-button";
 import { WorkPhoto } from "@/components/work-image";
 import { works, workBySlug, worksByArea, artistBySlug, FALLBACK } from "@/lib/collection";
-import { mapsDirectionsUrl, workQuery } from "@/lib/maps";
+import { mapsDirectionsUrl, workQuery, workMapCenter } from "@/lib/maps";
 import { routeBySlug } from "@/lib/routes-data";
 import { confidenceMeta } from "@/lib/constants";
 
@@ -206,7 +206,7 @@ export default async function ArtworkPage({ params }: { params: Promise<{ slug: 
 
             {/* Map & arrive — respects map_status, never a false pin */}
             <div className="relative min-h-[320px] md:min-h-[420px]">
-              <StylizedMap works={[work]} selectedSlug={work.slug} showLabels={false} className="absolute inset-0" />
+              <GoogleTerritoryMap center={workMapCenter(work)} zoom={15} footnote={false} className="absolute inset-0" />
               <div className="pointer-events-none absolute inset-x-5 bottom-5 md:inset-x-8">
                 <div className="pointer-events-auto rounded-xl border border-ink bg-paper p-4 shadow-card">
                   <div className="flex items-start justify-between gap-4">

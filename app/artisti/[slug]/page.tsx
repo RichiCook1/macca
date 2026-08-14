@@ -2,7 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { StylizedMap } from "@/components/stylized-map";
+import { GoogleTerritoryMap } from "@/components/google-map";
+import { workMapCenter } from "@/lib/maps";
 import { WorkCard } from "@/components/work-card";
 import { FallbackNote } from "@/components/badges";
 import { Overline } from "@/components/ui";
@@ -80,9 +81,10 @@ export default async function ArtistPage({
         <section className="border-b border-ink/80">
           <div className="mx-auto grid max-w-[1400px] md:grid-cols-[1.15fr_0.85fr]">
             <div className="relative min-h-[320px] border-b border-ink/15 md:min-h-[420px] md:border-b-0 md:border-r md:border-ink/80">
-              <StylizedMap
-                works={artistWorks}
-                showLabels={false}
+              <GoogleTerritoryMap
+                center={artistWorks[0] ? workMapCenter(artistWorks[0]) : undefined}
+                zoom={13}
+                footnote={false}
                 className="absolute inset-0"
               />
             </div>

@@ -2,7 +2,8 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { HomeHero } from "@/components/home-hero";
-import { StylizedMap, MapLegend } from "@/components/stylized-map";
+import { MapLegend } from "@/components/stylized-map";
+import { GoogleTerritoryMap } from "@/components/google-map";
 import { RouteCard } from "@/components/route-card";
 import { WorkPhoto } from "@/components/work-image";
 import { Overline, SectionHeading } from "@/components/ui";
@@ -61,10 +62,8 @@ export default function HomePage() {
                 <MapLegend className="inline-block" />
               </div>
             </div>
-            <div className="h-[340px] overflow-hidden rounded-xl border border-ink/80 md:h-[420px]">
-              <Link href="/esplora" className="block h-full focus-ring">
-                <StylizedMap works={works} />
-              </Link>
+            <div className="relative h-[340px] overflow-hidden rounded-xl border border-ink/80 md:h-[420px]">
+              <GoogleTerritoryMap zoom={13} footnote={false} className="absolute inset-0" />
             </div>
           </div>
         </section>

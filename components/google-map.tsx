@@ -48,13 +48,25 @@ export function GoogleTerritoryMap({
   workPins = [],
   className,
   zoom = 13,
+  center = PECCIOLI_CENTER,
+  satelliteToggle = true,
+  footnote = true,
 }: {
   workPins?: WorkPin[];
   className?: string;
   zoom?: number;
+  /** Map centre — defaults to Peccioli. */
+  center?: { lat: number; lng: number };
+  /** Show the in-map Mappa/Satellite switch. */
+  satelliteToggle?: boolean;
+  /** Show the "pin = verified coordinates" footnote (hidden on tight previews). */
+  footnote?: boolean;
 }) {
   const holder = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<google.maps.Map | null>(null);
   const [state, setState] = useState<LoadState>(MAPS_API_KEY ? "loading" : "idle");
+  const [mapType, setMapType] = useState<"roadmap" | "hybrid">("roadmap");
+  const { lat, lng } = center;
 
   useEffect(() => {
     if (!MAPS_API_KEY || !holder.current) return;
@@ -64,14 +76,16 @@ export function GoogleTerritoryMap({
       .then(() => {
         if (cancelled || !holder.current || !window.google?.maps) return;
         const map = new google.maps.Map(holder.current, {
-          center: PECCIOLI_CENTER,
+          center: { lat, lng },
           zoom,
-          styles: MACCA_MAP_STYLE,
+          mapTypeId: mapType,
+          styles: mapType === "roadmap" ? MACCA_MAP_STYLE : [],
           disableDefaultUI: true,
           zoomControl: true,
           gestureHandling: "cooperative",
           backgroundColor: "#ece8dd",
         });
+        mapRef.current = map;
 
         const info = new google.maps.InfoWindow();
 
@@ -127,7 +141,17 @@ export function GoogleTerritoryMap({
     return () => {
       cancelled = true;
     };
-  }, [workPins, zoom]);
+    // mapType is applied by the effect below without rebuilding the map.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lat, lng, zoom, workPins]);
+
+  // Switch roadmap ⇄ satellite without recreating the map (markers persist).
+  useEffect(() => {
+    const m = mapRef.current;
+    if (!m) return;
+    m.setMapTypeId(mapType);
+    m.setOptions({ styles: mapType === "roadmap" ? MACCA_MAP_STYLE : [] });
+  }, [mapType, state]);
 
   if (!MAPS_API_KEY || state === "error") {
     return (
@@ -173,9 +197,29 @@ export function GoogleTerritoryMap({
           <span className="font-mono text-[11px] text-ink-60">Caricamento mappa…</span>
         </div>
       )}
-      <div className="pointer-events-none absolute bottom-2 left-2 rounded-md bg-paper/90 px-2 py-1 font-mono text-[9px] text-ink-60">
-        pin = coordinate verificate · opere in verifica sulla mappa stilizzata
-      </div>
+      {satelliteToggle && state === "ready" && (
+        <div className="absolute right-2 top-2 z-10 flex overflow-hidden rounded-full border border-ink bg-paper text-[11px] shadow-card">
+          {(["roadmap", "hybrid"] as const).map((t) => (
+            <button
+              key={t}
+              type="button"
+              onClick={() => setMapType(t)}
+              aria-pressed={mapType === t}
+              className={clsx(
+                "px-3 py-1 transition-colors focus-ring",
+                mapType === t ? "bg-ink text-paper" : "text-ink-80 hover:text-ink"
+              )}
+            >
+              {t === "hybrid" ? "Satellite" : "Mappa"}
+            </button>
+          ))}
+        </div>
+      )}
+      {footnote && (
+        <div className="pointer-events-none absolute bottom-2 left-2 rounded-md bg-paper/90 px-2 py-1 font-mono text-[9px] text-ink-60">
+          pin = coordinate verificate · opere in verifica sulla mappa stilizzata
+        </div>
+      )}
     </div>
   );
 }

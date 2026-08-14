@@ -39,7 +39,7 @@ export function ExploreClient() {
   const [access, setAccess] = useState<Set<AccessClass>>(new Set());
   const [showFilters, setShowFilters] = useState(false);
   const [mobileView, setMobileView] = useState<"map" | "list">("map");
-  const [mapMode, setMapMode] = useState<"stilizzata" | "reale">("stilizzata");
+  const [mapMode, setMapMode] = useState<"stilizzata" | "reale">("reale");
   const filterDrawerRef = useModalBehavior(showFilters, () => setShowFilters(false));
 
   const toggle = <T,>(set: Set<T>, val: T, setter: (s: Set<T>) => void) => {

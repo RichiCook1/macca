@@ -5,8 +5,8 @@
 // the street addresses in the seed (address_or_site + hamlet), which asserts
 // nothing about exact position on our side.
 
-import type { Work } from "./collection";
-import { locations } from "./collection";
+import type { Work, AreaSlug } from "./collection";
+import { locations, locationForArea } from "./collection";
 
 /** Territory centre — Peccioli (seed: loc-breath-external, pending confirmation). */
 export const PECCIOLI_CENTER = { lat: 43.5479523, lng: 10.7207695 };
@@ -42,6 +42,27 @@ export function mapsRouteUrl(queries: string[]): string {
     ? `&waypoints=${encodeURIComponent(waypoints.join("|"))}`
     : "";
   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}${wp}&travelmode=walking`;
+}
+
+/**
+ * Best-effort map centre for a single work, from real location coordinates only
+ * (never invented): match a location named in the work's site text, else fall
+ * back to the work's area anchor, else the territory centre. Used to centre the
+ * Google preview on the relevant place — the pins themselves stay site-level.
+ */
+export function workMapCenter(work: Pick<Work, "place" | "area">): { lat: number; lng: number } {
+  const place = (work.place || "").toLowerCase();
+  const byName = locations.find(
+    (l) =>
+      l.lat != null &&
+      l.lon != null &&
+      (place.includes(l.name.toLowerCase()) ||
+        (l.address && place.includes(l.address.toLowerCase().split(",")[0].trim())))
+  );
+  if (byName) return { lat: byName.lat as number, lng: byName.lon as number };
+  const area = locationForArea(work.area as AreaSlug);
+  if (area && area.lat != null && area.lon != null) return { lat: area.lat, lng: area.lon };
+  return PECCIOLI_CENTER;
 }
 
 /** Only records with real coordinates ever become pins. */

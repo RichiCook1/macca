@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { StylizedMap, MapLegend } from "@/components/stylized-map";
+import { GoogleTerritoryMap } from "@/components/google-map";
 import { WorkCard } from "@/components/work-card";
 import { RouteCard } from "@/components/route-card";
 import { FallbackNote } from "@/components/badges";
@@ -71,12 +71,16 @@ export default async function LocationPage({
         {/* Broad map focused on this area */}
         <section className="border-b border-ink/80">
           <div className="relative h-[360px] md:h-[480px]">
-            <StylizedMap
-              works={areaWorks}
-              showLabels={false}
+            <GoogleTerritoryMap
+              center={
+                location.lat != null && location.lon != null
+                  ? { lat: location.lat, lng: location.lon }
+                  : undefined
+              }
+              zoom={15}
+              footnote={false}
               className="absolute inset-0"
             />
-            <MapLegend className="absolute bottom-4 left-4 hidden md:block" />
           </div>
         </section>
 
