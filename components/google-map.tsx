@@ -51,22 +51,30 @@ export function GoogleTerritoryMap({
   center = PECCIOLI_CENTER,
   satelliteToggle = true,
   footnote = true,
+  focus,
+  sitePins = true,
 }: {
   workPins?: WorkPin[];
   className?: string;
   zoom?: number;
-  /** Map centre — defaults to Peccioli. */
+  /** Map centre — defaults to Peccioli (overridden by `focus` when present). */
   center?: { lat: number; lng: number };
   /** Show the in-map Mappa/Satellite switch. */
   satelliteToggle?: boolean;
   /** Show the "pin = verified coordinates" footnote (hidden on tight previews). */
   footnote?: boolean;
+  /** Highlight a single place: a prominent marker + an honest "approximate
+   *  area" circle (radiusM) sized to the location's confidence. */
+  focus?: { lat: number; lng: number; title: string; radiusM?: number };
+  /** Draw the 17 verified site anchors. Off when focusing a single work. */
+  sitePins?: boolean;
 }) {
   const holder = useRef<HTMLDivElement>(null);
   const mapRef = useRef<google.maps.Map | null>(null);
   const [state, setState] = useState<LoadState>(MAPS_API_KEY ? "loading" : "idle");
   const [mapType, setMapType] = useState<"roadmap" | "hybrid">("roadmap");
-  const { lat, lng } = center;
+  const lat = focus?.lat ?? center.lat;
+  const lng = focus?.lng ?? center.lng;
 
   useEffect(() => {
     if (!MAPS_API_KEY || !holder.current) return;
@@ -89,8 +97,42 @@ export function GoogleTerritoryMap({
 
         const info = new google.maps.InfoWindow();
 
+        // Focused place — an "approximate area" disc + a prominent marker.
+        if (focus) {
+          new google.maps.Circle({
+            map,
+            center: { lat: focus.lat, lng: focus.lng },
+            radius: focus.radiusM ?? 130,
+            strokeColor: "#c0573a",
+            strokeOpacity: 0.5,
+            strokeWeight: 1.5,
+            fillColor: "#c0573a",
+            fillOpacity: 0.12,
+          });
+          const fm = new google.maps.Marker({
+            map,
+            position: { lat: focus.lat, lng: focus.lng },
+            title: focus.title,
+            zIndex: 999,
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              scale: 8,
+              fillColor: "#c0573a",
+              fillOpacity: 1,
+              strokeColor: "#f6f4ee",
+              strokeWeight: 3,
+            },
+          });
+          fm.addListener("click", () => {
+            info.setContent(
+              `<div style="font-family:system-ui;max-width:230px"><strong>${focus.title}</strong><br/><span style="font-size:11px;color:#7a7669">posizione a livello di area · in verifica</span></div>`
+            );
+            info.open({ map, anchor: fm });
+          });
+        }
+
         // Verified site anchors from the seed (never per-work false pins).
-        for (const p of verifiedPins()) {
+        for (const p of sitePins ? verifiedPins() : []) {
           const m = new google.maps.Marker({
             map,
             position: { lat: p.lat, lng: p.lng },
@@ -143,7 +185,7 @@ export function GoogleTerritoryMap({
     };
     // mapType is applied by the effect below without rebuilding the map.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lat, lng, zoom, workPins]);
+  }, [lat, lng, zoom, workPins, sitePins, focus?.title, focus?.radiusM]);
 
   // Switch roadmap ⇄ satellite without recreating the map (markers persist).
   useEffect(() => {

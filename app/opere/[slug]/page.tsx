@@ -206,7 +206,21 @@ export default async function ArtworkPage({ params }: { params: Promise<{ slug: 
 
             {/* Map & arrive — respects map_status, never a false pin */}
             <div className="relative min-h-[320px] md:min-h-[420px]">
-              <GoogleTerritoryMap center={workMapCenter(work)} zoom={15} footnote={false} className="absolute inset-0" />
+              <GoogleTerritoryMap
+                focus={{
+                  ...workMapCenter(work),
+                  title: work.place,
+                  radiusM:
+                    ({ exact: 25, site: 60, address: 120, cluster: 200, area: 350, external: 250 } as Record<
+                      string,
+                      number
+                    >)[work.mapConfidence] ?? 150,
+                }}
+                sitePins={false}
+                zoom={16}
+                footnote={false}
+                className="absolute inset-0"
+              />
               <div className="pointer-events-none absolute inset-x-5 bottom-5 md:inset-x-8">
                 <div className="pointer-events-auto rounded-xl border border-ink bg-paper p-4 shadow-card">
                   <div className="flex items-start justify-between gap-4">
