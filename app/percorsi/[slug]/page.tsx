@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { StylizedMap } from "@/components/stylized-map";
+import { RouteMapArt } from "@/components/route-map";
 import { AccessBadge, NightTag, FallbackNote } from "@/components/badges";
 import { SaveButton } from "@/components/save-button";
 import { ShareButton } from "@/components/share-button";
@@ -14,7 +14,6 @@ import {
   workBySlug,
   artistBySlug,
 } from "@/lib/collection";
-import type { MapPoint } from "@/lib/types";
 import { mapsRouteUrl, workQuery } from "@/lib/maps";
 
 export function generateStaticParams() {
@@ -37,13 +36,6 @@ export default async function RouteDetailPage({
     const artist = work ? artistBySlug(work.artistSlug) : undefined;
     return { stop, work, artist };
   });
-
-  // Only resolvable stops are drawn as map markers — but each carries its
-  // number from the FULL stop list, so map numbering always matches the
-  // "Tappe in ordine" list even when cluster/optional stops don't resolve.
-  const routeStops: (MapPoint & { n: number })[] = stops
-    .map(({ work }, i) => (work ? { ...work.point, n: i + 1 } : null))
-    .filter((p): p is MapPoint & { n: number } => Boolean(p));
 
   const night = routeIsNight(route);
   const booking = routeIsBooking(route);
@@ -72,13 +64,11 @@ export default async function RouteDetailPage({
           </div>
           <div className="mx-auto mt-4 max-w-[1400px] px-5 md:px-8">
             <div className="h-[300px] overflow-hidden rounded-xl border border-ink/80 md:h-[420px]">
-              <StylizedMap
-                trace={route.trace}
-                routeStops={routeStops}
-                night={night}
-                showLabels={false}
-              />
+              <RouteMapArt route={route} variant="hero" night={night} />
             </div>
+            <p className="mt-2 font-mono text-[10px] text-ink-40">
+              Mappa illustrata dimostrativa · la cartografia definitiva è in preparazione
+            </p>
           </div>
         </section>
 
