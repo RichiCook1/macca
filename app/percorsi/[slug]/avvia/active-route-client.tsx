@@ -160,6 +160,40 @@ export function ActiveRouteClient({
         </StylizedMap>
       </div>
 
+      {/* CTA — directly under the map */}
+      <div className="flex shrink-0 border-b border-ink/80">
+        {completed ? (
+          <div className="flex h-[54px] flex-1 items-center justify-center gap-3 bg-ink text-[15px] text-paper">
+            Percorso completato ✓
+            <Link
+              href={`/percorsi/${routeSlug}`}
+              className="text-[13px] text-paper/80 underline underline-offset-2 hover:text-paper focus-ring"
+            >
+              Torna al percorso
+            </Link>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={advance}
+            className="flex h-[54px] flex-1 items-center justify-center bg-terracotta text-[15px] text-paper transition-colors hover:bg-terracotta-dark focus-ring"
+          >
+            {idx >= total - 1 ? "Concludi il percorso ✓" : "Continua il percorso →"}
+          </button>
+        )}
+        {gmapsUrl && (
+          <a
+            href={gmapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Apri il percorso in Google Maps"
+            className="flex h-[54px] w-[92px] items-center justify-center border-l border-ink bg-paper font-mono text-[10px] uppercase tracking-overline text-ink transition-colors hover:bg-ink/[0.04] focus-ring"
+          >
+            Maps ↗
+          </a>
+        )}
+      </div>
+
       {/* Body */}
       <div className="flex flex-1 flex-col gap-3 overflow-y-auto px-4 py-3">
         {/* Status */}
@@ -282,39 +316,6 @@ export function ActiveRouteClient({
         </ul>
       </div>
 
-      {/* Sticky bottom CTA — real walking directions when the stops resolve */}
-      <div className="sticky bottom-0 flex border-t border-ink/80">
-        {completed ? (
-          <div className="flex h-[54px] flex-1 items-center justify-center gap-3 bg-ink text-[15px] text-paper">
-            Percorso completato ✓
-            <Link
-              href={`/percorsi/${routeSlug}`}
-              className="text-[13px] text-paper/80 underline underline-offset-2 hover:text-paper focus-ring"
-            >
-              Torna al percorso
-            </Link>
-          </div>
-        ) : (
-          <button
-            type="button"
-            onClick={advance}
-            className="flex h-[54px] flex-1 items-center justify-center bg-terracotta text-[15px] text-paper transition-colors hover:bg-terracotta-dark focus-ring"
-          >
-            {idx >= total - 1 ? "Concludi il percorso ✓" : "Continua il percorso →"}
-          </button>
-        )}
-        {gmapsUrl && (
-          <a
-            href={gmapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Apri il percorso in Google Maps"
-            className="flex h-[54px] w-[92px] items-center justify-center border-l border-ink bg-paper font-mono text-[10px] uppercase tracking-overline text-ink transition-colors hover:bg-ink/[0.04] focus-ring"
-          >
-            Maps ↗
-          </a>
-        )}
-      </div>
     </div>
   );
 }

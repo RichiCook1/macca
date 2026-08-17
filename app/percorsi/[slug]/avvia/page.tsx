@@ -36,8 +36,8 @@ export default async function AvviaPercorsoPage({
     };
   });
 
-  // Start "in progress" at the second stop (or the first if it's a single-stop route).
-  const currentIndex = stops.length > 1 ? 1 : 0;
+  // Start from the first stop.
+  const currentIndex = 0;
 
   const modeLabel = `${route.type} · ${route.duration} · ${route.stops.length} tappe`;
 
