@@ -184,7 +184,11 @@ export function ExploreClient() {
 
       {/* ===== Mobile: full-screen map + bottom sheet ===== */}
       <div className="relative h-full w-full lg:hidden">
-        <StylizedMap works={filtered} selectedSlug={selected} onSelect={setSelected} />
+        <GoogleTerritoryMap
+          className="absolute inset-0"
+          footnote={false}
+          toggleClassName="right-3 top-[112px]"
+        />
 
         <div className="absolute inset-x-0 top-0 z-30 flex items-center gap-2 p-3">
           <input

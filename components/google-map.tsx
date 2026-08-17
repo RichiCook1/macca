@@ -50,6 +50,7 @@ export function GoogleTerritoryMap({
   zoom = 13,
   center = PECCIOLI_CENTER,
   satelliteToggle = true,
+  toggleClassName,
   footnote = true,
   focus,
   sitePins = true,
@@ -61,6 +62,8 @@ export function GoogleTerritoryMap({
   center?: { lat: number; lng: number };
   /** Show the in-map Mappa/Satellite switch. */
   satelliteToggle?: boolean;
+  /** Position override for the Mappa/Satellite switch (default top-right). */
+  toggleClassName?: string;
   /** Show the "pin = verified coordinates" footnote (hidden on tight previews). */
   footnote?: boolean;
   /** Highlight a single place: a prominent marker + an honest "approximate
@@ -244,7 +247,12 @@ export function GoogleTerritoryMap({
         </div>
       )}
       {satelliteToggle && state === "ready" && (
-        <div className="absolute right-2 top-2 z-10 flex overflow-hidden rounded-full border border-ink bg-paper text-[11px] shadow-card">
+        <div
+          className={clsx(
+            "absolute z-10 flex overflow-hidden rounded-full border border-ink bg-paper text-[11px] shadow-card",
+            toggleClassName ?? "right-2 top-2"
+          )}
+        >
           {(["roadmap", "hybrid"] as const).map((t) => (
             <button
               key={t}
