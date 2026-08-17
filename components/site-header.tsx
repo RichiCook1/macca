@@ -12,6 +12,7 @@ const nav = [
   { href: "/esplora", key: "nav.explore" as const },
   { href: "/collezione", key: "nav.collection" as const },
   { href: "/percorsi", key: "nav.routes" as const },
+  { href: "/itinerario", key: "nav.itinerary" as const },
   { href: "/timeline", key: "nav.timeline" as const },
   { href: "/visita", key: "nav.visit" as const },
   { href: "/info", key: "nav.about" as const },

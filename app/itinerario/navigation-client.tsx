@@ -119,9 +119,9 @@ export function NavigationClient({ stops, onExit }: { stops: Work[]; onExit: () 
           <button
             onClick={() => setTargetIdx((i) => Math.max(0, i - 1))}
             disabled={targetIdx === 0}
-            className="rounded-lg border border-ink bg-paper px-4 py-2.5 text-sm disabled:opacity-40 focus-ring"
+            className="shrink-0 rounded-lg border border-ink bg-paper px-3.5 py-2.5 text-sm disabled:opacity-40 focus-ring"
           >
-            ‹ Prec.
+            ‹ Tappa precedente
           </button>
           {isLast ? (
             <button

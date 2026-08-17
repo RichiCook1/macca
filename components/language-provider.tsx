@@ -14,6 +14,7 @@ const dict = {
   "nav.routes": { it: "Percorsi", en: "Routes" },
   "nav.timeline": { it: "Timeline", en: "Timeline" },
   "nav.visit": { it: "Visita", en: "Visit" },
+  "nav.itinerary": { it: "Itinerario", en: "Itinerary" },
   "nav.about": { it: "MACCA", en: "MACCA" },
   "cta.openMap": { it: "Apri mappa", en: "Open map" },
   "cta.exploreMap": { it: "Esplora la mappa", en: "Explore the map" },

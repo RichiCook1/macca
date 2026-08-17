@@ -102,6 +102,8 @@ export function GoogleTerritoryMap({
   const infoRef = useRef<google.maps.InfoWindow | null>(null);
   const markersRef = useRef<(google.maps.Marker | google.maps.Polyline)[]>([]);
   const userMarkerRef = useRef<google.maps.Marker | null>(null);
+  const routePolyRef = useRef<google.maps.Polyline | null>(null);
+  const dirServiceRef = useRef<google.maps.DirectionsService | null>(null);
   const [state, setState] = useState<LoadState>(MAPS_API_KEY ? "loading" : "idle");
   const [mapType, setMapType] = useState<"roadmap" | "hybrid">("roadmap");
   const onSelectRef = useRef(onSelectPin);
@@ -200,18 +202,6 @@ export function GoogleTerritoryMap({
     for (const m of markersRef.current) m.setMap(null);
     markersRef.current = [];
 
-    // Walking route line (drawn under the pins).
-    if (routeLine && routeLine.length >= 2) {
-      const line = new google.maps.Polyline({
-        map,
-        path: routeLine,
-        strokeColor: "#c0573a",
-        strokeOpacity: 0.9,
-        strokeWeight: 4,
-      });
-      markersRef.current.push(line);
-    }
-
     // Luoghi — secondary, hollow, so works read as the primary pins.
     if (sitePins) {
       for (const p of verifiedPins()) {
@@ -283,7 +273,61 @@ export function GoogleTerritoryMap({
       markersRef.current.push(m);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state, pinKey, sitePins, selectedId, routeKey]);
+  }, [state, pinKey, sitePins, selectedId]);
+
+  // Walking route line — follows real pedestrian paths via the Directions
+  // service, falling back to straight segments if it can't be reached (e.g.
+  // the Directions API isn't enabled).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (state !== "ready" || !map || !window.google?.maps) return;
+    let cancelled = false;
+
+    const clear = () => {
+      routePolyRef.current?.setMap(null);
+      routePolyRef.current = null;
+    };
+    const draw = (path: google.maps.LatLngLiteral[] | google.maps.LatLng[]) => {
+      clear();
+      routePolyRef.current = new google.maps.Polyline({
+        map,
+        path,
+        strokeColor: "#c0573a",
+        strokeOpacity: 0.9,
+        strokeWeight: 4,
+      });
+    };
+
+    if (!routeLine || routeLine.length < 2) {
+      clear();
+      return;
+    }
+
+    const stops = routeLine.slice(0, 25); // Directions waypoint ceiling
+    dirServiceRef.current ??= new google.maps.DirectionsService();
+    dirServiceRef.current.route(
+      {
+        origin: stops[0],
+        destination: stops[stops.length - 1],
+        waypoints: stops.slice(1, -1).map((p) => ({ location: p, stopover: true })),
+        travelMode: google.maps.TravelMode.WALKING,
+      },
+      (res, status) => {
+        if (cancelled) return;
+        if (status === google.maps.DirectionsStatus.OK && res?.routes[0]) {
+          draw(res.routes[0].overview_path);
+        } else {
+          // Fallback: honest straight segments between stops.
+          draw(routeLine);
+        }
+      }
+    );
+
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state, routeKey]);
 
   // Live "you are here" dot — updated in place, without redrawing the markers.
   useEffect(() => {
