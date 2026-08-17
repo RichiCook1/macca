@@ -8,6 +8,7 @@ import { GoogleTerritoryMap } from "@/components/google-map";
 import { WorkPhoto } from "@/components/work-image";
 import { Overline } from "@/components/ui";
 import { useItinerary } from "@/components/use-itinerary";
+import { NavigationClient } from "./navigation-client";
 import { works, workBySlug } from "@/lib/collection";
 import {
   PECCIOLI_CENTER,
@@ -30,6 +31,7 @@ export default function ItineraryPage() {
   );
 
   const [start, setStart] = useState<Start>({ kind: "peccioli" });
+  const [navigating, setNavigating] = useState(false);
   const [me, setMe] = useState<{ lat: number; lng: number } | null>(null);
   const [geoBusy, setGeoBusy] = useState(false);
   const [geoErr, setGeoErr] = useState<string | null>(null);
@@ -187,14 +189,20 @@ export default function ItineraryPage() {
               </ol>
 
               <div className="mt-5 flex flex-wrap gap-2">
+                <button
+                  onClick={() => setNavigating(true)}
+                  className="rounded-lg border border-ink bg-terracotta px-4 py-2.5 text-sm font-medium text-paper hover:bg-terracotta-dark focus-ring"
+                >
+                  ▶ Avvia navigazione
+                </button>
                 {gmapsUrl && (
                   <a
                     href={gmapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-lg border border-ink bg-terracotta px-4 py-2.5 text-sm font-medium text-paper hover:bg-terracotta-dark focus-ring"
+                    className="rounded-lg border border-ink bg-paper px-4 py-2.5 text-sm font-medium hover:bg-ink/[0.04] focus-ring"
                   >
-                    Apri il percorso in Google Maps ↗
+                    Google Maps ↗
                   </a>
                 )}
                 <button
@@ -221,6 +229,9 @@ export default function ItineraryPage() {
         )}
       </main>
       <SiteFooter />
+      {navigating && orderedWorks.length > 0 && (
+        <NavigationClient stops={orderedWorks} onExit={() => setNavigating(false)} />
+      )}
     </>
   );
 }

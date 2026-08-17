@@ -43,6 +43,8 @@ export interface WorkPin {
   hamlet?: string;
   /** Work detail link. */
   href?: string;
+  /** Optional number/letter shown inside the pin (navigation stops). */
+  label?: string;
 }
 
 /**
@@ -64,6 +66,9 @@ export function GoogleTerritoryMap({
   sitePins = true,
   onSelectPin,
   selectedId,
+  routeLine,
+  userPosition,
+  followUser = false,
 }: {
   workPins?: WorkPin[];
   className?: string;
@@ -72,6 +77,12 @@ export function GoogleTerritoryMap({
   onSelectPin?: (id: string) => void;
   /** Work id whose pin is drawn highlighted (different colour, on top). */
   selectedId?: string;
+  /** Ordered points for a walking route line (in-app navigation). */
+  routeLine?: { lat: number; lng: number }[];
+  /** Live "you are here" position dot. */
+  userPosition?: { lat: number; lng: number } | null;
+  /** Pan the map to the user's position as it updates (navigation). */
+  followUser?: boolean;
   /** Map centre — defaults to Peccioli (overridden by `focus` when present). */
   center?: { lat: number; lng: number };
   /** Show the in-map Mappa/Satellite switch. */
@@ -89,7 +100,8 @@ export function GoogleTerritoryMap({
   const holder = useRef<HTMLDivElement>(null);
   const mapRef = useRef<google.maps.Map | null>(null);
   const infoRef = useRef<google.maps.InfoWindow | null>(null);
-  const markersRef = useRef<google.maps.Marker[]>([]);
+  const markersRef = useRef<(google.maps.Marker | google.maps.Polyline)[]>([]);
+  const userMarkerRef = useRef<google.maps.Marker | null>(null);
   const [state, setState] = useState<LoadState>(MAPS_API_KEY ? "loading" : "idle");
   const [mapType, setMapType] = useState<"roadmap" | "hybrid">("roadmap");
   const onSelectRef = useRef(onSelectPin);
@@ -178,7 +190,8 @@ export function GoogleTerritoryMap({
 
   // Draw/refresh markers (site anchors + work pins) without recreating the map,
   // so panning/zoom survives filter changes.
-  const pinKey = workPins.map((p) => p.id).join(",");
+  const pinKey = workPins.map((p) => `${p.id}${p.label ? ":" + p.label : ""}`).join(",");
+  const routeKey = (routeLine ?? []).map((p) => `${p.lat.toFixed(5)},${p.lng.toFixed(5)}`).join("|");
   useEffect(() => {
     const map = mapRef.current;
     const info = infoRef.current;
@@ -186,6 +199,18 @@ export function GoogleTerritoryMap({
 
     for (const m of markersRef.current) m.setMap(null);
     markersRef.current = [];
+
+    // Walking route line (drawn under the pins).
+    if (routeLine && routeLine.length >= 2) {
+      const line = new google.maps.Polyline({
+        map,
+        path: routeLine,
+        strokeColor: "#c0573a",
+        strokeOpacity: 0.9,
+        strokeWeight: 4,
+      });
+      markersRef.current.push(line);
+    }
 
     // Luoghi — secondary, hollow, so works read as the primary pins.
     if (sitePins) {
@@ -217,17 +242,21 @@ export function GoogleTerritoryMap({
     const esc = (s: string) => s.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     for (const w of workPins) {
       const isSel = w.id === selectedId;
+      const hasLabel = !!w.label;
       const m = new google.maps.Marker({
         map,
         position: { lat: w.lat, lng: w.lng },
         title: w.title,
         zIndex: isSel ? 998 : undefined,
+        label: hasLabel
+          ? { text: w.label as string, color: "#f6f4ee", fontSize: "11px", fontWeight: "700" }
+          : undefined,
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
-          scale: isSel ? 11 : 7,
+          scale: hasLabel ? (isSel ? 14 : 12) : isSel ? 11 : 7,
           fillColor: isSel ? "#2f6f4e" : "#c0573a",
           fillOpacity: 1,
-          strokeColor: isSel ? "#f6f4ee" : "#f6f4ee",
+          strokeColor: "#f6f4ee",
           strokeWeight: isSel ? 3 : 2,
         },
       });
@@ -254,7 +283,36 @@ export function GoogleTerritoryMap({
       markersRef.current.push(m);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state, pinKey, sitePins, selectedId]);
+  }, [state, pinKey, sitePins, selectedId, routeKey]);
+
+  // Live "you are here" dot — updated in place, without redrawing the markers.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (state !== "ready" || !map || !window.google?.maps) return;
+    if (!userPosition) {
+      userMarkerRef.current?.setMap(null);
+      userMarkerRef.current = null;
+      return;
+    }
+    if (!userMarkerRef.current) {
+      userMarkerRef.current = new google.maps.Marker({
+        map,
+        zIndex: 1000,
+        title: "La tua posizione",
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 8,
+          fillColor: "#2f6df0",
+          fillOpacity: 1,
+          strokeColor: "#ffffff",
+          strokeWeight: 3,
+        },
+      });
+    }
+    userMarkerRef.current.setPosition(userPosition);
+    if (followUser) map.panTo(userPosition);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userPosition?.lat, userPosition?.lng, followUser, state]);
 
   if (!MAPS_API_KEY || state === "error") {
     return (
