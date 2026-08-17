@@ -13,6 +13,7 @@
 import seed from "@/src/data/macca.client.json";
 import contentOverlay from "@/src/data/macca.content.json";
 import generatedImages from "@/src/data/macca.images.generated.json";
+import geoCoords from "@/src/data/macca.coordinates.generated.json";
 
 // ---- Raw schema (mirrors the seed file) ----
 export interface RawWork {
@@ -357,6 +358,8 @@ export interface Work {
   materials?: string;
   dimensions?: string;
   coordinates?: { lat: number; lon: number; confidence?: string };
+  /** Per-work geocoded position for the real map (address/street/area precision). */
+  mapCoord?: { lat: number; lon: number; precision: string };
   images: WorkImage[];
   heroImage?: WorkImage;
   /** True once at least one cleared/credited image is provided. */
@@ -437,6 +440,12 @@ function buildWork(raw: RawWork): Work {
     materials: ov.materials,
     dimensions: ov.dimensions,
     coordinates: ov.coordinates,
+    mapCoord: (() => {
+      const g = (geoCoords as Record<string, { lat: number | null; lon: number | null; precision: string }>)[
+        raw.work_id
+      ];
+      return g && g.lat != null && g.lon != null ? { lat: g.lat, lon: g.lon, precision: g.precision } : undefined;
+    })(),
     images,
     heroImage: images[0],
     hasPhoto: images.length > 0,

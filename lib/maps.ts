@@ -50,7 +50,13 @@ export function mapsRouteUrl(queries: string[]): string {
  * back to the work's area anchor, else the territory centre. Used to centre the
  * Google preview on the relevant place — the pins themselves stay site-level.
  */
-export function workMapCenter(work: Pick<Work, "place" | "area">): { lat: number; lng: number } {
+export function workMapCenter(work: Pick<Work, "place" | "area" | "mapCoord">): { lat: number; lng: number } {
+  // 1. Per-work geocoded position — only when it's genuinely specific
+  //    (address/street/source). Coarse "area" geocodes fall through to the
+  //    named-site match below, which is often better for the historic centre.
+  if (work.mapCoord && ["address", "street", "source"].includes(work.mapCoord.precision)) {
+    return { lat: work.mapCoord.lat, lng: work.mapCoord.lon };
+  }
   const place = (work.place || "").toLowerCase();
   const byName = locations.find(
     (l) =>
@@ -143,6 +149,37 @@ export function nearestWorks(work: Work, all: Work[], limit = 6): { work: Work; 
     .map((w) => ({ work: w, meters: distanceMeters(here, workMapCenter(w)) }))
     .sort((a, b) => a.meters - b.meters)
     .slice(0, limit);
+}
+
+/**
+ * Order works into a walking sequence from a start point via nearest-neighbour,
+ * returning each work with its leg distance (metres from the previous point) and
+ * the running total. Simple, deterministic, good enough for a short town route.
+ */
+export function orderFromStart(
+  start: { lat: number; lng: number },
+  works: Work[]
+): { work: Work; leg: number; total: number }[] {
+  const remaining = works.slice();
+  const out: { work: Work; leg: number; total: number }[] = [];
+  let cur = start;
+  let total = 0;
+  while (remaining.length) {
+    let best = 0;
+    let bestD = Infinity;
+    for (let i = 0; i < remaining.length; i++) {
+      const d = distanceMeters(cur, workMapCenter(remaining[i]));
+      if (d < bestD) {
+        bestD = d;
+        best = i;
+      }
+    }
+    const w = remaining.splice(best, 1)[0];
+    total += bestD;
+    out.push({ work: w, leg: bestD, total });
+    cur = workMapCenter(w);
+  }
+  return out;
 }
 
 /** Only records with real coordinates ever become pins. */

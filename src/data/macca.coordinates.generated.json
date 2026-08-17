@@ -1,0 +1,337 @@
+{
+ "macca-001": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-002": {
+  "lat": 43.545505,
+  "lon": 10.720816,
+  "precision": "street"
+ },
+ "macca-003": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-004": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-005": {
+  "lat": 43.547798,
+  "lon": 10.720955,
+  "precision": "address"
+ },
+ "macca-006": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-007": {
+  "lat": 43.572161,
+  "lon": 10.796086,
+  "precision": "street"
+ },
+ "macca-008": {
+  "lat": 43.538367,
+  "lon": 10.790684,
+  "precision": "address"
+ },
+ "macca-009": {
+  "lat": 43.506108,
+  "lon": 10.756225,
+  "precision": "street"
+ },
+ "macca-010": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-011": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-012": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-013": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-014": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-015": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-016": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-017": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-018": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-019": {
+  "lat": 43.572521,
+  "lon": 10.796864,
+  "precision": "area"
+ },
+ "macca-020": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-021": {
+  "lat": 43.546034,
+  "lon": 10.720755,
+  "precision": "address"
+ },
+ "macca-022": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-024": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-025": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-026": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-027": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-031": {
+  "lat": 43.540174,
+  "lon": 10.793256,
+  "precision": "address"
+ },
+ "macca-032": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-033": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-034": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-035": {
+  "lat": 43.548543,
+  "lon": 10.719895,
+  "precision": "street"
+ },
+ "macca-036": {
+  "lat": 43.540174,
+  "lon": 10.793256,
+  "precision": "address"
+ },
+ "macca-037": {
+  "lat": 43.549523,
+  "lon": 10.721829,
+  "precision": "address"
+ },
+ "macca-038": {
+  "lat": 43.549523,
+  "lon": 10.721829,
+  "precision": "address"
+ },
+ "macca-039": {
+  "lat": 43.537532,
+  "lon": 10.749301,
+  "precision": "area"
+ },
+ "macca-040": {
+  "lat": 43.508548,
+  "lon": 10.817353,
+  "precision": "area"
+ },
+ "macca-041": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-042": {
+  "lat": 43.538367,
+  "lon": 10.790684,
+  "precision": "address"
+ },
+ "macca-043": {
+  "lat": 43.507438,
+  "lon": 10.757922,
+  "precision": "area"
+ },
+ "macca-044": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-045": {
+  "lat": 43.540154,
+  "lon": 10.79225,
+  "precision": "street"
+ },
+ "macca-046": {
+  "lat": 43.539518,
+  "lon": 10.792176,
+  "precision": "street"
+ },
+ "macca-047": {
+  "lat": 43.540154,
+  "lon": 10.79225,
+  "precision": "street"
+ },
+ "macca-048": {
+  "lat": 43.549069,
+  "lon": 10.721484,
+  "precision": "street"
+ },
+ "macca-049": {
+  "lat": 43.549069,
+  "lon": 10.721484,
+  "precision": "street"
+ },
+ "macca-050": {
+  "lat": 43.549069,
+  "lon": 10.721484,
+  "precision": "street"
+ },
+ "macca-051": {
+  "lat": 43.544015,
+  "lon": 10.724161,
+  "precision": "address"
+ },
+ "macca-052": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-053": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-054": {
+  "lat": 43.572521,
+  "lon": 10.796864,
+  "precision": "area"
+ },
+ "macca-055": {
+  "lat": 43.546833,
+  "lon": 10.720398,
+  "precision": "street"
+ },
+ "macca-056": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-057": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-058": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-059": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-060": {
+  "lat": 43.545505,
+  "lon": 10.720816,
+  "precision": "street"
+ },
+ "macca-061": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-062": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-063": {
+  "lat": 43.545947,
+  "lon": 10.734129,
+  "precision": "street"
+ },
+ "macca-064": {
+  "lat": 43.547979,
+  "lon": 10.720784,
+  "precision": "address"
+ },
+ "macca-065": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-066": {
+  "lat": 43.548543,
+  "lon": 10.719895,
+  "precision": "street"
+ },
+ "macca-067": {
+  "lat": 43.545947,
+  "lon": 10.734129,
+  "precision": "street"
+ },
+ "macca-069": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-070": {
+  "lat": 43.549637,
+  "lon": 10.721567,
+  "precision": "area"
+ },
+ "macca-071": {
+  "lat": 43.547979,
+  "lon": 10.720784,
+  "precision": "address"
+ },
+ "macca-072": {
+  "lat": 43.547952,
+  "lon": 10.720769,
+  "precision": "source"
+ }
+}

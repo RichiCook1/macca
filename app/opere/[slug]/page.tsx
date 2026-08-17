@@ -14,6 +14,7 @@ import {
 } from "@/components/badges";
 import { Overline, Button } from "@/components/ui";
 import { ShareButton } from "@/components/share-button";
+import { ItineraryButton } from "@/components/itinerary-button";
 import { WorkPhoto } from "@/components/work-image";
 import { works, workBySlug, worksByArea, artistBySlug, FALLBACK } from "@/lib/collection";
 import { mapsDirectionsUrl, workQuery, workMapCenter } from "@/lib/maps";
@@ -144,6 +145,7 @@ export default async function ArtworkPage({ params }: { params: Promise<{ slug: 
                   Modalità AR ↗
                 </Link>
               </div>
+              <ItineraryButton slug={work.slug} className="mt-3" />
             </div>
           </div>
         </section>
