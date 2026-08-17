@@ -28,13 +28,21 @@ function loadMapsApi(): Promise<void> {
   return loaderPromise;
 }
 
-/** Extra work pin (only for overlay-verified coordinates). */
+/** A work plotted on the map, with the bits its preview card needs. */
 export interface WorkPin {
   id: string;
   title: string;
   lat: number;
   lng: number;
   confidence?: string;
+  /** Hero photo src for the click preview. */
+  image?: string;
+  /** e.g. "Artist · Year". */
+  subtitle?: string;
+  /** e.g. hamlet/area. */
+  hamlet?: string;
+  /** Work detail link. */
+  href?: string;
 }
 
 /**
@@ -54,10 +62,16 @@ export function GoogleTerritoryMap({
   footnote = true,
   focus,
   sitePins = true,
+  onSelectPin,
+  selectedId,
 }: {
   workPins?: WorkPin[];
   className?: string;
   zoom?: number;
+  /** Called with a work id when its pin is clicked (e.g. to open a panel). */
+  onSelectPin?: (id: string) => void;
+  /** Work id whose pin is drawn highlighted (different colour, on top). */
+  selectedId?: string;
   /** Map centre — defaults to Peccioli (overridden by `focus` when present). */
   center?: { lat: number; lng: number };
   /** Show the in-map Mappa/Satellite switch. */
@@ -74,8 +88,12 @@ export function GoogleTerritoryMap({
 }) {
   const holder = useRef<HTMLDivElement>(null);
   const mapRef = useRef<google.maps.Map | null>(null);
+  const infoRef = useRef<google.maps.InfoWindow | null>(null);
+  const markersRef = useRef<google.maps.Marker[]>([]);
   const [state, setState] = useState<LoadState>(MAPS_API_KEY ? "loading" : "idle");
   const [mapType, setMapType] = useState<"roadmap" | "hybrid">("roadmap");
+  const onSelectRef = useRef(onSelectPin);
+  onSelectRef.current = onSelectPin;
   const lat = focus?.lat ?? center.lat;
   const lng = focus?.lng ?? center.lng;
 
@@ -99,6 +117,7 @@ export function GoogleTerritoryMap({
         mapRef.current = map;
 
         const info = new google.maps.InfoWindow();
+        infoRef.current = info;
 
         // Focused place — an "approximate area" disc + a prominent marker.
         if (focus) {
@@ -138,51 +157,6 @@ export function GoogleTerritoryMap({
           });
         }
 
-        // Verified site anchors from the seed (never per-work false pins).
-        for (const p of sitePins ? verifiedPins() : []) {
-          const m = new google.maps.Marker({
-            map,
-            position: { lat: p.lat, lng: p.lng },
-            title: p.name,
-            icon: {
-              path: google.maps.SymbolPath.CIRCLE,
-              scale: 9,
-              fillColor: "#c0573a",
-              fillOpacity: 1,
-              strokeColor: "#34322d",
-              strokeWeight: 2,
-            },
-          });
-          m.addListener("click", () => {
-            info.setContent(
-              `<div style="font-family:system-ui;max-width:230px"><strong>${p.name}</strong><br/><span style="font-size:12px;color:#56524a">${p.confidence}</span><br/><span style="font-size:11px;color:#7a7669">${p.pinPolicy}</span></div>`
-            );
-            info.open({ map, anchor: m });
-          });
-        }
-
-        for (const w of workPins) {
-          const m = new google.maps.Marker({
-            map,
-            position: { lat: w.lat, lng: w.lng },
-            title: w.title,
-            icon: {
-              path: google.maps.SymbolPath.CIRCLE,
-              scale: 7,
-              fillColor: "#4a5d4e",
-              fillOpacity: 1,
-              strokeColor: "#f6f4ee",
-              strokeWeight: 2,
-            },
-          });
-          m.addListener("click", () => {
-            info.setContent(
-              `<div style="font-family:system-ui"><strong>${w.title}</strong>${w.confidence ? `<br/><span style="font-size:12px;color:#56524a">${w.confidence}</span>` : ""}</div>`
-            );
-            info.open({ map, anchor: m });
-          });
-        }
-
         setState("ready");
       })
       .catch(() => !cancelled && setState("error"));
@@ -190,9 +164,9 @@ export function GoogleTerritoryMap({
     return () => {
       cancelled = true;
     };
-    // mapType is applied by the effect below without rebuilding the map.
+    // mapType/markers are handled by the effects below without rebuilding.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lat, lng, zoom, workPins, sitePins, focus?.title, focus?.radiusM]);
+  }, [lat, lng, zoom, focus?.title, focus?.radiusM]);
 
   // Switch roadmap ⇄ satellite without recreating the map (markers persist).
   useEffect(() => {
@@ -201,6 +175,86 @@ export function GoogleTerritoryMap({
     m.setMapTypeId(mapType);
     m.setOptions({ styles: mapType === "roadmap" ? MACCA_MAP_STYLE : [] });
   }, [mapType, state]);
+
+  // Draw/refresh markers (site anchors + work pins) without recreating the map,
+  // so panning/zoom survives filter changes.
+  const pinKey = workPins.map((p) => p.id).join(",");
+  useEffect(() => {
+    const map = mapRef.current;
+    const info = infoRef.current;
+    if (state !== "ready" || !map || !window.google?.maps) return;
+
+    for (const m of markersRef.current) m.setMap(null);
+    markersRef.current = [];
+
+    // Luoghi — secondary, hollow, so works read as the primary pins.
+    if (sitePins) {
+      for (const p of verifiedPins()) {
+        const m = new google.maps.Marker({
+          map,
+          position: { lat: p.lat, lng: p.lng },
+          title: p.name,
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 6,
+            fillColor: "#f6f4ee",
+            fillOpacity: 1,
+            strokeColor: "#4a5d4e",
+            strokeWeight: 2,
+          },
+        });
+        m.addListener("click", () => {
+          info?.setContent(
+            `<div style="font-family:system-ui;max-width:230px"><strong>${p.name}</strong><br/><span style="font-size:12px;color:#56524a">${p.confidence}</span><br/><span style="font-size:11px;color:#7a7669">${p.pinPolicy}</span></div>`
+          );
+          info?.open({ map, anchor: m });
+        });
+        markersRef.current.push(m);
+      }
+    }
+
+    // Works — primary terracotta pins with a photo preview on click.
+    const esc = (s: string) => s.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    for (const w of workPins) {
+      const isSel = w.id === selectedId;
+      const m = new google.maps.Marker({
+        map,
+        position: { lat: w.lat, lng: w.lng },
+        title: w.title,
+        zIndex: isSel ? 998 : undefined,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: isSel ? 11 : 7,
+          fillColor: isSel ? "#2f6f4e" : "#c0573a",
+          fillOpacity: 1,
+          strokeColor: isSel ? "#f6f4ee" : "#f6f4ee",
+          strokeWeight: isSel ? 3 : 2,
+        },
+      });
+      m.addListener("click", () => {
+        const sub = [w.subtitle, w.hamlet].filter(Boolean).map((s) => esc(s as string)).join(" · ");
+        info?.setContent(
+          `<div style="width:196px;font-family:system-ui">${
+            w.image
+              ? `<img src="${w.image}" alt="" style="width:100%;height:104px;object-fit:cover;border-radius:6px;display:block;margin-bottom:6px"/>`
+              : ""
+          }<div style="font-family:Georgia,'Times New Roman',serif;font-size:15px;line-height:1.15;color:#34322d">${esc(
+            w.title
+          )}</div>${
+            sub ? `<div style="font-size:11.5px;color:#7a7669;margin-top:2px">${sub}</div>` : ""
+          }${
+            w.href
+              ? `<a href="${w.href}" style="display:inline-block;margin-top:7px;font-size:12px;color:#c0573a;text-decoration:none">Apri scheda →</a>`
+              : ""
+          }</div>`
+        );
+        info?.open({ map, anchor: m });
+        onSelectRef.current?.(w.id);
+      });
+      markersRef.current.push(m);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state, pinKey, sitePins, selectedId]);
 
   if (!MAPS_API_KEY || state === "error") {
     return (

@@ -65,6 +65,86 @@ export function workMapCenter(work: Pick<Work, "place" | "area">): { lat: number
   return PECCIOLI_CENTER;
 }
 
+/**
+ * Works as map pins. Since many works share one site (address-level), works at
+ * the same coordinate are fanned out on a small golden-angle spiral (a few tens
+ * of metres) so they're individually clickable — an honest presentational
+ * spread within the site, never a claim of surveyed position.
+ */
+export function workMapPins(
+  works: Work[]
+): { id: string; title: string; lat: number; lng: number; image?: string; subtitle?: string; hamlet?: string; href: string }[] {
+  const groups = new Map<string, Work[]>();
+  for (const w of works) {
+    const c = workMapCenter(w);
+    const key = `${c.lat.toFixed(4)},${c.lng.toFixed(4)}`;
+    const arr = groups.get(key);
+    if (arr) arr.push(w);
+    else groups.set(key, [w]);
+  }
+  const GOLDEN = Math.PI * (3 - Math.sqrt(5));
+  const out: ReturnType<typeof workMapPins> = [];
+  for (const [key, ws] of groups) {
+    const [lat, lng] = key.split(",").map(Number);
+    const cos = Math.cos((lat * Math.PI) / 180) || 1;
+    ws.forEach((w, i) => {
+      let dLat = 0,
+        dLng = 0;
+      if (ws.length > 1) {
+        const r = 0.00013 * Math.sqrt(i + 0.4); // ~14 m per unit
+        const t = i * GOLDEN;
+        dLat = Math.sin(t) * r;
+        dLng = (Math.cos(t) * r) / cos;
+      }
+      out.push({
+        id: w.slug,
+        title: w.title,
+        lat: lat + dLat,
+        lng: lng + dLng,
+        image: w.heroImage?.src,
+        subtitle: `${w.artist} · ${w.year}`,
+        hamlet: w.hamletArea,
+        href: `/opere/${w.slug}`,
+      });
+    });
+  }
+  return out;
+}
+
+/** Great-circle distance in metres between two lat/lng points. */
+export function distanceMeters(
+  a: { lat: number; lng: number },
+  b: { lat: number; lng: number }
+): number {
+  const R = 6371000;
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const dLat = toRad(b.lat - a.lat);
+  const dLng = toRad(b.lng - a.lng);
+  const s =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(a.lat)) * Math.cos(toRad(b.lat)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(s));
+}
+
+/** Human distance label: "120 m", "1,2 km". */
+export function formatDistance(m: number): string {
+  if (m < 950) return `${Math.max(10, Math.round(m / 10) * 10)} m`;
+  return `${(m / 1000).toFixed(1).replace(".", ",")} km`;
+}
+
+/**
+ * Nearest works to a given work, by real (geocoded) coordinates, with distance.
+ * Used by the "nelle vicinanze" panel.
+ */
+export function nearestWorks(work: Work, all: Work[], limit = 6): { work: Work; meters: number }[] {
+  const here = workMapCenter(work);
+  return all
+    .filter((w) => w.slug !== work.slug)
+    .map((w) => ({ work: w, meters: distanceMeters(here, workMapCenter(w)) }))
+    .sort((a, b) => a.meters - b.meters)
+    .slice(0, limit);
+}
+
 /** Only records with real coordinates ever become pins. */
 export function verifiedPins() {
   return locations

@@ -89,10 +89,13 @@ export function MapResultCard({
   work,
   active,
   onSelect,
+  badge,
 }: {
   work: Work;
   active?: boolean;
   onSelect?: () => void;
+  /** Small trailing label, e.g. a distance ("120 m"). */
+  badge?: string;
 }) {
   const rootClass = clsx(
     "flex w-full overflow-hidden rounded-xl border bg-paper text-left transition-colors focus-ring",
@@ -117,7 +120,13 @@ export function MapResultCard({
       <div className="flex-1 p-3">
         <div className="flex items-start justify-between gap-2">
           <div className="font-serif text-[15px] leading-tight">{work.title}</div>
-          {confidenceDot(work)}
+          {badge ? (
+            <span className="shrink-0 rounded-full border border-ink/25 bg-paper px-2 py-0.5 font-mono text-[10px] text-ink-60">
+              {badge}
+            </span>
+          ) : (
+            confidenceDot(work)
+          )}
         </div>
         <div className="text-[12px] text-ink-60">
           {work.artist} · {work.year} · {work.hamletArea}

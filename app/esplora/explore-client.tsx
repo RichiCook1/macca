@@ -22,7 +22,7 @@ import { BottomSheet } from "@/components/bottom-sheet";
 import { GoogleTerritoryMap } from "@/components/google-map";
 import { Button, Chip } from "@/components/ui";
 import { useModalBehavior } from "@/components/use-modal";
-import { mapsDirectionsUrl, workQuery } from "@/lib/maps";
+import { mapsDirectionsUrl, workQuery, workMapPins, nearestWorks, formatDistance } from "@/lib/maps";
 import { clsx } from "@/lib/clsx";
 
 export function ExploreClient() {
@@ -40,6 +40,7 @@ export function ExploreClient() {
   const [showFilters, setShowFilters] = useState(false);
   const [mobileView, setMobileView] = useState<"map" | "list">("map");
   const [mapMode, setMapMode] = useState<"stilizzata" | "reale">("reale");
+  const [showSites, setShowSites] = useState(false);
   const filterDrawerRef = useModalBehavior(showFilters, () => setShowFilters(false));
 
   const toggle = <T,>(set: Set<T>, val: T, setter: (s: Set<T>) => void) => {
@@ -64,6 +65,7 @@ export function ExploreClient() {
 
   const activeFilterCount = areas.size + cats.size + access.size;
   const selectedWork = selected ? works.find((w) => w.slug === selected) ?? null : null;
+  const pins = useMemo(() => workMapPins(filtered), [filtered]);
 
   const reset = () => {
     setAreas(new Set());
@@ -150,7 +152,7 @@ export function ExploreClient() {
         </div>
         <div className="min-h-0 flex-1 overflow-y-auto p-4">
           {selectedWork ? (
-            <SelectedPanel work={selectedWork} onClose={() => setSelected(null)} />
+            <SelectedPanel work={selectedWork} onClose={() => setSelected(null)} onSelect={setSelected} />
           ) : (
             resultList
           )}
@@ -159,7 +161,12 @@ export function ExploreClient() {
 
       <div className="relative hidden min-w-0 flex-1 lg:block">
         {mapMode === "reale" ? (
-          <GoogleTerritoryMap />
+          <GoogleTerritoryMap
+            workPins={pins}
+            sitePins={showSites}
+            onSelectPin={setSelected}
+            selectedId={selected ?? undefined}
+          />
         ) : (
           <StylizedMap works={filtered} selectedSlug={selected} onSelect={setSelected} />
         )}
@@ -179,6 +186,20 @@ export function ExploreClient() {
             </button>
           ))}
         </div>
+        {/* Luoghi filter (real map only) */}
+        {mapMode === "reale" && (
+          <button
+            onClick={() => setShowSites((s) => !s)}
+            aria-pressed={showSites}
+            className={clsx(
+              "absolute right-3 top-14 z-20 flex items-center gap-1.5 rounded-full border border-ink px-3 py-1.5 text-xs shadow-card transition-colors focus-ring",
+              showSites ? "bg-ink text-paper" : "bg-paper text-ink-80 hover:text-ink"
+            )}
+          >
+            <span className={clsx("h-2 w-2 rounded-full border", showSites ? "border-paper" : "border-cypress bg-paper")} />
+            Luoghi
+          </button>
+        )}
         {mapMode === "stilizzata" && <MapLegend className="absolute bottom-3 left-3" />}
       </div>
 
@@ -188,7 +209,22 @@ export function ExploreClient() {
           className="absolute inset-0"
           footnote={false}
           toggleClassName="right-3 top-[112px]"
+          workPins={pins}
+          sitePins={showSites}
+          onSelectPin={setSelected}
+          selectedId={selected ?? undefined}
         />
+        <button
+          onClick={() => setShowSites((s) => !s)}
+          aria-pressed={showSites}
+          className={clsx(
+            "absolute left-3 top-[112px] z-30 flex items-center gap-1.5 rounded-full border border-ink px-3 py-1.5 text-xs shadow-card",
+            showSites ? "bg-ink text-paper" : "bg-paper text-ink-80"
+          )}
+        >
+          <span className={clsx("h-2 w-2 rounded-full border", showSites ? "border-paper" : "border-cypress bg-paper")} />
+          Luoghi
+        </button>
 
         <div className="absolute inset-x-0 top-0 z-30 flex items-center gap-2 p-3">
           <input
@@ -227,7 +263,7 @@ export function ExploreClient() {
         {mobileView === "map" ? (
           <BottomSheet initial={selectedWork ? "half" : "collapsed"}>
             {selectedWork ? (
-              <SelectedPanel work={selectedWork} onClose={() => setSelected(null)} />
+              <SelectedPanel work={selectedWork} onClose={() => setSelected(null)} onSelect={setSelected} />
             ) : (
               <>
                 <div className="mb-3 font-serif text-lg">{filtered.length} opere nelle vicinanze</div>
@@ -289,8 +325,16 @@ function excerpt(text: string): string {
   return sentences.slice(0, 2).join(" ").trim();
 }
 
-function SelectedPanel({ work, onClose }: { work: Work; onClose: () => void }) {
-  const nearby = works.filter((w) => w.area === work.area && w.slug !== work.slug).slice(0, 1);
+function SelectedPanel({
+  work,
+  onClose,
+  onSelect,
+}: {
+  work: Work;
+  onClose: () => void;
+  onSelect?: (slug: string) => void;
+}) {
+  const nearby = nearestWorks(work, works, 6);
 
   return (
     <div>
@@ -365,9 +409,16 @@ function SelectedPanel({ work, onClose }: { work: Work; onClose: () => void }) {
       {nearby.length > 0 && (
         <div className="mt-5">
           <div className="overline mb-2">Nelle vicinanze</div>
-          {nearby.map((w) => (
-            <MapResultCard key={w.slug} work={w} />
-          ))}
+          <div className="flex flex-col gap-2">
+            {nearby.map(({ work: w, meters }) => (
+              <MapResultCard
+                key={w.slug}
+                work={w}
+                badge={meters < 40 ? "stesso luogo" : formatDistance(meters)}
+                onSelect={onSelect ? () => onSelect(w.slug) : undefined}
+              />
+            ))}
+          </div>
         </div>
       )}
     </div>
