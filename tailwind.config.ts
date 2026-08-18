@@ -76,9 +76,12 @@ const config: Config = {
         sheet: "20px",
       },
       boxShadow: {
-        card: "0 1px 3px rgba(52,50,45,0.08)",
-        raised: "0 3px 14px rgba(52,50,45,0.10)",
-        sheet: "0 -6px 24px rgba(52,50,45,0.12)",
+        // Two-layer warm elevation — a tight contact shadow + a wide diffuse
+        // one — reads more "material" than a single flat drop.
+        card: "0 1px 2px rgba(52,50,45,0.05), 0 6px 18px -8px rgba(52,50,45,0.12)",
+        raised:
+          "0 2px 6px rgba(52,50,45,0.06), 0 16px 40px -14px rgba(52,50,45,0.20)",
+        sheet: "0 -8px 34px -6px rgba(52,50,45,0.16)",
         phone: "0 24px 60px -18px rgba(52,50,45,0.35)",
       },
       maxWidth: {

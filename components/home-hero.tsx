@@ -42,21 +42,21 @@ export function HomeHero() {
           <div className="mt-9 flex flex-wrap gap-3">
             <Link
               href="/esplora"
-              className="group inline-flex items-center gap-2 rounded-lg border border-ink bg-terracotta px-6 py-3.5 text-[15px] text-paper shadow-card transition-all hover:-translate-y-0.5 hover:bg-terracotta-dark hover:shadow-raised focus-ring"
+              className="group inline-flex items-center gap-2 rounded-xl bg-terracotta px-6 py-3.5 text-[15px] text-paper shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:bg-terracotta-dark hover:shadow-raised focus-ring"
             >
               {t("cta.exploreMap")}
               <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
             </Link>
             <Link
               href="/percorsi"
-              className="group inline-flex items-center gap-2 rounded-lg border border-ink bg-paper/80 px-6 py-3.5 text-[15px] backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-paper hover:shadow-card focus-ring"
+              className="group inline-flex items-center gap-2 rounded-xl border border-ink/15 bg-paper/80 px-6 py-3.5 text-[15px] backdrop-blur transition-all duration-200 hover:-translate-y-0.5 hover:border-ink/35 hover:bg-paper hover:shadow-raised focus-ring"
             >
               {t("cta.chooseRoute")}
               <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
             </Link>
             <Link
               href="/opere"
-              className="group inline-flex items-center gap-2 rounded-lg border border-ink bg-paper/80 px-6 py-3.5 text-[15px] backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-paper hover:shadow-card focus-ring"
+              className="group inline-flex items-center gap-2 rounded-xl border border-ink/15 bg-paper/80 px-6 py-3.5 text-[15px] backdrop-blur transition-all duration-200 hover:-translate-y-0.5 hover:border-ink/35 hover:bg-paper hover:shadow-raised focus-ring"
             >
               {t("cta.exploreWorks")} <span aria-hidden>▦</span>
             </Link>

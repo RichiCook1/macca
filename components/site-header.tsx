@@ -81,7 +81,7 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
           </Link>
           <Link
             href="/esplora"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-ink bg-terracotta px-3 py-1.5 text-paper hover:bg-terracotta-dark focus-ring"
+            className="inline-flex items-center gap-1.5 rounded-full bg-terracotta px-3.5 py-1.5 text-paper shadow-card transition-all duration-200 hover:bg-terracotta-dark hover:shadow-raised hover:-translate-y-px focus-ring"
           >
             <span className="inline-block h-2.5 w-2.5 rounded-full border-2 border-paper" />
             {t("cta.openMap")}

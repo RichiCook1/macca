@@ -15,11 +15,12 @@ export function Overline({
 type ButtonVariant = "primary" | "secondary" | "tertiary";
 
 const buttonBase =
-  "inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium transition-colors focus-ring disabled:opacity-50";
+  "inline-flex items-center justify-center gap-2 rounded-xl text-sm font-medium transition-all duration-200 focus-ring disabled:opacity-50 disabled:pointer-events-none";
 const buttonVariant: Record<ButtonVariant, string> = {
   primary:
-    "bg-terracotta text-paper border border-ink hover:bg-terracotta-dark",
-  secondary: "bg-transparent text-ink border border-ink hover:bg-ink/[0.04]",
+    "bg-terracotta text-paper shadow-card hover:bg-terracotta-dark hover:shadow-raised hover:-translate-y-px active:translate-y-0",
+  secondary:
+    "bg-paper text-ink border border-ink/15 shadow-card hover:border-ink/35 hover:shadow-raised hover:-translate-y-px active:translate-y-0",
   tertiary: "bg-transparent text-ink-80 hover:text-ink",
 };
 
@@ -44,7 +45,7 @@ export function Button({
   type = "button",
   ...rest
 }: ButtonProps) {
-  const sizing = size === "lg" ? "px-6 py-3 text-base" : "px-4 py-2.5";
+  const sizing = size === "lg" ? "px-7 py-3.5 text-base" : "px-5 py-2.5";
   const cls = clsx(buttonBase, buttonVariant[variant], sizing, className);
   if (href) {
     return (
@@ -75,10 +76,10 @@ export function Chip({
   className?: string;
 }) {
   const cls = clsx(
-    "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[13px] transition-colors",
+    "inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-[13px] transition-all duration-200",
     active
-      ? "border-ink bg-ink text-paper"
-      : "border-ink/70 text-ink-80 hover:border-ink hover:text-ink",
+      ? "border-transparent bg-ink text-paper shadow-card"
+      : "border-ink/15 bg-paper text-ink-80 hover:border-ink/40 hover:text-ink",
     className
   );
   if (as === "span") return <span className={cls}>{children}</span>;
@@ -138,7 +139,7 @@ export function Card({
   return (
     <div
       className={clsx(
-        "rounded-xl border border-ink/15 bg-paper shadow-card",
+        "rounded-2xl border border-ink/10 bg-paper shadow-card",
         className
       )}
     >
