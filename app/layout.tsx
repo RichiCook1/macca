@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Fraunces, IBM_Plex_Mono } from "next/font/google";
+import { Hanken_Grotesk, Fraunces, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/language-provider";
 import { BottomNav } from "@/components/bottom-nav";
 
-const sans = Inter({
+const sans = Hanken_Grotesk({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
