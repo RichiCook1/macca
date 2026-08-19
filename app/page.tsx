@@ -11,6 +11,7 @@ import { ProvisionalTag, FallbackNote } from "@/components/badges";
 import { works, flagshipWorks } from "@/lib/works";
 import { routes } from "@/lib/routes-data";
 import { locations, mapAreas, FALLBACK } from "@/lib/collection";
+import { workMapPins } from "@/lib/maps";
 import { decades, decadeLabel } from "@/lib/constants";
 
 export default function HomePage() {
@@ -23,6 +24,10 @@ export default function HomePage() {
     count: works.filter((w) => w.decade === d).length,
   }));
   const maxCount = Math.max(...decadeCounts.map((d) => d.count), 1);
+
+  // Every work as a map pin — the homepage map shows the collection itself,
+  // not the site anchors (those are a filter inside Esplora).
+  const homePins = workMapPins(works);
 
   // Representative location per area for the "esplora per luogo" tiles.
   const repLocation = (areaName: string) =>
@@ -63,7 +68,13 @@ export default function HomePage() {
               </div>
             </div>
             <div className="relative h-[340px] overflow-hidden rounded-2xl border border-ink/10 shadow-card md:h-[460px]">
-              <GoogleTerritoryMap zoom={13} footnote={false} className="absolute inset-0" />
+              <GoogleTerritoryMap
+                workPins={homePins}
+                sitePins={false}
+                zoom={13}
+                footnote={false}
+                className="absolute inset-0"
+              />
             </div>
           </div>
 
