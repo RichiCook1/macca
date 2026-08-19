@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { GoogleTerritoryMap } from "@/components/google-map";
-import { workMapCenter } from "@/lib/maps";
+import { workMapCenter, workMapPins } from "@/lib/maps";
 import { WorkCard } from "@/components/work-card";
 import { FallbackNote } from "@/components/badges";
 import { Overline } from "@/components/ui";
@@ -82,6 +82,8 @@ export default async function ArtistPage({
           <div className="mx-auto grid max-w-[1400px] md:grid-cols-[1.15fr_0.85fr]">
             <div className="relative min-h-[320px] border-b border-ink/15 md:min-h-[420px] md:border-b-0 md:border-r md:border-ink/80">
               <GoogleTerritoryMap
+                workPins={workMapPins(artistWorks)}
+                sitePins={false}
                 center={artistWorks[0] ? workMapCenter(artistWorks[0]) : undefined}
                 zoom={13}
                 footnote={false}
@@ -91,8 +93,8 @@ export default async function ArtistPage({
             <div className="p-6 md:p-9">
               <Overline>Dove nel territorio</Overline>
               <p className="mt-3 max-w-md text-[14px] leading-relaxed text-ink-80">
-                Le opere di {artist.name} nel paesaggio di Peccioli. La mappa è
-                astratta: la posizione esatta è indicata solo dove verificata.
+                Le opere di {artist.name} nel paesaggio di Peccioli. La posizione
+                è indicata al livello di affidabilità verificato, mai un pin falso.
               </p>
 
               {projects.length > 0 && (

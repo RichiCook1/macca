@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { GoogleTerritoryMap } from "@/components/google-map";
+import { workMapPins } from "@/lib/maps";
 import { WorkCard } from "@/components/work-card";
 import { RouteCard } from "@/components/route-card";
 import { FallbackNote } from "@/components/badges";
@@ -72,6 +73,8 @@ export default async function LocationPage({
         <section className="border-b border-ink/80">
           <div className="relative h-[360px] md:h-[480px]">
             <GoogleTerritoryMap
+              workPins={workMapPins(areaWorks)}
+              sitePins={false}
               center={
                 location.lat != null && location.lon != null
                   ? { lat: location.lat, lng: location.lon }
