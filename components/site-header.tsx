@@ -18,7 +18,14 @@ const nav = [
   { href: "/info", key: "nav.about" as const },
 ];
 
-export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
+export function SiteHeader({
+  transparent = false,
+  overlay = false,
+}: {
+  transparent?: boolean;
+  /** Sit over a dark photographic hero: light type, no bar, no bottom rule. */
+  overlay?: boolean;
+}) {
   const { t } = useLang();
   const pathname = usePathname();
   const { count } = useSaved();
@@ -36,14 +43,22 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
         }
       }}
       className={clsx(
-        "sticky top-0 z-50 border-b border-ink/80 backdrop-blur",
-        transparent ? "bg-paper/85" : "bg-paper"
+        "z-50 transition-colors",
+        overlay
+          ? "absolute inset-x-0 top-0 text-paper"
+          : clsx(
+              "sticky top-0 border-b border-ink/10 backdrop-blur",
+              transparent ? "bg-paper/85" : "bg-paper"
+            )
       )}
     >
       <div className="mx-auto flex h-[60px] max-w-[1400px] items-center justify-between gap-4 px-5 md:px-8">
         <Link
           href="/"
-          className="group flex items-baseline gap-1.5 font-serif text-2xl font-semibold tracking-wide focus-ring"
+          className={clsx(
+            "group flex items-baseline gap-1.5 font-serif text-2xl font-semibold tracking-wide focus-ring",
+            overlay && "text-paper"
+          )}
         >
           MACCA
           <span
@@ -53,14 +68,18 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
         </Link>
 
         {/* Map-label nav: mono small-caps, echoing the territory linework */}
-        <nav className="hidden items-center gap-6 font-mono text-[11px] uppercase tracking-overline text-ink-80 lg:flex">
+        <nav className={clsx(
+            "hidden items-center gap-6 font-mono text-[11px] uppercase tracking-overline lg:flex",
+            overlay ? "text-paper/75" : "text-ink-80"
+          )}>
           {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={clsx(
-                "link-underline pb-0.5 transition-colors hover:text-ink focus-ring",
-                isActive(item.href) && "text-terracotta"
+                "link-underline pb-0.5 transition-colors focus-ring",
+                overlay ? "hover:text-paper" : "hover:text-ink",
+                isActive(item.href) && (overlay ? "text-paper" : "text-terracotta")
               )}
             >
               {t(item.key)}
@@ -69,11 +88,11 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
         </nav>
 
         <div className="hidden items-center gap-3 text-xs lg:flex">
-          <Link href="/cerca" className="text-ink-80 hover:text-ink focus-ring">
+          <Link href="/cerca" className={clsx("focus-ring", overlay ? "text-paper/75 hover:text-paper" : "text-ink-80 hover:text-ink")}>
             {t("util.search")}
           </Link>
           <LangSwitch />
-          <Link href="/salvati" className="text-ink-80 hover:text-ink focus-ring">
+          <Link href="/salvati" className={clsx("focus-ring", overlay ? "text-paper/75 hover:text-paper" : "text-ink-80 hover:text-ink")}>
             {t("util.saved")}
             {count > 0 && (
               <span className="ml-1 rounded-full bg-ink px-1.5 text-[10px] text-paper">{count}</span>
@@ -98,11 +117,14 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
             aria-expanded={open}
             aria-controls="menu-mobile"
             onClick={() => setOpen((v) => !v)}
-            className="flex h-9 w-9 flex-col items-center justify-center gap-[5px] rounded-lg border border-ink focus-ring"
+            className={clsx(
+              "flex h-9 w-9 flex-col items-center justify-center gap-[5px] rounded-lg border focus-ring",
+              overlay ? "border-paper/40" : "border-ink"
+            )}
           >
-            <span className="h-[1.5px] w-4 bg-ink" />
-            <span className="h-[1.5px] w-4 bg-ink" />
-            <span className="h-[1.5px] w-4 bg-ink" />
+            <span className={clsx("h-[1.5px] w-4", overlay ? "bg-paper" : "bg-ink")} />
+            <span className={clsx("h-[1.5px] w-4", overlay ? "bg-paper" : "bg-ink")} />
+            <span className={clsx("h-[1.5px] w-4", overlay ? "bg-paper" : "bg-ink")} />
           </button>
         </div>
       </div>

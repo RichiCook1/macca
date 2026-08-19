@@ -40,7 +40,7 @@ export default function HomePage() {
 
   return (
     <>
-      <SiteHeader transparent />
+      <SiteHeader transparent overlay />
       <main>
         <HomeHero />
 
@@ -62,7 +62,7 @@ export default function HomePage() {
                 <MapLegend className="inline-block" />
               </div>
             </div>
-            <div className="relative h-[340px] overflow-hidden rounded-xl border border-ink/80 md:h-[420px]">
+            <div className="relative h-[340px] overflow-hidden rounded-2xl border border-ink/10 shadow-card md:h-[460px]">
               <GoogleTerritoryMap zoom={13} footnote={false} className="absolute inset-0" />
             </div>
           </div>
