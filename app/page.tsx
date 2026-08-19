@@ -45,8 +45,8 @@ export default function HomePage() {
         <HomeHero />
 
         {/* Map as collection */}
-        <section className="mx-auto max-w-[1400px] px-5 py-16 md:px-8">
-          <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr] md:items-center">
+        <section className="mx-auto max-w-[1400px] px-5 py-20 md:px-8 md:py-28">
+          <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr] md:items-center lg:gap-16">
             <div>
               <Overline>La collezione è una mappa</Overline>
               <h2 className="mt-3 font-serif text-3xl leading-tight md:text-4xl">
@@ -66,11 +66,36 @@ export default function HomePage() {
               <GoogleTerritoryMap zoom={13} footnote={false} className="absolute inset-0" />
             </div>
           </div>
+
+          {/* Density over time — a quiet footnote to the collection, not a section of its own */}
+          <div className="mt-14 border-t border-ink/10 pt-6">
+            <div className="flex items-baseline justify-between gap-4">
+              <Overline>Un museo costruito nel tempo</Overline>
+              <Link href="/timeline" className="font-mono text-[11px] text-ink-60 hover:text-ink focus-ring">
+                Timeline →
+              </Link>
+            </div>
+            <div className="mt-4 flex items-end gap-3">
+              {decadeCounts.map((d, i) => (
+                <div key={d.decade} className="flex flex-1 flex-col gap-2">
+                  <span
+                    className={`w-full rounded-sm ${
+                      i === decadeCounts.length - 1 ? "bg-terracotta" : "bg-ink/15"
+                    }`}
+                    style={{ height: Math.max(4, Math.round((d.count / maxCount) * 40)) }}
+                  />
+                  <span className="font-mono text-[10px] text-ink-40">
+                    {decadeLabel[d.decade]} · {d.count}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* Featured routes */}
-        <section className="border-t border-ink/15 bg-stone-50">
-          <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-8">
+        <section className="bg-stone-50">
+          <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-8 md:py-24">
             <SectionHeading
               title="Percorsi in evidenza"
               action={
@@ -88,7 +113,7 @@ export default function HomePage() {
         </section>
 
         {/* Featured work / new commission */}
-        <section className="border-t border-ink/15">
+        <section className="border-t border-ink/10">
           <div className="mx-auto grid max-w-[1400px] md:grid-cols-2">
             <div className="relative min-h-[280px] border-b border-ink/15 md:border-b-0 md:border-r">
               {featured.heroImage ? (
@@ -137,45 +162,11 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* A museum built over time */}
-        <section className="border-t border-ink/15 bg-stone-50">
-          <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-8">
-            <SectionHeading
-              title="Un museo costruito nel tempo"
-              action={
-                <Link href="/timeline" className="text-sm text-ink-60 hover:text-ink focus-ring">
-                  Vai alla timeline →
-                </Link>
-              }
-            />
-            <div className="mt-10 flex items-end gap-2 border-b border-ink/80 pb-0" style={{ height: 80 }}>
-              {decadeCounts.map((d, i) => (
-                <div key={d.decade} className="flex flex-1 flex-col items-center gap-2">
-                  <span className="font-mono text-[11px] text-ink-60">{d.count}</span>
-                  <span
-                    className={`w-3/4 border border-ink ${
-                      i === decadeCounts.length - 1 ? "bg-terracotta" : i === 2 ? "bg-stone-300" : "bg-stone-200"
-                    }`}
-                    style={{ height: Math.max(6, Math.round((d.count / maxCount) * 56)) }}
-                  />
-                </div>
-              ))}
-            </div>
-            <div className="mt-2 flex">
-              {decadeCounts.map((d) => (
-                <span key={d.decade} className="flex-1 text-center font-mono text-[11px] text-ink-60">
-                  {decadeLabel[d.decade]}
-                </span>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Explore by place */}
-        <section className="border-t border-ink/15">
-          <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-8">
+        <section className="border-t border-ink/10">
+          <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-8 md:py-24">
             <SectionHeading title="Esplora per luogo" />
-            <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+            <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 lg:gap-5">
               {mapAreas.map((a) => {
                 const loc = repLocation(a.name);
                 const count = works.filter((w) => w.area === a.slug).length;
@@ -184,7 +175,7 @@ export default function HomePage() {
                   <Link
                     key={a.slug}
                     href={loc ? `/luoghi/${loc.slug}` : "/esplora"}
-                    className={`group relative flex h-28 flex-col justify-end overflow-hidden rounded-lg border border-ink p-3 focus-ring ${
+                    className={`group relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-2xl border border-ink/10 p-4 shadow-card transition-shadow duration-300 hover:shadow-raised focus-ring sm:aspect-[3/4] lg:aspect-square ${
                       img ? "" : "hatch"
                     }`}
                   >
@@ -197,14 +188,14 @@ export default function HomePage() {
                           loading="lazy"
                           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
-                        <span className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/25 to-transparent" />
+                        <span className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/30 to-ink/5" />
                       </>
                     )}
-                    <span className={`relative font-serif text-[15px] ${img ? "text-paper" : ""}`}>
+                    <span className={`relative font-serif text-[20px] leading-tight md:text-[22px] ${img ? "text-paper" : ""}`}>
                       {a.name}
                     </span>
                     <span
-                      className={`relative font-mono text-[10px] ${img ? "text-paper/80" : "text-ink-60"}`}
+                      className={`relative mt-1 font-mono text-[10px] uppercase tracking-overline ${img ? "text-paper/75" : "text-ink-60"}`}
                     >
                       {count} opere
                     </span>
@@ -216,7 +207,7 @@ export default function HomePage() {
         </section>
 
         {/* Visit planning strip */}
-        <section className="border-t border-ink/15 bg-stone-50">
+        <section className="bg-stone-50">
           <div className="mx-auto grid max-w-[1400px] gap-4 px-5 py-12 sm:grid-cols-2 lg:grid-cols-4 md:px-8">
             {[
               { t: "Arrivare", d: "In auto da Pisa / Firenze · trasporti", href: "/visita" },
