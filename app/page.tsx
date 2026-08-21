@@ -237,7 +237,7 @@ export default function HomePage() {
               <Reveal key={c.t} delay={i * 60}>
               <Link
                 href={c.href}
-                className="rounded-xl border border-ink/20 bg-paper p-5 transition-shadow hover:shadow-card focus-ring"
+                className="block h-full rounded-xl border border-ink/15 bg-paper p-5 shadow-card transition-shadow hover:shadow-raised focus-ring"
               >
                 <div className="font-serif text-lg">{c.t}</div>
                 <div className="mt-2 text-[13px] text-ink-60">{c.d}</div>

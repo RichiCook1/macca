@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { LangSwitch } from "./lang-switch";
 
 const cols: { title: string; links: { label: string; href: string }[] }[] = [
@@ -32,8 +35,31 @@ const cols: { title: string; links: { label: string; href: string }[] }[] = [
 ];
 
 export function SiteFooter() {
+  // Parallax reveal: the footer is pinned behind the page (fixed, z-0) while
+  // the content (main, z-10, opaque) scrolls away above it — the dark panel is
+  // uncovered rather than scrolled in. A spacer keeps the document height
+  // honest; its height mirrors the real footer via ResizeObserver, with a CSS
+  // fallback so no-JS users still get a scroll-past reveal.
+  const footRef = useRef<HTMLElement | null>(null);
+  const [h, setH] = useState<number | null>(null);
+
+  useEffect(() => {
+    const el = footRef.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(() => setH(el.offsetHeight));
+    ro.observe(el);
+    setH(el.offsetHeight);
+    return () => ro.disconnect();
+  }, []);
+
   return (
-    <footer className="mt-20 bg-ink text-stone-200">
+    <>
+    <div
+      aria-hidden
+      className="mt-20 h-[640px] md:h-[520px]"
+      style={h != null ? { height: h } : undefined}
+    />
+    <footer ref={footRef} className="fixed inset-x-0 bottom-0 z-0 bg-ink pb-[var(--bnav)] text-stone-200">
       <div className="mx-auto grid max-w-[1400px] gap-10 px-5 py-12 md:grid-cols-[1.5fr_2fr] md:px-8">
         <div>
           <div className="font-serif text-3xl font-semibold text-paper">MACCA</div>
@@ -77,5 +103,6 @@ export function SiteFooter() {
         </div>
       </div>
     </footer>
+    </>
   );
 }

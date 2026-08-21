@@ -26,6 +26,14 @@
     scroll-behavior: smooth;
   }
 
+  /* The page content paints above the pinned footer (see SiteFooter):
+     opaque, stacked, so the footer is revealed as the page scrolls away. */
+  main {
+    position: relative;
+    z-index: 10;
+    background: #f0ece2;
+  }
+
   body {
     @apply bg-stone text-ink font-sans antialiased;
     text-rendering: optimizeLegibility;
