@@ -7,6 +7,7 @@ import { AccessBadge, NightTag, FallbackNote } from "@/components/badges";
 import { SaveButton } from "@/components/save-button";
 import { ShareButton } from "@/components/share-button";
 import { Button, Overline } from "@/components/ui";
+import { WorkPhoto } from "@/components/work-image";
 import { routeIsBooking, routeIsNight } from "@/components/route-card";
 import {
   routes,
@@ -15,6 +16,7 @@ import {
   artistBySlug,
 } from "@/lib/collection";
 import { mapsRouteUrl, workQuery } from "@/lib/maps";
+import { clsx } from "@/lib/clsx";
 
 export function generateStaticParams() {
   return routes.map((r) => ({ slug: r.slug }));
@@ -132,7 +134,21 @@ export default async function RouteDetailPage({
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink text-[13px] font-bold text-paper">
                       {i + 1}
                     </span>
-                    <div className="min-w-0">
+                    {/* Thumbnail of the work at this stop — a real cleared photo
+                        when there is one, the honest placeholder otherwise. */}
+                    <div className="h-16 w-16 shrink-0 overflow-hidden rounded-lg border border-ink/10 shadow-card sm:h-20 sm:w-20">
+                      {work?.heroImage ? (
+                        <WorkPhoto
+                          image={work.heroImage}
+                          alt={work.title}
+                          className="zoom-media h-full w-full"
+                          showCredit={false}
+                        />
+                      ) : (
+                        <div className={clsx("h-full w-full", work?.nightView ? "bg-night" : "hatch")} />
+                      )}
+                    </div>
+                    <div className="min-w-0 flex-1">
                       <div className="text-[15px] leading-snug">
                         {stop.raw}
                         {artist && (
@@ -160,12 +176,12 @@ export default async function RouteDetailPage({
                     {work ? (
                       <Link
                         href={`/opere/${work.slug}`}
-                        className="flex items-start gap-4 rounded-lg p-1 transition-colors hover:bg-ink/[0.03] focus-ring"
+                        className="group flex items-center gap-4 rounded-xl p-1.5 transition-colors hover:bg-ink/[0.03] focus-ring"
                       >
                         {inner}
                       </Link>
                     ) : (
-                      <div className="flex items-start gap-4 p-1">{inner}</div>
+                      <div className="flex items-center gap-4 p-1.5">{inner}</div>
                     )}
                   </li>
                 );
