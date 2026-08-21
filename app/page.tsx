@@ -7,6 +7,7 @@ import { GoogleTerritoryMap } from "@/components/google-map";
 import { RouteCard } from "@/components/route-card";
 import { WorkPhoto } from "@/components/work-image";
 import { Overline, SectionHeading } from "@/components/ui";
+import { Reveal } from "@/components/reveal";
 import { ProvisionalTag, FallbackNote } from "@/components/badges";
 import { works, flagshipWorks } from "@/lib/works";
 import { routes } from "@/lib/routes-data";
@@ -52,7 +53,7 @@ export default function HomePage() {
         {/* Map as collection */}
         <section className="mx-auto max-w-[1400px] px-5 py-20 md:px-8 md:py-28">
           <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr] md:items-center lg:gap-16">
-            <div>
+            <Reveal>
               <Overline>La collezione è una mappa</Overline>
               <h2 className="mt-3 font-serif text-3xl leading-tight md:text-4xl">
                 L'arte non comincia all'ingresso. È già nel paesaggio.
@@ -66,8 +67,8 @@ export default function HomePage() {
               <div className="mt-6">
                 <MapLegend className="inline-block" />
               </div>
-            </div>
-            <div className="relative h-[340px] overflow-hidden rounded-2xl border border-ink/10 shadow-card md:h-[460px]">
+            </Reveal>
+            <Reveal delay={120} className="relative h-[340px] overflow-hidden rounded-2xl border border-ink/10 shadow-card md:h-[460px]">
               <GoogleTerritoryMap
                 workPins={homePins}
                 sitePins={false}
@@ -75,11 +76,11 @@ export default function HomePage() {
                 footnote={false}
                 className="absolute inset-0"
               />
-            </div>
+            </Reveal>
           </div>
 
           {/* Density over time — a quiet footnote to the collection, not a section of its own */}
-          <div className="mt-14 border-t border-ink/10 pt-6">
+          <Reveal className="mt-14 border-t border-ink/10 pt-6">
             <div className="flex items-baseline justify-between gap-4">
               <Overline>Un museo costruito nel tempo</Overline>
               <Link href="/timeline" className="font-mono text-[11px] text-ink-60 hover:text-ink focus-ring">
@@ -101,12 +102,13 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* Featured routes */}
         <section className="bg-stone-50">
           <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-8 md:py-24">
+            <Reveal>
             <SectionHeading
               title="Percorsi in evidenza"
               action={
@@ -115,9 +117,12 @@ export default function HomePage() {
                 </Link>
               }
             />
+            </Reveal>
             <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {routes.slice(0, 3).map((r) => (
-                <RouteCard key={r.slug} route={r} />
+              {routes.slice(0, 3).map((r, i) => (
+                <Reveal key={r.slug} delay={i * 80}>
+                  <RouteCard route={r} />
+                </Reveal>
               ))}
             </div>
           </div>
@@ -139,7 +144,7 @@ export default function HomePage() {
                 </div>
               )}
             </div>
-            <div className="flex flex-col justify-center p-8 md:p-14">
+            <Reveal className="flex flex-col justify-center p-8 md:p-14">
               <Overline>Nuova commissione</Overline>
               <h2 className="mt-3 font-serif text-3xl leading-tight md:text-4xl">{featured.title}</h2>
               <div className="mt-1.5 text-sm text-ink-60">
@@ -169,22 +174,24 @@ export default function HomePage() {
               >
                 Scopri l'opera · indizio sulla mappa →
               </Link>
-            </div>
+            </Reveal>
           </div>
         </section>
 
         {/* Explore by place */}
         <section className="border-t border-ink/10">
           <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-8 md:py-24">
-            <SectionHeading title="Esplora per luogo" />
+            <Reveal>
+              <SectionHeading title="Esplora per luogo" />
+            </Reveal>
             <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 lg:gap-5">
-              {mapAreas.map((a) => {
+              {mapAreas.map((a, i) => {
                 const loc = repLocation(a.name);
                 const count = works.filter((w) => w.area === a.slug).length;
                 const img = areaImage(a.slug);
                 return (
+                  <Reveal key={a.slug} delay={i * 60}>
                   <Link
-                    key={a.slug}
                     href={loc ? `/luoghi/${loc.slug}` : "/esplora"}
                     className={`group relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-2xl border border-ink/10 p-4 shadow-card transition-shadow duration-300 hover:shadow-raised focus-ring sm:aspect-[3/4] lg:aspect-square ${
                       img ? "" : "hatch"
@@ -211,6 +218,7 @@ export default function HomePage() {
                       {count} opere
                     </span>
                   </Link>
+                  </Reveal>
                 );
               })}
             </div>
@@ -225,15 +233,16 @@ export default function HomePage() {
               { t: "Accessibilità", d: "Pendenze e gradini segnalati per opera", href: "/visita" },
               { t: "Luoghi su prenotazione", d: "Siti interni e accesso regolato", href: "/visita" },
               { t: "Stato dei dati", d: "Verifiche, diritti immagini e fonti", href: "/cantiere" },
-            ].map((c) => (
+            ].map((c, i) => (
+              <Reveal key={c.t} delay={i * 60}>
               <Link
-                key={c.t}
                 href={c.href}
                 className="rounded-xl border border-ink/20 bg-paper p-5 transition-shadow hover:shadow-card focus-ring"
               >
                 <div className="font-serif text-lg">{c.t}</div>
                 <div className="mt-2 text-[13px] text-ink-60">{c.d}</div>
               </Link>
+              </Reveal>
             ))}
           </div>
         </section>

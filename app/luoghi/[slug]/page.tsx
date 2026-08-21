@@ -8,6 +8,7 @@ import { WorkCard } from "@/components/work-card";
 import { RouteCard } from "@/components/route-card";
 import { FallbackNote } from "@/components/badges";
 import { Overline } from "@/components/ui";
+import { Reveal } from "@/components/reveal";
 import {
   locations,
   locationBySlug,
@@ -116,7 +117,7 @@ export default async function LocationPage({
         {/* Where it is + what to know */}
         <section className="mx-auto max-w-[1400px] px-5 py-16 md:px-8 md:py-24">
           <div className="grid gap-10 md:grid-cols-[1.15fr_0.85fr] lg:gap-16">
-            <div className="relative h-[340px] overflow-hidden rounded-2xl border border-ink/10 shadow-card md:h-[460px]">
+            <Reveal className="relative h-[340px] overflow-hidden rounded-2xl border border-ink/10 shadow-card md:h-[460px]">
               <GoogleTerritoryMap
                 workPins={workMapPins(areaWorks)}
                 sitePins={false}
@@ -125,9 +126,9 @@ export default async function LocationPage({
                 footnote={false}
                 className="absolute inset-0"
               />
-            </div>
+            </Reveal>
 
-            <div className="flex flex-col justify-center">
+            <Reveal delay={100} className="flex flex-col justify-center">
               <Overline>Il luogo</Overline>
               {location.notes ? (
                 <p className="mt-3 max-w-md prose-editorial text-[15px]">{location.notes}</p>
@@ -169,7 +170,7 @@ export default async function LocationPage({
                   Fonte ↗
                 </a>
               )}
-            </div>
+            </Reveal>
           </div>
         </section>
 
@@ -184,8 +185,10 @@ export default async function LocationPage({
             </div>
             {areaWorks.length ? (
               <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {areaWorks.map((w) => (
-                  <WorkCard key={w.slug} work={w} />
+                {areaWorks.map((w, i) => (
+                  <Reveal key={w.slug} delay={(i % 3) * 70}>
+                    <WorkCard work={w} />
+                  </Reveal>
                 ))}
               </div>
             ) : (
@@ -207,8 +210,10 @@ export default async function LocationPage({
                 </Link>
               </div>
               <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                {relatedRoutes.map((r) => (
-                  <RouteCard key={r.slug} route={r} />
+                {relatedRoutes.map((r, i) => (
+                  <Reveal key={r.slug} delay={(i % 3) * 70}>
+                    <RouteCard route={r} />
+                  </Reveal>
                 ))}
               </div>
             </div>

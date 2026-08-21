@@ -39,8 +39,8 @@ export function HomeHero() {
             alt=""
             aria-hidden
             className={clsx(
-              "absolute inset-0 h-full w-full object-cover transition-opacity duration-[1600ms] ease-in-out motion-safe:scale-[1.03]",
-              n === i ? "opacity-100" : "opacity-0"
+              "absolute inset-0 h-full w-full object-cover transition-opacity duration-[1600ms] ease-in-out",
+              n === i ? "opacity-100 kenburns" : "opacity-0"
             )}
           />
         ))}
