@@ -9,6 +9,8 @@ import { RouteCard } from "@/components/route-card";
 import { FallbackNote } from "@/components/badges";
 import { Overline } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
+import type { Metadata } from "next";
+import { ogImageForWork, socialImage, shareText } from "@/lib/site";
 import {
   locations,
   locationBySlug,
@@ -17,6 +19,49 @@ import {
   slugifyName,
   FALLBACK,
 } from "@/lib/collection";
+
+/** Share card: the place, pictured by a work that stands there. */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const location = locationBySlug(slug);
+  if (!location) return {};
+
+  const areaKey = slugifyName(location.area);
+  const areaWorks = works.filter((w) => {
+    const a = slugifyName(w.hamletArea);
+    return a === areaKey || a.includes(areaKey) || areaKey.includes(a);
+  });
+  const cover =
+    areaWorks.find((w) => w.isFlagship && ogImageForWork(w.workId)) ??
+    areaWorks.find((w) => ogImageForWork(w.workId));
+  const description =
+    location.notes ||
+    `${areaWorks.length} ${areaWorks.length === 1 ? "opera" : "opere"} in ${location.area} — museo diffuso MACCA a Peccioli.`;
+  const shareDescription = shareText(description);
+  const image = socialImage(ogImageForWork(cover?.workId));
+
+  return {
+    title: location.name,
+    description,
+    openGraph: {
+      type: "article",
+      title: location.name,
+      description: shareDescription,
+      url: `/luoghi/${location.slug}`,
+      images: image ? [image] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: location.name,
+      description: shareDescription,
+      images: image ? [image.url] : undefined,
+    },
+  };
+}
 
 export function generateStaticParams() {
   return locations.map((l) => ({ slug: l.slug }));

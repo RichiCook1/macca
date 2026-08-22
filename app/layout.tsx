@@ -3,6 +3,7 @@ import { Hanken_Grotesk, Fraunces, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/language-provider";
 import { BottomNav } from "@/components/bottom-nav";
+import { SITE_URL, SITE_NAME, SITE_TAGLINE, socialImage } from "@/lib/site";
 
 const sans = Hanken_Grotesk({
   subsets: ["latin"],
@@ -25,10 +26,33 @@ const mono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const DESCRIPTION =
+  "Un museo diffuso nel paesaggio di Peccioli. Mappa, percorsi, opere e visita di un museo d'arte contemporanea a cielo aperto.";
+
 export const metadata: Metadata = {
-  title: "MACCA — Museo d'Arte Contemporanea a Cielo Aperto",
-  description:
-    "Un museo diffuso nel paesaggio di Peccioli. Mappa, percorsi, opere e visita di un museo d'arte contemporanea a cielo aperto.",
+  // Absolute URLs for social cards are resolved against this.
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} — ${SITE_TAGLINE}`,
+    // Page titles read "Breath — MACCA" rather than repeating the tagline.
+    template: `%s — ${SITE_NAME}`,
+  },
+  description: DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "it_IT",
+    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
+    description: DESCRIPTION,
+    url: "/",
+    images: socialImage() ? [socialImage()!] : undefined,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
+    description: DESCRIPTION,
+    images: socialImage() ? [socialImage()!.url] : undefined,
+  },
 };
 
 export const viewport: Viewport = {

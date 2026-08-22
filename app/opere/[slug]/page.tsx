@@ -20,6 +20,44 @@ import { works, workBySlug, worksByArea, artistBySlug, FALLBACK } from "@/lib/co
 import { mapsDirectionsUrl, workQuery, workMapCenter } from "@/lib/maps";
 import { routeBySlug } from "@/lib/routes-data";
 import { confidenceMeta } from "@/lib/constants";
+import type { Metadata } from "next";
+import { ogImageForWork, socialImage, shareText } from "@/lib/site";
+
+/** Share card: the artwork's own photograph, title, artist and year. */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const work = workBySlug(slug);
+  if (!work) return {};
+
+  const title = `${work.title} · ${work.artist}`;
+  const description =
+    work.description ??
+    `${work.artist}, ${work.year}. ${work.hamletArea} — opera del museo diffuso MACCA a Peccioli.`;
+  const shareDescription = shareText(description);
+  const image = socialImage(ogImageForWork(work.workId));
+
+  return {
+    title,
+    description,
+    openGraph: {
+      type: "article",
+      title,
+      description: shareDescription,
+      url: `/opere/${work.slug}`,
+      images: image ? [image] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: shareDescription,
+      images: image ? [image.url] : undefined,
+    },
+  };
+}
 
 export function generateStaticParams() {
   return works.map((w) => ({ slug: w.slug }));

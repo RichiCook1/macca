@@ -8,6 +8,45 @@ import { WorkCard } from "@/components/work-card";
 import { FallbackNote } from "@/components/badges";
 import { Overline } from "@/components/ui";
 import { artists, artistBySlug, worksByArtist, FALLBACK } from "@/lib/collection";
+import type { Metadata } from "next";
+import { ogImageForWork, socialImage, shareText } from "@/lib/site";
+
+/** Share card: the artist, with one of their works as the picture. */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const artist = artistBySlug(slug);
+  if (!artist) return {};
+
+  const works = worksByArtist(slug);
+  const cover = works.find((w) => ogImageForWork(w.workId));
+  const description =
+    artist.bio ??
+    `${artist.workCount} ${artist.workCount === 1 ? "opera" : "opere"} nel museo diffuso MACCA a Peccioli.`;
+  const shareDescription = shareText(description);
+  const image = socialImage(ogImageForWork(cover?.workId));
+
+  return {
+    title: artist.name,
+    description,
+    openGraph: {
+      type: "profile",
+      title: artist.name,
+      description: shareDescription,
+      url: `/artisti/${artist.slug}`,
+      images: image ? [image] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: artist.name,
+      description: shareDescription,
+      images: image ? [image.url] : undefined,
+    },
+  };
+}
 
 export function generateStaticParams() {
   return artists.map((a) => ({ slug: a.slug }));

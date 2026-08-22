@@ -17,6 +17,47 @@ import {
 } from "@/lib/collection";
 import { mapsRouteUrl, workQuery } from "@/lib/maps";
 import { clsx } from "@/lib/clsx";
+import type { Metadata } from "next";
+import { ogImageForWork, socialImage, shareText } from "@/lib/site";
+
+/** Share card: the route, pictured by the first photographed stop. */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const route = routeBySlug(slug);
+  if (!route) return {};
+
+  const stopWorks = route.stops
+    .map((st) => (st.workSlug ? workBySlug(st.workSlug) : undefined))
+    .filter((w): w is NonNullable<typeof w> => Boolean(w));
+  const cover = stopWorks.find((w) => ogImageForWork(w.workId));
+  const description =
+    route.prototypeValue ||
+    `${route.stops.length} tappe · ${route.type} · ${route.duration} nel museo diffuso MACCA a Peccioli.`;
+  const shareDescription = shareText(description);
+  const image = socialImage(ogImageForWork(cover?.workId));
+
+  return {
+    title: route.title,
+    description,
+    openGraph: {
+      type: "article",
+      title: route.title,
+      description: shareDescription,
+      url: `/percorsi/${route.slug}`,
+      images: image ? [image] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: route.title,
+      description: shareDescription,
+      images: image ? [image.url] : undefined,
+    },
+  };
+}
 
 export function generateStaticParams() {
   return routes.map((r) => ({ slug: r.slug }));

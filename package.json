@@ -7,12 +7,13 @@
     "content": "node scripts/build-content-manifest.mjs",
     "demo:images": "node scripts/gen-demo-images.mjs",
     "demo:clear": "node scripts/gen-demo-images.mjs --clear",
-    "predev": "node scripts/build-content-manifest.mjs",
+    "predev": "node scripts/build-content-manifest.mjs && node scripts/build-og-images.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/build-content-manifest.mjs",
+    "prebuild": "node scripts/build-content-manifest.mjs && node scripts/build-og-images.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "og": "node scripts/build-og-images.mjs"
   },
   "dependencies": {
     "next": "15.5.22",
@@ -28,6 +29,7 @@
     "autoprefixer": "^10.4.20",
     "playwright-core": "^1.49.1",
     "postcss": "^8.4.49",
+    "sharp": "^0.34.5",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3"
   }
