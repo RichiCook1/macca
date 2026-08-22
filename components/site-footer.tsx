@@ -46,20 +46,29 @@ export function SiteFooter() {
   useEffect(() => {
     const el = footRef.current;
     if (!el || typeof ResizeObserver === "undefined") return;
-    const ro = new ResizeObserver(() => setH(el.offsetHeight));
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const sync = () => setH(mq.matches ? el.offsetHeight : null);
+    const ro = new ResizeObserver(sync);
     ro.observe(el);
-    setH(el.offsetHeight);
-    return () => ro.disconnect();
+    mq.addEventListener("change", sync);
+    sync();
+    return () => {
+      ro.disconnect();
+      mq.removeEventListener("change", sync);
+    };
   }, []);
 
   return (
     <>
     <div
       aria-hidden
-      className="mt-20 h-[640px] md:h-[520px]"
+      className="hidden lg:block lg:h-[520px]"
       style={h != null ? { height: h } : undefined}
     />
-    <footer ref={footRef} className="fixed inset-x-0 bottom-0 z-0 bg-ink pb-[var(--bnav)] text-stone-200">
+    <footer
+      ref={footRef}
+      className="mt-20 bg-ink pb-[var(--bnav)] text-stone-200 lg:fixed lg:inset-x-0 lg:bottom-0 lg:z-0 lg:mt-0"
+    >
       <div className="mx-auto grid max-w-[1400px] gap-10 px-5 py-12 md:grid-cols-[1.5fr_2fr] md:px-8">
         <div>
           <div className="font-serif text-3xl font-semibold text-paper">MACCA</div>

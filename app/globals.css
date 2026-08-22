@@ -24,14 +24,22 @@
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
-  /* The page content paints above the pinned footer (see SiteFooter):
-     opaque, stacked, so the footer is revealed as the page scrolls away. */
-  main {
-    position: relative;
-    z-index: 10;
-    background: #f0ece2;
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Where the footer is pinned (lg+, see SiteFooter), the page content paints
+     above it — opaque and stacked — so the footer is revealed as the page
+     scrolls away. Below lg the footer sits in normal flow. */
+  @media (min-width: 1024px) {
+    main {
+      position: relative;
+      z-index: 10;
+      background: #f0ece2;
+    }
   }
 
   body {
