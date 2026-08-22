@@ -57,7 +57,7 @@ export function BottomSheet({
   const heightPx = () => sheetRef.current?.offsetHeight || 1;
   const pxFor = (s: Snap) => (OFFSET[s] / 100) * heightPx();
 
-  const settle = useCallback((endPx: number, velocity: number) => {
+  const settleTarget = useCallback((endPx: number, velocity: number): Snap => {
     const h = heightPx();
     // A decisive flick throws to the next snap in that direction.
     if (Math.abs(velocity) > 0.5) {
@@ -67,9 +67,7 @@ export function BottomSheet({
         )
       );
       const dir = velocity > 0 ? -1 : 1; // down = smaller snap
-      const next = ORDER[Math.min(ORDER.length - 1, Math.max(0, idx + dir))];
-      setSnap(next);
-      return;
+      return ORDER[Math.min(ORDER.length - 1, Math.max(0, idx + dir))];
     }
     // Otherwise settle on whichever snap is nearest where the finger let go.
     let best: Snap = "half";
@@ -81,7 +79,7 @@ export function BottomSheet({
         best = s;
       }
     }
-    setSnap(best);
+    return best;
   }, []);
 
   const onPointerDown = (e: React.PointerEvent, fromScroll = false) => {
@@ -98,6 +96,12 @@ export function BottomSheet({
       basePx: pxFor(snap),
       fromScroll,
     };
+    // Own the transition imperatively for the whole gesture: React class
+    // changes land a frame late, which is what produced the release jump.
+    if (sheetRef.current) sheetRef.current.style.transition = "none";
+    // The header owns the pointer immediately; from the list we only take it
+    // once the pull actually commits (see onPointerMove).
+    if (!fromScroll) (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
     setDragging(true);
   };
 
@@ -106,16 +110,23 @@ export function BottomSheet({
     if (!d || d.id !== e.pointerId) return;
     const delta = e.clientY - d.startY;
 
-    // A pull that begins in the list only takes over when it heads downward.
-    if (d.fromScroll && delta < 0) return;
+    // A pull that begins in the list only takes over once it clearly heads
+    // down; until then the list keeps scrolling normally.
+    if (d.fromScroll) {
+      if (delta < 8) return;
+      if (!(e.currentTarget as HTMLElement).hasPointerCapture?.(e.pointerId)) {
+        (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
+      }
+    }
 
     const dt = e.timeStamp - d.lastT;
-    if (dt > 0) d.velocity = (e.clientY - d.lastY) / dt;
-    d.lastY = e.clientY;
-    d.lastT = e.timeStamp;
-
-    if (!(e.currentTarget as HTMLElement).hasPointerCapture?.(e.pointerId)) {
-      (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
+    if (dt > 2) {
+      // Exponential moving average — one raw frame is far too jittery to
+      // decide a flick from, and a pause before release would read as zero.
+      const v = (e.clientY - d.lastY) / dt;
+      d.velocity = d.velocity * 0.7 + v * 0.3;
+      d.lastY = e.clientY;
+      d.lastT = e.timeStamp;
     }
 
     // Clamp to the travel range, with a little rubber-band past the ends.
@@ -132,16 +143,37 @@ export function BottomSheet({
     }
   };
 
+  /** Settle to a snap, animating from wherever the finger left the sheet. */
+  const restTo = (target: Snap) => {
+    const el = sheetRef.current;
+    if (el) {
+      // Restore the transition first, then move: doing it in this order (and
+      // imperatively, in one frame) is what makes the settle animate from the
+      // dragged position instead of snapping back and re-animating.
+      el.style.transition = "";
+      el.style.transform = `translateY(${OFFSET[target]}%)`;
+    }
+    setDragging(false);
+    setSnap(target);
+  };
+
   const endDrag = (e: React.PointerEvent) => {
     const d = drag.current;
     if (!d || d.id !== e.pointerId) return;
     const endPx = d.basePx + dyRef.current;
     drag.current = null;
     dyRef.current = 0;
-    // Hand the transform back to React/CSS for the settle animation.
-    if (sheetRef.current) sheetRef.current.style.transform = "";
-    setDragging(false);
-    settle(endPx, d.velocity);
+    restTo(settleTarget(endPx, d.velocity));
+  };
+
+  /** The browser took the gesture (native scroll, system swipe): restore the
+   *  snap we started from rather than surprising the user with a new one. */
+  const cancelDrag = (e: React.PointerEvent) => {
+    const d = drag.current;
+    if (!d || d.id !== e.pointerId) return;
+    drag.current = null;
+    dyRef.current = 0;
+    restTo(snap);
   };
 
   const onKeyDown = (e: React.KeyboardEvent) => {
@@ -158,8 +190,14 @@ export function BottomSheet({
     }
   };
 
-  // Collapsing should also return the list to the top.
+  // Keep the inline transform in step with the snap (keyboard, prop changes),
+  // so React's rendered position and the imperative one never disagree.
   useEffect(() => {
+    const el = sheetRef.current;
+    if (el && !drag.current) {
+      el.style.transition = "";
+      el.style.transform = `translateY(${OFFSET[snap]}%)`;
+    }
     if (snap === "collapsed" && scrollRef.current) scrollRef.current.scrollTop = 0;
   }, [snap]);
 
@@ -170,8 +208,11 @@ export function BottomSheet({
       ref={sheetRef}
       className={clsx(
         "absolute inset-x-0 bottom-0 z-40 flex h-[88%] flex-col rounded-t-sheet border-t border-ink bg-paper shadow-sheet will-change-transform",
-        // Only animate on release — while dragging the sheet is under the finger.
-        !dragging && "transition-transform duration-[380ms] ease-[cubic-bezier(0.22,0.61,0.21,1)] motion-reduce:transition-none",
+        // Always present; the gesture switches it off via an inline
+        // `transition: none` so the class is available again the instant the
+        // finger lifts (a conditional class would land a frame too late and
+        // the settle would jump instead of animating).
+        "transition-transform duration-[380ms] ease-[cubic-bezier(0.22,0.61,0.21,1)] motion-reduce:transition-none",
         className
       )}
       style={{ transform }}
@@ -182,7 +223,7 @@ export function BottomSheet({
         onPointerDown={(e) => onPointerDown(e)}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
-        onPointerCancel={endDrag}
+        onPointerCancel={cancelDrag}
         onKeyDown={onKeyDown}
         role="button"
         aria-expanded={snap !== "collapsed"}
@@ -199,11 +240,11 @@ export function BottomSheet({
 
       <div
         ref={scrollRef}
-        className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pb-6 pt-2"
+        className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pt-2 pb-[calc(1.5rem+var(--bnav))]"
         onPointerDown={(e) => onPointerDown(e, true)}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
-        onPointerCancel={endDrag}
+        onPointerCancel={cancelDrag}
       >
         {children}
       </div>
